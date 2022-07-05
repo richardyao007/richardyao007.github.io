@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "[RubyOnRails]一些网址"
+date:   2013-03-18 22:14:49 +0800
+categories: RubyOnRails
+---
+[http://js2coffee.thomaskalka.de/][http://js2coffee.thomaskalka.de/]              javascript和coffeescript在线转换
+
+[http://slim-lang.com/][http://slim-lang.com/]                                 slim template官方首页
+
+[http://coffeescript.org/][http://coffeescript.org/]                               coffeescript官方首页
+
+
+[http://js2coffee.thomaskalka.de/]: http://js2coffee.thomaskalka.de/
+[http://slim-lang.com/]: http://slim-lang.com/
+[http://coffeescript.org/]: http://coffeescript.org/

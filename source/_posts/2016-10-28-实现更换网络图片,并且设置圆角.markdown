@@ -1,0 +1,42 @@
+---
+layout: post
+title:  "[Android]实现更换网络图片,并且设置圆角"
+date:   2016-10-28 09:14:49 +0800
+category: Android
+---
+
+    new DownloadImageTask(airport_image)
+            .execute(image);  //image即是获取到的图片url
+
+   private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap mbitmap) {
+            Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+            Canvas canvas = new Canvas(imageRounded);
+            Paint mpaint = new Paint();
+            mpaint.setAntiAlias(true);
+            mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+            canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 50, 50, mpaint);// Round Image Corner 100 100 100 100
+            bmImage.setImageBitmap(imageRounded);
+   //       bmImage.setImageBitmap(result);
+            Log.d(TAG, "设置=====onPostExecute");
+        }
+    }

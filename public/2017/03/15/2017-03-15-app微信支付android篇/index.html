@@ -1,0 +1,555 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[android] app微信支付android篇
+       
+        <div id="post-time" datetime="2017-03-15T01:14:49.000Z">
+          2017-03-15
+        </div>
+      
+    </h2>
+    <p>h5上需要提供一个javascript方法 ：</p>
+<pre><code>  global_function_weixin_pay = function () &#123;
+    return &#39;http://api.****.com/interface/payments/information?&#39; + &#39;order_id=&#39; + that.order.order_id + &#39;&amp;fee=&#39; + that.order.amount + &#39;&amp;order_sn=&#39; + that.order.order_number + &#39;&amp;trade_type=APP&#39;
+  &#125;
+</code></pre>
+<p>&#x2F;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>购买商品的activity</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></em>*****&#x2F;</p>
+<pre><code>private String translateHtmlStringToLocal(String value) &#123;
+    return value.replace(&quot;\&quot;&quot;, &quot;&quot;);
+&#125;
+
+public class shopShowWebViewClient extends WebViewClient &#123;
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, String url) &#123;
+        Log.d(TAG, &quot;ShopShowActivity shouldOverrideUrlLoading====&quot; + url);
+        //微信支付，h5请求的地址必须是带域名的
+        Pattern pattern = Pattern.compile(&quot;http://h5.shangyunyijia.com/run_native_pay&quot;);
+        Matcher matcher = pattern.matcher(url);
+        if (matcher.find()) &#123;
+            Log.d(TAG, &quot;微信开始支付&quot;);
+            shopShowWebView.evaluateJavascript(&quot;global_function_weixin_pay()&quot;, new ValueCallback&lt;String&gt;() &#123;
+                @Override
+                public void onReceiveValue(String value) &#123;
+                    Log.d(TAG, &quot;global_function_weixin_pay value=&quot; + value);
+                    if (!value.contains(&quot;null&quot;) &amp;&amp; !value.contains(&quot;NULL&quot;)) &#123;
+                        String payUrl = translateHtmlStringToLocal(value);
+                        getPayInfoFromServer(payUrl);
+                    &#125;
+                &#125;
+            &#125;);
+            return true;
+        &#125;
+
+        view.loadUrl(url);
+
+        return false;
+    &#125;
+
+    @Override
+    public void onPageFinished(WebView view, String url) &#123;
+        super.onPageFinished(view, url);
+
+        Log.d(TAG, &quot;onPageFinished, 触发的url是====&quot; + url);
+
+        Log.d(TAG, &quot;取消小菊花开始...&quot;);
+        // 取消小菊花 放在这里才可以.   针对myorder  打开的时候小菊花不会消失。
+        try &#123;
+            dismissLoadingDialog();
+        &#125; catch (Exception e) &#123;
+            try &#123;
+                dismissLoadingDialog();
+            &#125; catch (Exception e2) &#123;
+                Log.e(TAG, &quot;== 取消小菊花出错了: &quot; + e.toString());
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+
+
+/**
+ * 微信获取支付信息
+ * @param payUrl
+ */
+public void getPayInfoFromServer(final String payUrl) &#123;
+
+    if (this != null) &#123;
+        this.showLoadingDialog();
+    &#125;
+
+    com.lidroid.xutils.HttpUtils http = new com.lidroid.xutils.HttpUtils();
+    http.send(HttpRequest.HttpMethod.GET,
+            payUrl,
+            null,
+            new RequestCallBack&lt;String&gt;() &#123;
+                @Override
+                public void onSuccess(ResponseInfo&lt;String&gt; responseInfo) &#123;
+
+                    if (ShopShowActivity.this != null) &#123;
+                        ShopShowActivity.this.dismissLoadingDialog();
+                    &#125;
+
+                    if (responseInfo != null &amp;&amp; responseInfo.result != null) &#123;
+
+                        WeiXinPayBean weiXinPayBean = JSON.parseObject(responseInfo.result, WeiXinPayBean.class);
+                        Log.d(TAG, &quot;ShopShowActivity=== getPayInfoFromServer() =========onSuccess(ResponseInfo&lt;String&gt; responseInfo)&quot; + weiXinPayBean.getReturn_code().toUpperCase());
+
+                        if (weiXinPayBean.getReturn_code().toUpperCase().equals(&quot;SUCCESS&quot;)) &#123;
+                            WXPayEntryActivity.show(ShopShowActivity.this, weiXinPayBean, REQUEST_WEIXIN_PAY);
+</code></pre>
+<p>&#x2F;&#x2F;                                Intent intent &#x3D; new Intent(ShopShowActivity.this, WXPayEntryActivity.class);<br>&#x2F;&#x2F;                                intent.putExtra(“weiXinPayBean”, weiXinPayBean);<br>&#x2F;&#x2F;                                startActivityForResult(intent, REQUEST_WEIXIN_PAY);</p>
+<pre><code>                            //WXPayEntryActivity.show(OrderPaySuccessFragment.newInstance(pageUrl, &quot;支付成功&quot;, true), weiXinPayBean, REQUEST_WEIXIN_PAY);
+                        &#125; else &#123;
+                            Toast.makeText(ShopShowActivity.this, weiXinPayBean.getErr_code_des(), Toast.LENGTH_SHORT).show();
+                        &#125;
+                    &#125; else &#123;
+                        Toast.makeText(ShopShowActivity.this, &quot;获取支付信息失败&quot;, Toast.LENGTH_SHORT).show();
+                    &#125;
+                &#125;
+
+                @Override
+                public void onFailure(HttpException e, String s) &#123;
+                    Log.d(TAG, &quot;=========onFailure(HttpException e, String s)&quot; + s + &quot;============&quot; + e.toString());
+                    e.printStackTrace();
+                &#125;
+            &#125;);
+&#125;
+</code></pre>
+<p>&#x2F;<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>微信支付javabean</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>********&#x2F;</p>
+<pre><code>    package com.***;
+
+    import com.alibaba.fastjson.annotation.JSONField;
+
+    import java.io.Serializable;
+
+    public class WeiXinPayBean implements Serializable &#123;
+
+            private String appId;
+            private String partnerid;
+            private String prepay_id;
+            private String order_id;
+            @JSONField(name=&quot;package&quot;)
+            private String packageX;
+            private String timeStamp;
+            private String nonceStr;
+            private String return_code;
+            private String return_msg;
+            private String sign;
+            private String err_code_des;
+
+            public String getAppId() &#123;
+                return appId;
+            &#125;
+
+            public void setAppId(String appId) &#123;
+                this.appId = appId;
+            &#125;
+
+            public String getPartnerid() &#123;
+                return partnerid;
+            &#125;
+
+            public void setPartnerid(String partnerid) &#123;
+                this.partnerid = partnerid;
+            &#125;
+
+            public String getPrepay_id() &#123;
+                return prepay_id;
+            &#125;
+
+            public void setPrepay_id(String prepay_id) &#123;
+                this.prepay_id = prepay_id;
+            &#125;
+
+            public void setOrder_id(String order_id) &#123;
+                this.order_id = order_id;
+            &#125;
+
+            public String getOrder_id() &#123;
+                return order_id;
+            &#125;
+
+            public String getPackageX() &#123;
+                return packageX;
+            &#125;
+
+            public void setPackageX(String packageX) &#123;
+                this.packageX = packageX;
+            &#125;
+
+            public String getTimeStamp() &#123;
+                return timeStamp;
+            &#125;
+
+            public void setTimeStamp(String timeStamp) &#123;
+                this.timeStamp = timeStamp;
+            &#125;
+
+            public String getNonceStr() &#123;
+                return nonceStr;
+            &#125;
+
+            public void setNonceStr(String nonceStr) &#123;
+                this.nonceStr = nonceStr;
+            &#125;
+
+            public String getReturn_code() &#123;
+                return return_code;
+            &#125;
+
+            public void setReturn_code(String return_code) &#123;
+                this.return_code = return_code;
+            &#125;
+
+            public String getReturn_msg() &#123;
+                return return_msg;
+            &#125;
+
+            public void setReturn_msg(String return_msg) &#123;
+                this.return_msg = return_msg;
+            &#125;
+
+            public String getSign() &#123;
+                return sign;
+            &#125;
+
+            public void setSign(String sign) &#123;
+                this.sign = sign;
+            &#125;
+
+            public String getErr_code_des() &#123;
+                return err_code_des;
+            &#125;
+
+            public void setErr_code_des(String err_code_des) &#123;
+                this.err_code_des = err_code_des;
+            &#125;
+    &#125;
+</code></pre>
+<p>&#x2F;<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>微信支付activity, 必须放在wxapi目录下</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>********&#x2F;</p>
+<pre><code>    package com.***.wxapi;
+
+    import android.app.Activity;
+    import android.content.Context;
+    import android.content.Intent;
+    import android.os.Bundle;
+    import android.support.v4.app.Fragment;
+    import android.util.Log;
+    import android.widget.Toast;
+
+    import com.syyj.PageUrls;
+    import com.syyj.R;
+    import com.syyj.WeiXinPayBean;
+    import com.syyj.shop.PayFailActivity;
+    import com.syyj.shop.PaySuccessActivity;
+    import com.tencent.mm.sdk.constants.ConstantsAPI;
+    import com.tencent.mm.sdk.modelbase.BaseReq;
+    import com.tencent.mm.sdk.modelbase.BaseResp;
+    import com.tencent.mm.sdk.modelpay.PayReq;
+    import com.tencent.mm.sdk.openapi.IWXAPI;
+    import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+    import com.tencent.mm.sdk.openapi.WXAPIFactory;
+
+    public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler&#123;
+
+        private static final String PAY_SUCCESS_URL = PageUrls.BASE_URL + &quot;/shop/paysuccess/&quot;;
+        private static final String PAY_FAIL_URL = PageUrls.BASE_URL + &quot;/shop/payfail/&quot;;
+
+        private WeiXinPayBean weiXinPayBean;
+
+        public static void show(Activity activity, WeiXinPayBean weiXinPayBean, int requestCode) &#123;
+            Intent intent = new Intent(activity, WXPayEntryActivity.class);
+            intent.putExtra(&quot;weiXinPayBean&quot;, weiXinPayBean);
+            activity.startActivityForResult(intent, requestCode);
+        &#125;
+        public static void show(Fragment fragment, WeiXinPayBean weiXinPayBean, int requestCode) &#123;
+            Intent intent = new Intent(fragment.getActivity(), WXPayEntryActivity.class);
+            intent.putExtra(&quot;weiXinPayBean&quot;, weiXinPayBean);
+            fragment.startActivityForResult(intent, requestCode);
+        &#125;
+
+        private static final String TAG = &quot;WXPayEntryActivity&quot;;
+
+        private IWXAPI api;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) &#123;
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.pay_result);
+
+            weiXinPayBean = (WeiXinPayBean) getIntent().getSerializableExtra(&quot;weiXinPayBean&quot;);
+            api = WXAPIFactory.createWXAPI(getApplicationContext(), weiXinPayBean.getAppId());
+            if (weiXinPayBean != null) &#123;
+                api = WXAPIFactory.createWXAPI(getApplicationContext(), weiXinPayBean.getAppId());
+                pay(this, weiXinPayBean);
+            &#125; else &#123;
+                api = WXAPIFactory.createWXAPI(getApplicationContext(), weiXinPayBean.getAppId());
+                api.handleIntent(getIntent(), this);
+            &#125;
+
+        &#125;
+
+        @Override
+        protected void onNewIntent(Intent intent) &#123;
+            super.onNewIntent(intent);
+            setIntent(intent);
+            api.handleIntent(intent, this);
+        &#125;
+
+        @Override
+        public void onReq(BaseReq baseReq) &#123;
+
+        &#125;
+
+        @Override
+        public void onResp(BaseResp resp) &#123;
+            Log.d(TAG, &quot;WXPayEntryActivity onResp, errCode = &quot; + resp.errCode);
+
+            Log.d(TAG, &quot;WXPayEntryActivity onResp, getType = &quot; + resp.getType());
+
+            Log.d(TAG, &quot;WXPayEntryActivity onResp, COMMAND_PAY_BY_WX = &quot; + ConstantsAPI.COMMAND_PAY_BY_WX);
+
+            if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) &#123;
+                // errCode: 0 成功， -1 支付失败， -2 用户取消支付
+
+                if (resp.errCode == 0)  &#123;
+                    setResult(RESULT_OK);
+                    Toast.makeText(this, &quot;支付成功&quot;, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(WXPayEntryActivity.this, PaySuccessActivity.class);
+                    intent.putExtra(&quot;id&quot;, weiXinPayBean.getOrder_id());
+                    startActivity(intent);
+    //				WebViewActivity.show(WXPayEntryActivity.this, PAY_SUCCESS_URL+weiXinPayBean.getOrder_id(), &quot;支付成功&quot;, WebViewActivity.FRAGMENT_ORDER_PAY_SUCCESS, true);
+                    finish();
+                &#125; else &#123;
+    //                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    //                builder.setTitle(&quot;支付结果&quot;);
+    //                builder.setMessage(String.valueOf(resp.errCode));
+    //                builder.show();
+    //                setResult(RESULT_CANCELED);
+    //				WebViewActivity.show(WXPayEntryActivity.this, PAY_FAIL_URL+weiXinPayBean.getOrder_id(), &quot;支付失败&quot;, WebViewActivity.FRAGMENT_ORDER_PAY_FAIL, true);
+
+                    Intent intent = new Intent(WXPayEntryActivity.this, PayFailActivity.class);
+                    intent.putExtra(&quot;id&quot;, weiXinPayBean.getOrder_id());
+                    startActivity(intent);
+                    finish();
+                &#125;
+            &#125;
+        &#125;
+
+
+        public void pay(Context context, WeiXinPayBean weiXinPayBean) &#123;
+            final IWXAPI msgApi = WXAPIFactory.createWXAPI(context, null);
+            // 将该app注册到微信
+            msgApi.registerApp(weiXinPayBean.getAppId());
+
+            PayReq request = new PayReq();
+            request.appId = weiXinPayBean.getAppId();
+            request.partnerId = weiXinPayBean.getPartnerid();
+            request.prepayId= weiXinPayBean.getPrepay_id();
+            request.packageValue = weiXinPayBean.getPackageX();
+            request.nonceStr= weiXinPayBean.getNonceStr();
+            request.timeStamp= weiXinPayBean.getTimeStamp();
+            request.sign= weiXinPayBean.getSign();
+            boolean sendSuccess = msgApi.sendReq(request);
+            // 和微信交互可能失败, 失败时直接返回
+            if (!sendSuccess) &#123;
+                finish();
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2017/03/15/2017-03-15-app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/"> ← [Ruby On Rails] app微信支付Ruby on Rails接口篇 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2017/03/10/2017-03-10-app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/"> [Ruby On Rails] app微信支付配置篇(appid,key,mch_id) → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">legend</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+

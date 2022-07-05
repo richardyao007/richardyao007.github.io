@@ -1,0 +1,33 @@
+.markdown-body {
+  box-sizing: border-box;
+  width: 90%;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 0 40px 0;
+}
+#post-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#post-time {
+  font-size: 14px;
+  color: #808080;
+  font-weight: normal;
+  white-space: nowrap;
+}
+#page-prev-next {
+  box-sizing: border-box;
+  width: 90%;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+#page-prev-next a {
+  font-family: theme_font_family;
+  color: theme_color;
+  font-size: 17px;
+}

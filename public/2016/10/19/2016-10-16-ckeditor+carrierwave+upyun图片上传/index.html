@@ -1,0 +1,411 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[RubyOnRails]ckeditor+carrierwave+upyun图片上传
+       
+        <div id="post-time" datetime="2016-10-19T01:14:49.000Z">
+          2016-10-19
+        </div>
+      
+    </h2>
+    <p>ckeditor+carrierwave+upyun图片上传</p>
+<ol>
+<li><p>添加gem</p>
+<p> gem ‘ckeditor’</p>
+</li>
+</ol>
+<p>参照地址:</p>
+<pre><code>https://github.com/galetahub/ckeditor
+
+
+
+gem &#39;upyun&#39;
+
+gem &#39;carrierwave&#39;
+
+gem &#39;mini_magick&#39;
+</code></pre>
+<p>gem “carrierwave-upyun”(NOTE: 此 Gem 是一个 CarrierWave 的组件，你需要配合 CarrierWave 一起使用。</p>
+<p>) , 参照地址:</p>
+<pre><code>https://github.com/nowa/carrierwave-upyun
+</code></pre>
+<p>1.新建一个 initializer</p>
+<pre><code>config/initializers/carrierwave.rb
+
+
+
+# -*- encoding : utf-8 -*-
+
+CarrierWave.configure do |config|
+
+  config.storage = :upyun
+
+  config.upyun_username = Settings.operator
+
+  config.upyun_password = Settings.password
+
+  config.upyun_bucket = Settings.bucket
+
+  config.upyun_bucket_host = &quot;http://images.touring.com.cn&quot;
+
+end
+</code></pre>
+<ol start="2">
+<li><p>生成uploader</p>
+<p> rails generate uploader ckeditor_picture</p>
+<h1 id="encoding-utf-8"><a href="#encoding-utf-8" class="headerlink" title="-- encoding : utf-8 --"></a>-<em>- encoding : utf-8 -</em>-</h1><p> class CkeditorPictureUploader &lt; CarrierWave::Uploader::Base</p>
+<pre><code> include Ckeditor::Backend::CarrierWave
+
+ # Include RMagick or ImageScience support:
+
+ # include CarrierWave::RMagick
+
+ include CarrierWave::MiniMagick
+
+ # include CarrierWave::ImageScience
+
+ CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
+
+ # Choose what kind of storage to use for this uploader:
+
+ storage :file
+
+ # Override the directory where uploaded files will be stored.
+
+ # This is a sensible default for uploaders that are meant to be mounted:
+
+ def store_dir
+
+ &quot;uploads/ckeditor/pictures/#&#123;model.id&#125;&quot;
+
+ # &quot;#&#123;model.class.to_s.underscore&#125;/#&#123;mounted_as&#125;&quot;
+
+ end
+
+ # Provide a default URL as a default if there hasn&#39;t been a file uploaded:
+
+ # def default_url
+
+ #   &quot;/images/fallback/&quot; + [version_name, &quot;default.png&quot;].compact.join(&#39;_&#39;)
+
+ # end
+
+
+
+ # Process files as they are uploaded:
+
+ # process :scale =&gt; [200, 300]
+
+ #
+
+ # def scale(width, height)
+
+ #   # do something
+
+ # end
+
+
+
+ process :read_dimensions
+
+
+
+ # Create different versions of your uploaded files:
+
+ # TODO 是不是这里引起的? -- 大师
+
+ version :thumb do
+
+ process :resize_to_fill =&gt; [118, 100]
+
+ end
+
+
+
+ version :content do
+
+ process :resize_to_limit =&gt; [800, 800]
+
+ end
+
+
+
+ # Add a white list of extensions which are allowed to be uploaded.
+
+ # For images you might use something like this:
+
+ def extension_white_list
+
+ Ckeditor.image_file_types
+
+ end
+
+ def original_filename
+
+ @original_filename
+
+ end
+
+ def filename
+
+ if super.present?
+
+   original = &quot;途铃图片&quot;
+
+   if original_filename.split(&#39;.&#39;).present?
+
+     original = original_filename.split(&#39;.&#39;).first
+
+   end
+
+   Rails.logger.info &quot;== model: #&#123;model.inspect&#125;&quot;
+
+   model.uploader_secure_token ||= SecureRandom.uuid.gsub(&quot;-&quot;,&quot;&quot;)
+
+   Rails.logger.debug(&quot;(BaseUploader.filename) #&#123;model.uploader_secure_token&#125;&quot;)
+
+   &quot;#&#123;original&#125;__#&#123;model.uploader_secure_token&#125;.#&#123;file.extension.downcase&#125;&quot;
+
+ end
+
+ end
+</code></pre>
+<p> end</p>
+</li>
+<li><p>修改uploader(这一步很关键)</p>
+<p> storage :file 修改为 storage :upyun</p>
+</li>
+<li><p>生成相应的ActiveRecord</p>
+<p> rails generate ckeditor:install –orm&#x3D;active_record –backend&#x3D;carrierwave</p>
+</li>
+<li><p>Load generated models(加载相应生成的model)</p>
+<p> config.autoload_paths +&#x3D; %w(#{config.root}&#x2F;app&#x2F;models&#x2F;ckeditor)</p>
+</li>
+<li><p>Mount the Ckeditor::Engine in your routes (config&#x2F;routes.rb):(修改route.rb, 路由文件)</p>
+<p> mount Ckeditor::Engine &#x3D;&gt; ‘&#x2F;ckeditor’</p>
+</li>
+<li><p>在application.js 中引用</p>
+<p> &#x2F;&#x2F;&#x3D; require ckeditor&#x2F;init</p>
+</li>
+<li><p>修改 config&#x2F;initializers&#x2F;assets.rb</p>
+<p> Rails.application.config.assets.precompile +&#x3D; %w(ckeditor&#x2F;config.js)</p>
+</li>
+<li><p>在simple_form中的调用</p>
+<p> &lt;%&#x3D; f.cktext_area :details %&gt;</p>
+</li>
+</ol>
+<p>10 . Controller 中的写法</p>
+<pre><code>bucket = Settings.bucket
+
+operator = Settings.operator
+
+password = Settings.password
+
+air_port_params = params[:air_port]
+
+if air_port_params.present? and air_port_params[:logo].present?
+
+  upload_file = air_port_params[:logo]
+
+  upyun = Upyun::Rest.new(bucket, operator, password)
+
+  new_file_name = Time.now.to_i
+
+  remote_file = &quot;/image/air_port_logo/#&#123;new_file_name&#125;&quot;
+
+  response = upyun.put remote_file, upload_file.read
+
+End
+</code></pre>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2016/10/28/2016-10-28-%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/"> ← [Android]实现更换网络图片,并且设置圆角 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2016/10/19/2016-10-19-Android%E6%95%B4%E5%90%88H5/"> [Android]整合H5的WebView(微信支付，支付宝支付) → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">legend</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+

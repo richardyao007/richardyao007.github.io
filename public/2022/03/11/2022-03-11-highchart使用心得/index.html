@@ -1,0 +1,270 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[javascript] highchart使用心得
+       
+        <div id="post-time" datetime="2022-03-11T01:14:49.000Z">
+          2022-03-11
+        </div>
+      
+    </h2>
+    <pre><code>    let that = this;
+    Highcharts.setOptions(&#123;
+        lang: &#123;
+            thousandsSep: &#39;,&#39;
+        &#125;
+    &#125;);
+    let max = 10;
+//根据X轴拿到的数据进行判断，没有超过10条就按照X轴拿到的数据总数显示
+    if(that.xAxisCategories.length &lt; 10) &#123;
+        max = that.xAxisCategories.length -1;
+    &#125;
+    Highcharts.chart(&#39;chart&#39;, &#123;
+        chart: &#123;
+            type: &#39;column&#39;
+        &#125;,
+        scrollbar: &#123;
+          enabled: true      //显示滚动条
+        &#125;,
+        legend: &#123;
+            enabled: false   //不现实图例
+        &#125;,
+        title: &#123;
+            text: &#39;&#39;      //不显示标题
+        &#125;,
+        credits: &#123;
+            enabled: false //去掉默认右下角的highchart.com
+        &#125;,
+        subtitle: &#123;
+            text: &#39;&#39; //不现实子标题
+        &#125;,
+        xAxis: &#123;
+            categories: that.xAxisCategories,   //X轴数据，如：[&#39;2022-01-01&#39;, &#39;2022-01-02&#39;, &#39;2022-01-03&#39;, &#39;2022-01-04&#39;, &#39;2022-01-05&#39;, &#39;2022-01-06&#39;, &#39;2022-01-07&#39;]
+            tickWidth: 1,    //X轴刻度显示
+    //很关键，控制超出多少个会出现滚动条
+            min: 0,
+            max: max
+        &#125;,
+        yAxis: &#123;
+            title: &#123;
+                enabled: false     //Y轴标题是否显示
+            &#125;,
+            gridLineDashStyle: &#39;longdash&#39;,   //背景显示虚线格
+            lineWidth: 1,                   //显示Y轴
+            tickWidth: 1,                   //显示Y轴刻度
+       //Y轴值为0的时候不居中显示，使用以下两个属性
+            min: 0,                       
+            minRange: 1
+        &#125;,
+        plotOptions: &#123;
+             //控制显示出来的柱状图样式，颜色等
+            column: &#123;
+                borderWidth: 0,
+                dataLabels: &#123;
+                    enabled: true，    //
+                    style: &#123;
+                        fontWeight: &#39;normal&#39;,
+                        color: &#39;#666666&#39;
+                    &#125;
+                &#125;,
+                color: &#39;#45DDCC&#39;
+            &#125;
+        &#125;,
+        series: [&#123;
+            name: that.typeText,    //鼠标放在柱状图上，显示的文字
+            data: that.seriesData   //Y轴数据，如：[1,2,3,4,5,6,7]
+        &#125;]
+    &#125;);
+</code></pre>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2022/03/19/2022-03-19-laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/"> ← [php] laravel中使用ckeditor+ckfinder实现图片上传等功能 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/02/21/2016-08-11-Ubuntu%E5%AE%89%E8%A3%85gradle/"> [Android]Ubuntu安装Gradle → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">legend</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+
