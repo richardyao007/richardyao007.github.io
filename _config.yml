@@ -116,5 +116,5 @@ theme: jekyll-theme-slate
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: https://github.com/richardyao007/richardyao007.github.io
+  repository: git@github.com:richardyao007/richardyao007.github.io.git
   branch: master
