@@ -109,12 +109,12 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: legend
-# theme: jekyll-theme-slate
+# theme: legend
+theme: jekyll-theme-slate
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: github
+  type: git
   repository: https://github.com/richardyao007/richardyao007.github.io
   branch: master
