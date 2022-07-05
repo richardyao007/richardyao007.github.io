@@ -1,0 +1,253 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[vue] vue(h5)+ror加入popup-picker实现省市县级联
+       
+        <div id="post-time" datetime="2017-02-20T01:14:49.000Z">
+          2017-02-20
+        </div>
+      
+    </h2>
+    <p>项目中导入:</p>
+<pre><code>import Picker from &#39;../picker&#39;
+
+import Cell from &#39;../cell&#39;
+
+import Popup from &#39;../popup&#39;
+
+import InlineDesc from &#39;../inline-desc&#39;
+
+import &#123; Flexbox, FlexboxItem &#125; from &#39;../flexbox&#39;
+
+import array2string from &#39;../../filters/array2String&#39;
+
+import value2name from &#39;../../filters/value2name&#39;
+
+import uuidMixin from &#39;../../libs/mixin_uuid
+</code></pre>
+<p>每个都需要导入，不能缺少。</p>
+<p>ror部分: </p>
+<pre><code>def get_data
+    @data = []
+        Province.includes(:cities).each do |province|
+            @data.push(&#123;
+                       name: province.name,
+                       value: province.name,
+                       parent: 0
+            &#125;)
+                    province.cities.includes(:towns).each do |city|
+                        @data.push(&#123;
+                                     name: city.name,
+                                     value: city.name,
+                                     parent: province.name
+                        &#125;)
+                        city.towns.each do |town|
+                            @data.push(&#123;
+                                       name: town.name,
+                                       value: town.name,
+                                       parent: city.name
+                            &#125;)
+                        end
+                  end
+            end
+      	@data
+end
+</code></pre>
+<p>vue(h5)部分：</p>
+<pre><code>&lt;group&gt;
+   &lt;popup-picker :title=&quot;title&quot; :data=&quot;data&quot; :columns=&quot;3&quot; v-model=&quot;address_array&quot; ref=&quot;picker3&quot; stlye=&quot;font-size: 20px;&quot;&gt;&lt;/popup-picker&gt;
+&lt;/group&gt;
+</code></pre>
+<p>这里的data即为get_data的结果。address_array是当前所选中的省市县(如: [‘陕西’, ‘西安’， ‘新城区’])</p>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2017/02/25/2017-02-25-android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"> ← [android] 图标桌面不显示的问题解决 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2017/01/20/2017-01-20-git%E6%89%93tag/"> [git] 打tag → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">legend</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+
