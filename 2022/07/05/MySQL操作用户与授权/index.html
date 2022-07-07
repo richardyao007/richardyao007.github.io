@@ -1,0 +1,262 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[MySql]中添加用户,新建数据库,用户授权,删除用户,修改密码
+       
+        <div id="post-time" datetime="2022-07-05T02:12:51.142Z">
+          2022-07-05
+        </div>
+      
+    </h2>
+    <p>MySql中添加用户,新建数据库,用户授权,删除用户,修改密码(注意每行后边都跟个;表示一个命令语句结束):</p>
+<p>1.新建用户</p>
+<p>登录MYSQL：</p>
+<p>@&gt;mysql -u root -p</p>
+<p>@&gt;密码</p>
+<p>创建用户：</p>
+<p>mysql&gt; insert into mysql.user(Host,User,Password) values(“localhost”,”test”,password(“1234”));</p>
+<p>这样就创建了一个名为：test 密码为：1234 的用户。</p>
+<p>注意：此处的”localhost”，是指该用户只能在本地登录，不能在另外一台机器上远程登录。如果想远程登录的话，将”localhost”改为”%”，表示在任何一台电脑上都可以登录。也可以指定某台机器可以远程登录。</p>
+<p>然后登录一下：</p>
+<p>mysql&gt;exit;</p>
+<p>@&gt;mysql -u test -p</p>
+<p>@&gt;输入密码</p>
+<p>mysql&gt;登录成功</p>
+<p>2.为用户授权</p>
+<p>授权格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;</p>
+<p>登录MYSQL（有ROOT权限），这里以ROOT身份登录：</p>
+<p>@&gt;mysql -u root -p</p>
+<p>@&gt;密码</p>
+<p>首先为用户创建一个数据库(testDB)：</p>
+<p>mysql&gt;create database testDB;</p>
+<p>授权test用户拥有testDB数据库的所有权限（某个数据库的所有权限）：</p>
+<p>mysql&gt;grant all privileges on testDB.* to test@localhost identified by ‘1234’;</p>
+<p>mysql&gt;flush privileges;&#x2F;&#x2F;刷新系统权限表</p>
+<p>格式：grant 权限 on 数据库.* to 用户名@登录主机 identified by “密码”;</p>
+<p>如果想指定部分权限给一用户，可以这样来写:</p>
+<p>mysql&gt;grant select,update on testDB.* to test@localhost identified by ‘1234’;</p>
+<p>mysql&gt;flush privileges; &#x2F;&#x2F;刷新系统权限表</p>
+<p>授权test用户拥有所有数据库的某些权限： 　</p>
+<p>mysql&gt;grant select,delete,update,create,drop on <em>.</em> to test@”%” identified by “1234”;</p>
+<pre><code> //test用户对所有数据库都有select,delete,update,create,drop 权限。
+</code></pre>
+<p>&#x2F;&#x2F;@”%” 表示对所有非本地主机授权，不包括localhost。（localhost地址设为127.0.0.1，如果设为真实的本地地址，不知道是否可以，没有验证。）</p>
+<p>&#x2F;&#x2F;对localhost授权：加上一句grant all privileges on testDB.* to test@localhost identified by ‘1234’;即可。</p>
+<p>3.删除用户</p>
+<p> @&gt;mysql -u root -p</p>
+<p> @&gt;密码</p>
+<p> mysql&gt;Delete FROM user Where User&#x3D;’test’ and Host&#x3D;’localhost’;</p>
+<p> mysql&gt;flush privileges;</p>
+<p> mysql&gt;drop database testDB; &#x2F;&#x2F;删除用户的数据库</p>
+<p>删除账户及权限：&gt;drop user 用户名@’%’;</p>
+<blockquote>
+<p>drop user 用户名@ localhost;</p>
+</blockquote>
+<p>4.修改指定用户密码</p>
+<p>  @&gt;mysql -u root -p</p>
+<p>  @&gt;密码</p>
+<p>  mysql&gt;update mysql.user set password&#x3D;password(‘新密码’) where User&#x3D;”test” and Host&#x3D;”localhost”;</p>
+<p>  mysql&gt;flush privileges;</p>
+<p>5.列出所有数据库</p>
+<p>mysql&gt;show database;</p>
+<p>6.切换数据库</p>
+<p>mysql&gt;use ‘数据库名’;</p>
+<p>7.列出所有表</p>
+<p>mysql&gt;show tables;</p>
+<p>8.显示数据表结构</p>
+<p>mysql&gt;describe 表名;</p>
+<p>9.删除数据库和数据表</p>
+<p>mysql&gt;drop database 数据库名;</p>
+<p>mysql&gt;drop table 数据表名;</p>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"> ← [Capistrano]Capistrano: 自动化部署的利器 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"> [MySql]Ubuntu系统mysql用户root空密码登录 → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+

@@ -1,0 +1,213 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[Ubuntu]安装jdk
+       
+        <div id="post-time" datetime="2022-07-05T02:12:51.141Z">
+          2022-07-05
+        </div>
+      
+    </h2>
+    <p>具体步骤参详了如下链接：<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/yang_hui1986527/article/details/6677450">http://blog.csdn.net/yang_hui1986527&#x2F;article&#x2F;details&#x2F;6677450</a></p>
+<p>1、到 Sun 的官网下载</p>
+<p><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a><br>选择 accept license ，然后选择适合自己机型的JDK下载。</p>
+<p>2、解压文件，修改文件名</p>
+<p>$ sudo mkdir &#x2F;usr&#x2F;lib&#x2F;jvm<br>$ sudo tar zxvf jdk-7u21-linux-i586.tar.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm<br>$ cd &#x2F;usr&#x2F;lib&#x2F;jvm<br>$ sudo mv jdk1.7.0_21 java</p>
+<p>3、添加环境变量</p>
+<p>$ sudo vim ~&#x2F;.bashrc<br>加入如下内容<br>export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java<br>export JRE_HOME&#x3D;${JAVA_HOME}&#x2F;jre<br>export CLASSPATH&#x3D;.:${JAVA_HOME}&#x2F;lib:${JRE_HOME}&#x2F;lib<br>export PATH&#x3D;${JAVA_HOME}&#x2F;bin:$PATH</p>
+<p>4、配置默认JDK版本</p>
+<p>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;java 300<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;javac 300<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;jar jar &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;jar 300<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;javah javah &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;javah 300<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;javap javap &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;javap 300<br>然后执行<br>sudo update-alternatives –config java<br>若是初次安装 JDK， 将提示<br>There is only one alternative in link group java (providing &#x2F;usr&#x2F;bin&#x2F;java): &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java&#x2F;bin&#x2F;java<br>无需配置。<br>若是非初次安装，将有不同版本的 JDK 选项。</p>
+<p>5、测试</p>
+<p>$ java -version<br>java version “1.7.0_21” Java(TM) SE Runtime Environment (build 1.7.0_21-b11)<br>Java HotSpot(TM) Server VM (build 23.21-b01, mixed mode)</p>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/"> ← [jQuery]中removeAttr方法在IE8以下版本中的Bug </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/07/01/hello-world/"> Hello World → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
+
