@@ -1498,6 +1498,20 @@ end
       </categories>
   </entry>
   <entry>
+    <title>[Git]Git忽略规则及.gitignore规则不生效的解决办法</title>
+    <url>/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<pre><code>git rm -r --cached .
+
+git add .
+
+git commit -m &#39;update .gitignore&#39;
+</code></pre>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[Capistrano]Capistrano: 自动化部署的利器</title>
     <url>/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</url>
     <content><![CDATA[<pre><code>            capistrano是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。
@@ -1784,20 +1798,6 @@ end
 ]]></content>
       <categories>
         <category>Capistrano</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Git]Git忽略规则及.gitignore规则不生效的解决办法</title>
-    <url>/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<pre><code>git rm -r --cached .
-
-git add .
-
-git commit -m &#39;update .gitignore&#39;
-</code></pre>
-]]></content>
-      <categories>
-        <category>Git</category>
       </categories>
   </entry>
   <entry>
@@ -2370,39 +2370,22 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[RubyOnRails]Ubuntu下Rails开发环境配置</title>
-    <url>/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>Ubuntu版本：14.04</p>
-<p>Ruby版本：2.1.2</p>
-<p>1、 更新apt-get：</p>
-<p>ubuntu@ubuntu:~$ sudo apt-get update</p>
-<p>2、 安装curl：</p>
-<p>ubuntu@ubuntu:~$ sudo apt-get install curl</p>
-<p>3、 安装rvm：</p>
-<p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p>
-<p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p>
-<p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p>
-<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#x77;&#x61;&#121;&#x6e;&#101;&#x65;&#115;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x77;&#x61;&#121;&#x6e;&#101;&#x65;&#115;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>, Michal Papis <a href="mailto:&#x6d;&#112;&#97;&#x70;&#105;&#x73;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#109;">&#x6d;&#112;&#97;&#x70;&#105;&#x73;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#109;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
-<p>4、 安装ruby：</p>
-<p>要先执行下面命令，否则后边流程跑不动：</p>
-<p>ubuntu@ubuntu:~$ rvm autolibs enable</p>
-<p>下面这步可选，是将rvm的源改成国内taobao的源：</p>
-<p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p>
-<p>安装：</p>
-<p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p>
-<p>5、 更改gem源：</p>
-<p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
-<p>6、 安装rails：</p>
-<p>ubuntu@ubuntu:~$ gem install rails</p>
-<p>下面就可以创建一个”blog”程序尝试一下：</p>
-<p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p>
-<p>2、启动服务器（执行 rails server）时会有如下报错：</p>
-<p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p>
-<p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p>
-<p>再次启动服务器，即可正常运行啦！！！</p>
+    <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
+    <url>/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<p>安装postgis：</p>
+<p>sudo apt-get install postgresql postgresql-contrib postgis postgresql-9.3-postgis-2.1</p>
+<p>安装pdo-pqsql：</p>
+<p>sudo apt-get install php5-pgsql</p>
+<p>测试pdo：</p>
+<p>new PDO(“pgsql:host&#x3D;127.0.0.1;dbname&#x3D;test”,  “postgres”,  “root”); die(“1111111”);</p>
+<p>安装composer：</p>
+<p>curl -sS <a href="https://getcomposer.org/installer">https://getcomposer.org/installer</a> | php</p>
+<p>mv composer.phar &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</p>
+<p>项目下：</p>
+<p>composer install （composer install -vvv）</p>
 ]]></content>
       <categories>
-        <category>RubyOnRails</category>
+        <category>Ubuntu</category>
       </categories>
   </entry>
   <entry>
@@ -2467,22 +2450,39 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
-    <url>/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<p>安装postgis：</p>
-<p>sudo apt-get install postgresql postgresql-contrib postgis postgresql-9.3-postgis-2.1</p>
-<p>安装pdo-pqsql：</p>
-<p>sudo apt-get install php5-pgsql</p>
-<p>测试pdo：</p>
-<p>new PDO(“pgsql:host&#x3D;127.0.0.1;dbname&#x3D;test”,  “postgres”,  “root”); die(“1111111”);</p>
-<p>安装composer：</p>
-<p>curl -sS <a href="https://getcomposer.org/installer">https://getcomposer.org/installer</a> | php</p>
-<p>mv composer.phar &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</p>
-<p>项目下：</p>
-<p>composer install （composer install -vvv）</p>
+    <title>[RubyOnRails]Ubuntu下Rails开发环境配置</title>
+    <url>/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>Ubuntu版本：14.04</p>
+<p>Ruby版本：2.1.2</p>
+<p>1、 更新apt-get：</p>
+<p>ubuntu@ubuntu:~$ sudo apt-get update</p>
+<p>2、 安装curl：</p>
+<p>ubuntu@ubuntu:~$ sudo apt-get install curl</p>
+<p>3、 安装rvm：</p>
+<p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p>
+<p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p>
+<p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p>
+<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>, Michal Papis <a href="mailto:&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
+<p>4、 安装ruby：</p>
+<p>要先执行下面命令，否则后边流程跑不动：</p>
+<p>ubuntu@ubuntu:~$ rvm autolibs enable</p>
+<p>下面这步可选，是将rvm的源改成国内taobao的源：</p>
+<p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p>
+<p>安装：</p>
+<p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p>
+<p>5、 更改gem源：</p>
+<p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
+<p>6、 安装rails：</p>
+<p>ubuntu@ubuntu:~$ gem install rails</p>
+<p>下面就可以创建一个”blog”程序尝试一下：</p>
+<p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p>
+<p>2、启动服务器（执行 rails server）时会有如下报错：</p>
+<p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p>
+<p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p>
+<p>再次启动服务器，即可正常运行啦！！！</p>
 ]]></content>
       <categories>
-        <category>Ubuntu</category>
+        <category>RubyOnRails</category>
       </categories>
   </entry>
   <entry>
@@ -2509,17 +2509,6 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[Android]Ubuntu安装Gradle</title>
-    <url>/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</url>
-    <content><![CDATA[<p>安装gradle：</p>
-<p>curl -s <a href="https://get.sdkman.io/">https://get.sdkman.io</a> | bash</p>
-<p>sdk install gradle 2.14.1</p>
-]]></content>
-      <categories>
-        <category>Android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[VueJs]Ubuntu下安装配置vuejs</title>
     <url>/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/</url>
     <content><![CDATA[<p><a href="https://github.com/vuejs">https://github.com/vuejs</a></p>
@@ -2529,7 +2518,7 @@ Cache-Control: no-cache
 <p>npm install webpack -g</p>
 <p>npm install webpack –save-dev</p>
 <p>使用指定版本</p>
-<p> npm install <a href="mailto:&#x77;&#101;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#x2e;&#50;&#46;&#120;">&#x77;&#101;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#x2e;&#50;&#46;&#120;</a> –save-dev</p>
+<p> npm install <a href="mailto:&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;">&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;</a> –save-dev</p>
 <p>第三步，安装vue</p>
 <p>npm install vue</p>
 <p>npm install vue@csp</p>
@@ -2545,6 +2534,17 @@ Cache-Control: no-cache
 ]]></content>
       <categories>
         <category>VUEJS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Android]Ubuntu安装Gradle</title>
+    <url>/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</url>
+    <content><![CDATA[<p>安装gradle：</p>
+<p>curl -s <a href="https://get.sdkman.io/">https://get.sdkman.io</a> | bash</p>
+<p>sdk install gradle 2.14.1</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -2734,6 +2734,20 @@ Cache-Control: no-cache
 
     return cityId;
 &#125;
+</code></pre>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[android] 图标桌面不显示的问题解决</title>
+    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+        &lt;/intent-filter&gt;
 </code></pre>
 ]]></content>
       <categories>
@@ -3054,20 +3068,6 @@ protected void onDestroy() &#123;
 ]]></content>
       <categories>
         <category>Ruby On Rails</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[android] 图标桌面不显示的问题解决</title>
-    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
-            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-        &lt;/intent-filter&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>android</category>
       </categories>
   </entry>
   <entry>
@@ -4036,17 +4036,6 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
       </categories>
   </entry>
   <entry>
-    <title>[Php]错误信息的显示</title>
-    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
-    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
-<p>display_errors &#x3D; On</p>
-<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
-]]></content>
-      <categories>
-        <category>PHP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[Ubuntu]linux下vim命令详解</title>
     <url>/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<p>高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：</p>
@@ -4145,6 +4134,17 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
       </categories>
   </entry>
   <entry>
+    <title>[Php]错误信息的显示</title>
+    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
+    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
+<p>display_errors &#x3D; On</p>
+<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[RubyOnRails]常用正则表达式</title>
     <url>/2013/05/07/ruby%20on%20rails%20%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
     <content><![CDATA[<pre><code>#1.用戶名注冊
@@ -4215,18 +4215,6 @@ end
       </categories>
   </entry>
   <entry>
-    <title>[RubyOnRails]rvm is not a function的解决方法</title>
-    <url>/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p><a href="http://www.cnblogs.com/fantiantian/p/3392357.html">http://www.cnblogs.com/fantiantian/p/3392357.html</a></p>
-<p>执行如下命令：</p>
-<p>&#x2F;bin&#x2F;bash –login</p>
-<p>（设置terminal[终端],以登录shell方式运行命令[Run command as a login shell 的选项, 把它选上]）</p>
-]]></content>
-      <categories>
-        <category>RubyOnRails</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[Ubuntu]安装jdk</title>
     <url>/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/</url>
     <content><![CDATA[<p>具体步骤参详了如下链接：<br><a href="http://blog.csdn.net/yang_hui1986527/article/details/6677450">http://blog.csdn.net/yang_hui1986527&#x2F;article&#x2F;details&#x2F;6677450</a></p>
@@ -4243,6 +4231,18 @@ end
 ]]></content>
       <categories>
         <category>Ubuntu</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[RubyOnRails]rvm is not a function的解决方法</title>
+    <url>/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p><a href="http://www.cnblogs.com/fantiantian/p/3392357.html">http://www.cnblogs.com/fantiantian/p/3392357.html</a></p>
+<p>执行如下命令：</p>
+<p>&#x2F;bin&#x2F;bash –login</p>
+<p>（设置terminal[终端],以登录shell方式运行命令[Run command as a login shell 的选项, 把它选上]）</p>
+]]></content>
+      <categories>
+        <category>RubyOnRails</category>
       </categories>
   </entry>
   <entry>
@@ -4319,24 +4319,6 @@ end
       </categories>
   </entry>
   <entry>
-    <title>[Ubuntu]使用google拼音输入法</title>
-    <url>/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</url>
-    <content><![CDATA[<p> linux下面的中文输入法一直不给力</p>
-<p>现在，google拼音输入法可以用了！这得感谢下面这个项目：<br>libgooglepinyin ( A fork from google pinyin on android)<br>项目地址：<a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
-<p>准备工作：你得安装ibus。（这是ubuntu的默认输入法框架，所以一般都不需要你去安装），具体可以参考 <a href="http://wiki.ubuntu.org.cn/IBus">http://wiki.ubuntu.org.cn/IBus</a></p>
-<p>然后：<br>sudo apt-get install cmake build-essential opencc mercurial ibus</p>
-<p>hg clone <a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
-<p>cd libgooglepinyin</p>
-<p>mkdir build;</p>
-<p>cd build</p>
-<p>cmake .. -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr</p>
-<p>make</p>
-]]></content>
-      <categories>
-        <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[vue] vue(h5)+ror加入popup-picker实现省市县级联</title>
     <url>/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/</url>
     <content><![CDATA[<p>项目中导入:</p>
@@ -4393,6 +4375,24 @@ end
 ]]></content>
       <categories>
         <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Ubuntu]使用google拼音输入法</title>
+    <url>/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<p> linux下面的中文输入法一直不给力</p>
+<p>现在，google拼音输入法可以用了！这得感谢下面这个项目：<br>libgooglepinyin ( A fork from google pinyin on android)<br>项目地址：<a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
+<p>准备工作：你得安装ibus。（这是ubuntu的默认输入法框架，所以一般都不需要你去安装），具体可以参考 <a href="http://wiki.ubuntu.org.cn/IBus">http://wiki.ubuntu.org.cn/IBus</a></p>
+<p>然后：<br>sudo apt-get install cmake build-essential opencc mercurial ibus</p>
+<p>hg clone <a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
+<p>cd libgooglepinyin</p>
+<p>mkdir build;</p>
+<p>cd build</p>
+<p>cmake .. -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr</p>
+<p>make</p>
+]]></content>
+      <categories>
+        <category>Ubuntu</category>
       </categories>
   </entry>
   <entry>
@@ -5549,6 +5549,16 @@ end
       </categories>
   </entry>
   <entry>
+    <title>[JavaScript]禁用鼠标右键的“粘贴”菜单，可以防止鼠标右键或者Ctrl + V粘贴不合法的数据</title>
+    <url>/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</url>
+    <content><![CDATA[<pre><code class="bash">onpaste=&quot;javascript: return false;&quot;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[Ubuntu] 支付宝支付使用openssl生成key</title>
     <url>/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/</url>
     <content><![CDATA[<pre><code>    支付宝支付使用openssl生成公钥，私钥，pkcs8格式密钥
@@ -5571,16 +5581,6 @@ end
 ]]></content>
       <categories>
         <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[JavaScript]禁用鼠标右键的“粘贴”菜单，可以防止鼠标右键或者Ctrl + V粘贴不合法的数据</title>
-    <url>/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</url>
-    <content><![CDATA[<pre><code class="bash">onpaste=&quot;javascript: return false;&quot;
-</code></pre>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
       </categories>
   </entry>
 </search>
