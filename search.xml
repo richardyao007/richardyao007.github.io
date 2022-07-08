@@ -2370,6 +2370,42 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
+    <title>[RubyOnRails]Ubuntu下Rails开发环境配置</title>
+    <url>/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>Ubuntu版本：14.04</p>
+<p>Ruby版本：2.1.2</p>
+<p>1、 更新apt-get：</p>
+<p>ubuntu@ubuntu:~$ sudo apt-get update</p>
+<p>2、 安装curl：</p>
+<p>ubuntu@ubuntu:~$ sudo apt-get install curl</p>
+<p>3、 安装rvm：</p>
+<p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p>
+<p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p>
+<p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p>
+<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#x77;&#x61;&#121;&#x6e;&#101;&#x65;&#115;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;">&#x77;&#x61;&#121;&#x6e;&#101;&#x65;&#115;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>, Michal Papis <a href="mailto:&#x6d;&#112;&#97;&#x70;&#105;&#x73;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#109;">&#x6d;&#112;&#97;&#x70;&#105;&#x73;&#64;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#99;&#x6f;&#109;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
+<p>4、 安装ruby：</p>
+<p>要先执行下面命令，否则后边流程跑不动：</p>
+<p>ubuntu@ubuntu:~$ rvm autolibs enable</p>
+<p>下面这步可选，是将rvm的源改成国内taobao的源：</p>
+<p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p>
+<p>安装：</p>
+<p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p>
+<p>5、 更改gem源：</p>
+<p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
+<p>6、 安装rails：</p>
+<p>ubuntu@ubuntu:~$ gem install rails</p>
+<p>下面就可以创建一个”blog”程序尝试一下：</p>
+<p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p>
+<p>2、启动服务器（执行 rails server）时会有如下报错：</p>
+<p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p>
+<p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p>
+<p>再次启动服务器，即可正常运行啦！！！</p>
+]]></content>
+      <categories>
+        <category>RubyOnRails</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[RubyOnRails]Ruby Array学习总结</title>
     <url>/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>Array</p>
@@ -2431,42 +2467,6 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[RubyOnRails]Ubuntu下Rails开发环境配置</title>
-    <url>/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>Ubuntu版本：14.04</p>
-<p>Ruby版本：2.1.2</p>
-<p>1、 更新apt-get：</p>
-<p>ubuntu@ubuntu:~$ sudo apt-get update</p>
-<p>2、 安装curl：</p>
-<p>ubuntu@ubuntu:~$ sudo apt-get install curl</p>
-<p>3、 安装rvm：</p>
-<p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p>
-<p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p>
-<p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p>
-<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#115;&#101;&#103;&#117;&#105;&#x6e;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#115;&#101;&#103;&#117;&#105;&#x6e;&#64;&#x67;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a>, Michal Papis <a href="mailto:&#x6d;&#112;&#97;&#x70;&#105;&#115;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#x6d;&#112;&#97;&#x70;&#105;&#115;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
-<p>4、 安装ruby：</p>
-<p>要先执行下面命令，否则后边流程跑不动：</p>
-<p>ubuntu@ubuntu:~$ rvm autolibs enable</p>
-<p>下面这步可选，是将rvm的源改成国内taobao的源：</p>
-<p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p>
-<p>安装：</p>
-<p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p>
-<p>5、 更改gem源：</p>
-<p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p>
-<p>6、 安装rails：</p>
-<p>ubuntu@ubuntu:~$ gem install rails</p>
-<p>下面就可以创建一个”blog”程序尝试一下：</p>
-<p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p>
-<p>2、启动服务器（执行 rails server）时会有如下报错：</p>
-<p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p>
-<p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p>
-<p>再次启动服务器，即可正常运行啦！！！</p>
-]]></content>
-      <categories>
-        <category>RubyOnRails</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
     <url>/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</url>
     <content><![CDATA[<p>安装postgis：</p>
@@ -2509,6 +2509,17 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
+    <title>[Android]Ubuntu安装Gradle</title>
+    <url>/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</url>
+    <content><![CDATA[<p>安装gradle：</p>
+<p>curl -s <a href="https://get.sdkman.io/">https://get.sdkman.io</a> | bash</p>
+<p>sdk install gradle 2.14.1</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[VueJs]Ubuntu下安装配置vuejs</title>
     <url>/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/</url>
     <content><![CDATA[<p><a href="https://github.com/vuejs">https://github.com/vuejs</a></p>
@@ -2518,7 +2529,7 @@ Cache-Control: no-cache
 <p>npm install webpack -g</p>
 <p>npm install webpack –save-dev</p>
 <p>使用指定版本</p>
-<p> npm install <a href="mailto:&#119;&#101;&#98;&#112;&#x61;&#x63;&#107;&#64;&#x31;&#46;&#x32;&#46;&#x78;">&#119;&#101;&#98;&#112;&#x61;&#x63;&#107;&#64;&#x31;&#46;&#x32;&#46;&#x78;</a> –save-dev</p>
+<p> npm install <a href="mailto:&#x77;&#101;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#x2e;&#50;&#46;&#120;">&#x77;&#101;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#x2e;&#50;&#46;&#120;</a> –save-dev</p>
 <p>第三步，安装vue</p>
 <p>npm install vue</p>
 <p>npm install vue@csp</p>
@@ -2537,14 +2548,15 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[Android]Ubuntu安装Gradle</title>
-    <url>/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</url>
-    <content><![CDATA[<p>安装gradle：</p>
-<p>curl -s <a href="https://get.sdkman.io/">https://get.sdkman.io</a> | bash</p>
-<p>sdk install gradle 2.14.1</p>
+    <title>[MySql]Ubuntu系统mysql用户root空密码登录</title>
+    <url>/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</url>
+    <content><![CDATA[<p>执行：</p>
+<p>sudo mysqld_safe –user&#x3D;mysql –skip-grant-tables –skip-networking &amp;</p>
+<p>新打开一个窗口：</p>
+<p>mysql -uroot -p</p>
 ]]></content>
       <categories>
-        <category>Android</category>
+        <category>MYSQL</category>
       </categories>
   </entry>
   <entry>
@@ -2675,18 +2687,6 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[MySql]Ubuntu系统mysql用户root空密码登录</title>
-    <url>/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</url>
-    <content><![CDATA[<p>执行：</p>
-<p>sudo mysqld_safe –user&#x3D;mysql –skip-grant-tables –skip-networking &amp;</p>
-<p>新打开一个窗口：</p>
-<p>mysql -uroot -p</p>
-]]></content>
-      <categories>
-        <category>MYSQL</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[android] 使用HttpURLConnection发送请求</title>
     <url>/2017/02/28/android%E4%BD%BF%E7%94%A8HttpURLConnection%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/</url>
     <content><![CDATA[<p>android部分, 需要使用URLEncoder.encode单独对中文参数部分进行编码(URLDecoder.decode(name, “UTF-8”);   可以将url中的编码转译)</p>
@@ -2734,20 +2734,6 @@ Cache-Control: no-cache
 
     return cityId;
 &#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[android] 图标桌面不显示的问题解决</title>
-    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
-            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-        &lt;/intent-filter&gt;
 </code></pre>
 ]]></content>
       <categories>
@@ -2938,6 +2924,146 @@ protected void onDestroy() &#123;
 
     /*******************res显示面板********************/
     使用的官网提供的面板socialize_share_menu_item.xml，umeng_socialize_oauth_dialog.xml
+</code></pre>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Ruby On Rails] app微信支付Ruby on Rails接口篇</title>
+    <url>/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/</url>
+    <content><![CDATA[<pre><code>    使用gem &#39;wx_pay&#39;
+
+
+    payments_controller
+
+
+    def information
+
+        trade_type = params[:trade_type]
+        WxPay.appid = Settings.wx_pay.android_and_ios.appid
+        WxPay.key = Settings.wx_pay.android_and_ios.key
+        WxPay.mch_id = Settings.wx_pay.android_and_ios.mch_id
+
+        #开启调试模式
+        WxPay.debug_mode = true
+
+        Rails.logger.info &quot;trade_type===#&#123;trade_type&#125;&quot;
+        Rails.logger.info &quot;appid===#&#123;Settings.wx_pay.android_and_ios.appid&#125;&quot;
+        Rails.logger.info &quot;key===#&#123;Settings.wx_pay.android_and_ios.key&#125;&quot;
+        Rails.logger.info &quot;mch_id===#&#123;Settings.wx_pay.android_and_ios.mch_id&#125;&quot;
+
+        fee = params[:fee]
+        order_sn = params[:order_sn]
+
+        # 订单号, 需要每次都要变化.
+        @order = Order.includes(:good).find(params[:order_id])
+
+        payment_params = &#123;
+            body: &quot;商品名称: #&#123;@order.good.name&#125;, 总价: #&#123;fee&#125;元&quot;,
+            out_trade_no: order_sn,
+            # 单位是 分, 所以要 乘以 100
+            total_fee: (fee.to_f * 100).to_i,
+
+            # 我们服务器的 IP
+            spbill_create_ip: Settings.wx_pay.spbill_create_ip,
+            # 微信服务器 在支付成功后, 调用我们服务器的接口, 来告诉我们.
+            notify_url: Settings.wx_pay.notify_url,
+            trade_type: trade_type, #&#39;JSAPI&#39;, # could be &quot;JSAPI&quot;, &quot;NATIVE&quot; or &quot;APP&quot;,
+            # 用户的open id
+            #openid: params[:open_id]  # 当支付方式是 公众号内支付的时候, 用这个.
+        &#125;
+        Rails.logger.info &quot;== payment_params: #&#123;payment_params.inspect&#125;&quot;
+
+        # 第一次访问微信服务器, 主要目的是获取 prepay_id, 在这个r 中,  r[&#39;prepay_id&#39;] 就是微信返回的值
+
+        r = WxPay::Service.invoke_unifiedorder payment_params
+
+        Rails.logger.info &quot;== information-: #&#123;r.inspect&#125;&quot;
+
+        # 准备为第二次 访问 微信服务器做准备.
+        if r.success? # =&gt; true
+            @order.update_attribute(&#39;collect&#39;, fee)
+            temp_return_code =  r[&quot;return_code&quot;]
+            temp_return_msg =  r[&quot;return_msg&quot;]
+
+
+            params_for_app = &#123;
+              prepayid: r[&#39;prepay_id&#39;],
+              noncestr: SecureRandom.uuid.tr(&#39;-&#39;, &#39;&#39;)
+            &#125;
+
+            # 第二次访问 微信服务器, 获取 app 支付所需要的参数:
+            # 臭名昭著的 sign 问题就是在这个方法中被解决( 应该是还需要把sign 重新生成一遍)
+            # 多亏有这个gem, 我们不必顾虑这个问题了.
+            #
+
+            r = WxPay::Service.generate_app_pay_req params_for_app
+
+            Rails.logger.info &quot;==== generate_app_pay_req : #&#123;r.inspect&#125;&quot;
+
+            result = &#123;
+              appId: r[:appid],
+              partnerid: r[:partnerid],
+              prepay_id: r[:prepayid],
+              package: r[:package],
+              timeStamp: r[:timestamp],
+              nonceStr: r[:noncestr],
+              return_code: temp_return_code,  # 这个参数没太大用. 我们项目使用而已.
+              return_msg: temp_return_msg,# 这个参数没太大用. 我们项目使用而已.
+              sign: r[:sign],
+              order_id: @order.id
+            &#125;
+        else
+            result = &#123; return_code: r[&quot;return_code&quot;], return_msg: r[&quot;return_msg&quot;], result_code: r[&quot;result_code&quot;], err_code: r[&quot;err_code&quot;], err_code_des: r[&quot;err_code_des&quot;] &#125;
+        end
+
+        Rails.logger.info &quot;== 最终返回给app的结果 final_result :--#&#123;result.inspect&#125;-------&quot;
+
+        render json: result
+    end
+
+    def notify
+        logger.info &quot;== notify from weixin server: &quot;
+        logger.info params.inspect
+        logger.info &quot;== notify from weixin server( done ) : &quot;
+
+        # 请求是由 微信服务器 发送过来.
+        result = Hash.from_xml(request.body.read)[&quot;xml&quot;]
+
+        Rails.logger.info &quot;----notify-----result------#&#123;result&#125;-------&quot;
+        if WxPay::Sign.verify?(result)
+            order_number = result[&quot;out_trade_no&quot;].to_s
+            logger.info &quot;==  sign verified&quot;
+            Rails.logger.info &quot;---------order_no------#&#123;result[&quot;out_trade_no&quot;]&#125;-------&quot;
+            @order = Order.find_by_order_number(order_number)
+            logger.info &quot;==  #&#123;@order.inspect&#125; order !!!!!----&quot;
+            unless @order.blank?
+              logger.info &quot;==  order is not blank !!!!!----&quot;
+              time = Time.now.to_datetime
+              @order.update_attributes(:order_status =&gt; &#39;yizhifu&#39;, :collect =&gt; result[&quot;total_fee&quot;], :payed_at =&gt; time)
+            end
+            render :xml =&gt; &#123; return_code: &quot;SUCCESS&quot; &#125;.to_xml(root: &#39;xml&#39;, dasherize: false)
+        else
+            logger.error &quot;==  sign NOT verified&quot;
+            render :xml =&gt; &#123; return_code: &quot;FAIL&quot;, return_msg: &quot;&quot; &#125;.to_xml(root: &#39;xml&#39;, dasherize: false)
+        end
+    end
+</code></pre>
+]]></content>
+      <categories>
+        <category>Ruby On Rails</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[android] 图标桌面不显示的问题解决</title>
+    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+        &lt;/intent-filter&gt;
 </code></pre>
 ]]></content>
       <categories>
@@ -3306,6 +3432,27 @@ public void getPayInfoFromServer(final String payUrl) &#123;
       </categories>
   </entry>
   <entry>
+    <title>[Ruby On Rails] app微信支付配置篇(appid,key,mch_id)</title>
+    <url>/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/</url>
+    <content><![CDATA[<p>appid:  注册开放平台后，管理中心新建应用审核通过后得到的.</p>
+<p>key: 一个32位字符串，在商户平台，api安全中，下载证书的下面有个设置密钥的地方，点击填写两次</p>
+<p>mch_id: 注册开放平台后，管理中心应用审核通过，点击查看，申请支付所绑定的商户平台的商户号</p>
+]]></content>
+      <categories>
+        <category>Ruby On Rails</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Css]控制禁止输入法</title>
+    <url>/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<p>很简单，一句话</p>
+<p>ime-mode:Disabled;</p>
+]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[RubyOnRails]ckeditor+carrierwave+upyun图片上传</title>
     <url>/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>ckeditor+carrierwave+upyun图片上传</p>
@@ -3523,153 +3670,6 @@ End
       </categories>
   </entry>
   <entry>
-    <title>[Ruby On Rails] app微信支付配置篇(appid,key,mch_id)</title>
-    <url>/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/</url>
-    <content><![CDATA[<p>appid:  注册开放平台后，管理中心新建应用审核通过后得到的.</p>
-<p>key: 一个32位字符串，在商户平台，api安全中，下载证书的下面有个设置密钥的地方，点击填写两次</p>
-<p>mch_id: 注册开放平台后，管理中心应用审核通过，点击查看，申请支付所绑定的商户平台的商户号</p>
-]]></content>
-      <categories>
-        <category>Ruby On Rails</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Ruby On Rails] app微信支付Ruby on Rails接口篇</title>
-    <url>/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/</url>
-    <content><![CDATA[<pre><code>    使用gem &#39;wx_pay&#39;
-
-
-    payments_controller
-
-
-    def information
-
-        trade_type = params[:trade_type]
-        WxPay.appid = Settings.wx_pay.android_and_ios.appid
-        WxPay.key = Settings.wx_pay.android_and_ios.key
-        WxPay.mch_id = Settings.wx_pay.android_and_ios.mch_id
-
-        #开启调试模式
-        WxPay.debug_mode = true
-
-        Rails.logger.info &quot;trade_type===#&#123;trade_type&#125;&quot;
-        Rails.logger.info &quot;appid===#&#123;Settings.wx_pay.android_and_ios.appid&#125;&quot;
-        Rails.logger.info &quot;key===#&#123;Settings.wx_pay.android_and_ios.key&#125;&quot;
-        Rails.logger.info &quot;mch_id===#&#123;Settings.wx_pay.android_and_ios.mch_id&#125;&quot;
-
-        fee = params[:fee]
-        order_sn = params[:order_sn]
-
-        # 订单号, 需要每次都要变化.
-        @order = Order.includes(:good).find(params[:order_id])
-
-        payment_params = &#123;
-            body: &quot;商品名称: #&#123;@order.good.name&#125;, 总价: #&#123;fee&#125;元&quot;,
-            out_trade_no: order_sn,
-            # 单位是 分, 所以要 乘以 100
-            total_fee: (fee.to_f * 100).to_i,
-
-            # 我们服务器的 IP
-            spbill_create_ip: Settings.wx_pay.spbill_create_ip,
-            # 微信服务器 在支付成功后, 调用我们服务器的接口, 来告诉我们.
-            notify_url: Settings.wx_pay.notify_url,
-            trade_type: trade_type, #&#39;JSAPI&#39;, # could be &quot;JSAPI&quot;, &quot;NATIVE&quot; or &quot;APP&quot;,
-            # 用户的open id
-            #openid: params[:open_id]  # 当支付方式是 公众号内支付的时候, 用这个.
-        &#125;
-        Rails.logger.info &quot;== payment_params: #&#123;payment_params.inspect&#125;&quot;
-
-        # 第一次访问微信服务器, 主要目的是获取 prepay_id, 在这个r 中,  r[&#39;prepay_id&#39;] 就是微信返回的值
-
-        r = WxPay::Service.invoke_unifiedorder payment_params
-
-        Rails.logger.info &quot;== information-: #&#123;r.inspect&#125;&quot;
-
-        # 准备为第二次 访问 微信服务器做准备.
-        if r.success? # =&gt; true
-            @order.update_attribute(&#39;collect&#39;, fee)
-            temp_return_code =  r[&quot;return_code&quot;]
-            temp_return_msg =  r[&quot;return_msg&quot;]
-
-
-            params_for_app = &#123;
-              prepayid: r[&#39;prepay_id&#39;],
-              noncestr: SecureRandom.uuid.tr(&#39;-&#39;, &#39;&#39;)
-            &#125;
-
-            # 第二次访问 微信服务器, 获取 app 支付所需要的参数:
-            # 臭名昭著的 sign 问题就是在这个方法中被解决( 应该是还需要把sign 重新生成一遍)
-            # 多亏有这个gem, 我们不必顾虑这个问题了.
-            #
-
-            r = WxPay::Service.generate_app_pay_req params_for_app
-
-            Rails.logger.info &quot;==== generate_app_pay_req : #&#123;r.inspect&#125;&quot;
-
-            result = &#123;
-              appId: r[:appid],
-              partnerid: r[:partnerid],
-              prepay_id: r[:prepayid],
-              package: r[:package],
-              timeStamp: r[:timestamp],
-              nonceStr: r[:noncestr],
-              return_code: temp_return_code,  # 这个参数没太大用. 我们项目使用而已.
-              return_msg: temp_return_msg,# 这个参数没太大用. 我们项目使用而已.
-              sign: r[:sign],
-              order_id: @order.id
-            &#125;
-        else
-            result = &#123; return_code: r[&quot;return_code&quot;], return_msg: r[&quot;return_msg&quot;], result_code: r[&quot;result_code&quot;], err_code: r[&quot;err_code&quot;], err_code_des: r[&quot;err_code_des&quot;] &#125;
-        end
-
-        Rails.logger.info &quot;== 最终返回给app的结果 final_result :--#&#123;result.inspect&#125;-------&quot;
-
-        render json: result
-    end
-
-    def notify
-        logger.info &quot;== notify from weixin server: &quot;
-        logger.info params.inspect
-        logger.info &quot;== notify from weixin server( done ) : &quot;
-
-        # 请求是由 微信服务器 发送过来.
-        result = Hash.from_xml(request.body.read)[&quot;xml&quot;]
-
-        Rails.logger.info &quot;----notify-----result------#&#123;result&#125;-------&quot;
-        if WxPay::Sign.verify?(result)
-            order_number = result[&quot;out_trade_no&quot;].to_s
-            logger.info &quot;==  sign verified&quot;
-            Rails.logger.info &quot;---------order_no------#&#123;result[&quot;out_trade_no&quot;]&#125;-------&quot;
-            @order = Order.find_by_order_number(order_number)
-            logger.info &quot;==  #&#123;@order.inspect&#125; order !!!!!----&quot;
-            unless @order.blank?
-              logger.info &quot;==  order is not blank !!!!!----&quot;
-              time = Time.now.to_datetime
-              @order.update_attributes(:order_status =&gt; &#39;yizhifu&#39;, :collect =&gt; result[&quot;total_fee&quot;], :payed_at =&gt; time)
-            end
-            render :xml =&gt; &#123; return_code: &quot;SUCCESS&quot; &#125;.to_xml(root: &#39;xml&#39;, dasherize: false)
-        else
-            logger.error &quot;==  sign NOT verified&quot;
-            render :xml =&gt; &#123; return_code: &quot;FAIL&quot;, return_msg: &quot;&quot; &#125;.to_xml(root: &#39;xml&#39;, dasherize: false)
-        end
-    end
-</code></pre>
-]]></content>
-      <categories>
-        <category>Ruby On Rails</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Css]控制禁止输入法</title>
-    <url>/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</url>
-    <content><![CDATA[<p>很简单，一句话</p>
-<p>ime-mode:Disabled;</p>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[RubyOnRails]gem install mysql2失败解决办法</title>
     <url>/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
     <content><![CDATA[<ol>
@@ -3682,24 +3682,6 @@ End
       <categories>
         <category>RubyOnRails</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2022/07/05/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
   </entry>
   <entry>
     <title>[git] 打tag</title>
@@ -3726,6 +3708,24 @@ End
       <categories>
         <category>git</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/07/05/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>[javascript] highchart使用心得</title>
@@ -3804,46 +3804,6 @@ End
       </categories>
   </entry>
   <entry>
-    <title>javascript - 使用浏览器读取剪切板中的图片内容，并且粘贴到对应的HTML编辑器中</title>
-    <url>/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/</url>
-    <content><![CDATA[<p>参考：<a href="https://stackoverflow.com/questions/60503912/get-image-using-paste-from-the-browser">https://stackoverflow.com/questions/60503912/get-image-using-paste-from-the-browser</a></p>
-<pre><code class="bash">$ // 1. 必须使用 onpaste方法。不能使用 click的方式来调用
-document.onpaste = function(pasteEvent) &#123;
-  var item = pasteEvent.clipboardData.items[0];
-
-  if (item.type.indexOf(&quot;image&quot;) === 0) &#123;
-    var blob = item.getAsFile();
-
-    var reader = new FileReader();
-
-    // 3. 记得要定义好 onload方法
-    reader.onload = function(event) &#123;
-      // 4. 就可以看到图片的内容了。这个是最最重要的。 
-      console.info(&#39;==&#39;,event.target.result)
-      // 接下来可以把这个图片的内容通过SDK上传到 CDN服务器上，并且在本地进行回显。 
-      $(&#39;#image_preview&#39;).html(&quot;&lt;img src=&quot; + event.target.result +&quot; /&gt;&quot;)
-    &#125;;
-
-    // 2. 使用这个方法
-    reader.readAsDataURL(blob);
-  &#125;
-&#125;
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
-    <title>[jQuery]中removeAttr方法在IE8以下版本中的Bug</title>
-    <url>/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/</url>
-    <content><![CDATA[<p>$(“#inputid”).removeAttr(‘data-validate’)  &#x2F;&#x2F;如果removeAttr不起作用，可以使用</p>
-<p>$(“#inputid”).prop(‘data-validate’,false)</p>
-<p>或</p>
-<p>$(“#inputid”).prop(‘checked’,false) or .removeAttr(‘checked’)?</p>
-]]></content>
-      <categories>
-        <category>JQuery</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[jQuery]增加 删除 修改select option</title>
     <url>/2013/05/07/jQuery%20%E5%A2%9E%E5%8A%A0%20%E5%88%A0%E9%99%A4%20%E4%BF%AE%E6%94%B9select%20option/</url>
     <content><![CDATA[<p> jQuery获取Select选择的Text和Value:</p>
@@ -3875,6 +3835,46 @@ document.onpaste = function(pasteEvent) &#123;
       <categories>
         <category>JQuery</category>
       </categories>
+  </entry>
+  <entry>
+    <title>[jQuery]中removeAttr方法在IE8以下版本中的Bug</title>
+    <url>/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/</url>
+    <content><![CDATA[<p>$(“#inputid”).removeAttr(‘data-validate’)  &#x2F;&#x2F;如果removeAttr不起作用，可以使用</p>
+<p>$(“#inputid”).prop(‘data-validate’,false)</p>
+<p>或</p>
+<p>$(“#inputid”).prop(‘checked’,false) or .removeAttr(‘checked’)?</p>
+]]></content>
+      <categories>
+        <category>JQuery</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>javascript - 使用浏览器读取剪切板中的图片内容，并且粘贴到对应的HTML编辑器中</title>
+    <url>/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/</url>
+    <content><![CDATA[<p>参考：<a href="https://stackoverflow.com/questions/60503912/get-image-using-paste-from-the-browser">https://stackoverflow.com/questions/60503912/get-image-using-paste-from-the-browser</a></p>
+<pre><code class="bash">$ // 1. 必须使用 onpaste方法。不能使用 click的方式来调用
+document.onpaste = function(pasteEvent) &#123;
+  var item = pasteEvent.clipboardData.items[0];
+
+  if (item.type.indexOf(&quot;image&quot;) === 0) &#123;
+    var blob = item.getAsFile();
+
+    var reader = new FileReader();
+
+    // 3. 记得要定义好 onload方法
+    reader.onload = function(event) &#123;
+      // 4. 就可以看到图片的内容了。这个是最最重要的。 
+      console.info(&#39;==&#39;,event.target.result)
+      // 接下来可以把这个图片的内容通过SDK上传到 CDN服务器上，并且在本地进行回显。 
+      $(&#39;#image_preview&#39;).html(&quot;&lt;img src=&quot; + event.target.result +&quot; /&gt;&quot;)
+    &#125;;
+
+    // 2. 使用这个方法
+    reader.readAsDataURL(blob);
+  &#125;
+&#125;
+</code></pre>
+]]></content>
   </entry>
   <entry>
     <title>javascript-对于hash进行排序的几种方式</title>
@@ -4036,6 +4036,17 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
       </categories>
   </entry>
   <entry>
+    <title>[Php]错误信息的显示</title>
+    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
+    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
+<p>display_errors &#x3D; On</p>
+<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[Ubuntu]linux下vim命令详解</title>
     <url>/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<p>高级一些的编辑器，都会包含宏功能，vim当然不能缺少了，在vim中使用宏是非常方便的：</p>
@@ -4079,17 +4090,6 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
 ]]></content>
       <categories>
         <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Php]错误信息的显示</title>
-    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
-    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
-<p>display_errors &#x3D; On</p>
-<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
-]]></content>
-      <categories>
-        <category>PHP</category>
       </categories>
   </entry>
   <entry>
@@ -4647,6 +4647,45 @@ end
 ]]></content>
       <categories>
         <category>laravel workman websocket php</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Android]实现更换网络图片,并且设置圆角</title>
+    <url>/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/</url>
+    <content><![CDATA[<pre><code>new DownloadImageTask(airport_image)
+        .execute(image);  //image即是获取到的图片url
+</code></pre>
+<p>   private class DownloadImageTask extends AsyncTask&lt;String, Void, Bitmap&gt; {<br>        ImageView bmImage;</p>
+<pre><code>    public DownloadImageTask(ImageView bmImage) &#123;
+        this.bmImage = bmImage;
+    &#125;
+
+    protected Bitmap doInBackground(String... urls) &#123;
+        String urldisplay = urls[0];
+        Bitmap mIcon11 = null;
+        try &#123;
+            InputStream in = new java.net.URL(urldisplay).openStream();
+            mIcon11 = BitmapFactory.decodeStream(in);
+        &#125; catch (Exception e) &#123;
+            Log.e(&quot;Error&quot;, e.getMessage());
+            e.printStackTrace();
+        &#125;
+        return mIcon11;
+    &#125;
+
+    protected void onPostExecute(Bitmap mbitmap) &#123;
+        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
+        Canvas canvas = new Canvas(imageRounded);
+        Paint mpaint = new Paint();
+        mpaint.setAntiAlias(true);
+        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 50, 50, mpaint);// Round Image Corner 100 100 100 100
+        bmImage.setImageBitmap(imageRounded);
+</code></pre>
+<p>   &#x2F;&#x2F;       bmImage.setImageBitmap(result);<br>            Log.d(TAG, “设置&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;onPostExecute”);<br>        }<br>    }</p>
+]]></content>
+      <categories>
+        <category>Android</category>
       </categories>
   </entry>
   <entry>
@@ -5435,45 +5474,6 @@ end
 ]]></content>
       <categories>
         <category>android</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Android]实现更换网络图片,并且设置圆角</title>
-    <url>/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/</url>
-    <content><![CDATA[<pre><code>new DownloadImageTask(airport_image)
-        .execute(image);  //image即是获取到的图片url
-</code></pre>
-<p>   private class DownloadImageTask extends AsyncTask&lt;String, Void, Bitmap&gt; {<br>        ImageView bmImage;</p>
-<pre><code>    public DownloadImageTask(ImageView bmImage) &#123;
-        this.bmImage = bmImage;
-    &#125;
-
-    protected Bitmap doInBackground(String... urls) &#123;
-        String urldisplay = urls[0];
-        Bitmap mIcon11 = null;
-        try &#123;
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
-        &#125; catch (Exception e) &#123;
-            Log.e(&quot;Error&quot;, e.getMessage());
-            e.printStackTrace();
-        &#125;
-        return mIcon11;
-    &#125;
-
-    protected void onPostExecute(Bitmap mbitmap) &#123;
-        Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
-        Canvas canvas = new Canvas(imageRounded);
-        Paint mpaint = new Paint();
-        mpaint.setAntiAlias(true);
-        mpaint.setShader(new BitmapShader(mbitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mbitmap.getWidth(), mbitmap.getHeight())), 50, 50, mpaint);// Round Image Corner 100 100 100 100
-        bmImage.setImageBitmap(imageRounded);
-</code></pre>
-<p>   &#x2F;&#x2F;       bmImage.setImageBitmap(result);<br>            Log.d(TAG, “设置&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;onPostExecute”);<br>        }<br>    }</p>
-]]></content>
-      <categories>
-        <category>Android</category>
       </categories>
   </entry>
   <entry>

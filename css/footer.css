@@ -1,6 +1,7 @@
 #bottom-outer {
   height: 30px;
   text-align: center;
+  margin-top: 50px;
 }
 #bottom-inner {
   display: inline-block;
