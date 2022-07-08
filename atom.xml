@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>知识是第一生产力</title>
+  <title>Hexo</title>
   
-  <subtitle>努力奋斗改变生活</subtitle>
+  
   <link href="https://richardyao007.github.io/atom.xml" rel="self"/>
   
   <link href="https://richardyao007.github.io/"/>
@@ -10,7 +10,7 @@
   <id>https://richardyao007.github.io/</id>
   
   <author>
-    <name>richard</name>
+    <name>John Doe</name>
     
   </author>
   
