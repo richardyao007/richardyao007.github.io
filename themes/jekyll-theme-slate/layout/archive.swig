@@ -1,20 +1,20 @@
 {% extends 'includes/layout.swig' %}   {#  模板继承 #}
 
 {% block body %}
-<div id="archive-outer">
-  <div id="archive-inter">
+  <div id="archive-outer">
+    <div id="archive-inter">
       {% set y = 0; %}
       {% for postItem in page.posts.toArray() %} 
         <div classets="archive-item">
-           {% if postItem.date === undefined %} {# 防止日期为空 #}
-           {% set postItem.date = date(Date.now(), 'YYYY/MM/DD') %}
-           {% endif %}
-           {% set year = postItem.date.year(); %} 
-           {% if (y != year) %}  {#  判断年分隔算法 #}
-             {% set y = year %}
-             <div id="archive-year"> {{ y }}年 </div>
-           {% endif %}
-           {% if !postItem.link %}
+            {% if postItem.date === undefined %} {# 防止日期为空 #}
+            {% set postItem.date = date(Date.now(), 'YYYY/MM/DD') %}
+            {% endif %}
+            {% set year = postItem.date.year(); %} 
+            {% if (y != year) %}  {#  判断年分隔算法 #}
+              {% set y = year %}
+              <div id="archive-year"> {{ y }}年 </div>
+            {% endif %}
+            {% if !postItem.link %}
             {# 文章链接 #}
             <a href="{{ url_for(postItem.path) }}">
               <time id="archive-item-time" datetime="{{ date_xml(postItem.date) }}">
@@ -26,5 +26,17 @@
         </div>
       {% endfor %}
     </div>
-</div>
+  </div>
+    {%- if page.prev or page.next %}
+    <nav class="pagination" id="page-nav">
+      {{
+        paginator({
+          prev_text: '<i class="fa fa-angle-left" aria-label="' + __('accessibility.prev_page') + '"></i>',
+          next_text: '<i class="fa fa-angle-right" aria-label="' + __('accessibility.next_page') + '"></i>',
+          mid_size: 1,
+          escape: false
+        })
+      }}
+    </nav>
+  {%- endif %}
 {% endblock %}

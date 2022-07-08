@@ -20,7 +20,10 @@ src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
 <link rel="stylesheet" href="/plugins/github-markdown.css">
 
 <head>
+  <title>{{ config.title }}</title>
   <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{ config.description }}" />
+  <meta name="keyword" content="{{ config.keywords }}"/>
   {% if theme.stylesheets !== undefined && theme.stylesheets.length > 0 %}
     {# stylesheet list from config.yml #}
     {% for url in theme.stylesheets %}
@@ -53,7 +56,6 @@ src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
     <script src="{{ url }}"></script>
   {% endfor %}
 {% endif %}
-
 </body>
 </html>
 
@@ -64,4 +66,3 @@ $(window).on('load', function(){
    prettyPrint();
  });
 </script>
-

@@ -1,3 +1,5 @@
+title: '知识是第一生产力'
+
 ########################################################
 # 版本：version 1.0
 # ps: 继承至hexo的 _config.yml文件
@@ -13,6 +15,7 @@ menu:
   #关于: /about   # 默认使用主页的about风格,所以先注释掉 #
   关于: /about   # 默认使用主页的about风格,所以先注释掉 #
   分享: /share
+  
 
 # stylesheets loaded in the <head>
 stylesheets:
@@ -36,8 +39,6 @@ livere_uid: MTAyMC81NjcxNC8zMzE3OA==
 wechatpay: /images/wechatpay.jpeg
 alipay:  /images/alipay.jpg
 reward_comment: 文章对我有帮助，打赏作者
-
-
 
 # 个人社交主页 (可选择填写部分）
 social:
@@ -64,17 +65,8 @@ social:
 # Miscelaneous
 favicon: /favicon.ico
 
-# RSS订阅
-plugin:
-- hexo-generator-feed
-subnav:
 rss: /atom.xml
 rss_icon: /images/rss.png
-
-# Feed Atom
-feed:
-type: atom
-path: atom
 
 # 主题主颜色
 theme_color: '#6d5aca'  #尝试替换自己喜欢的颜色 '#2ca6cb'... #
@@ -111,3 +103,19 @@ home_bgimage: /images/background.png
 #2.menu_about:在菜单栏新开一个菜单"关于", 请确保菜单配置menu，添加了about项(打开上面menu,about的注释)
 about_type: home_about
     
+local_search:
+  enable: true
+  # if auto, trigger search by changing input
+  # if manual, trigger search by pressing enter key or search button
+  trigger: auto
+  # show top n results per article, show all results by setting to -1
+  top_n_per_article: 1
+
+algolia_search:
+  enable: false
+  hits:
+    per_page: 5
+
+# RSS订阅
+plugin:
+- hexo-generator-feed
