@@ -197,3 +197,10 @@ input[type="search"] {
 .form-group {
   margin-bottom: 15px;
 }
+p.search-result {
+  color: #555;
+  font-size: 14px;
+}
+p {
+  margin: 0 0 10px;
+}
