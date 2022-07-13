@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[部署]Capistrano: 自动化部署的利器</title>
+    <url>/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</url>
+    <content><![CDATA[<p>Capistrano: 自动化部署的利器</p>
+<p>注意： 以下的文档针对的版本是 2.12.0 capistrano 3.x 跟 2.x 的工作原理是差不多的. 掌握了其中一个, 就可以很快掌握第二个. 区别在于 3.x 只在 ruby 2.x 版本下工作. 很多项目都是 1.9.x的,所以我们以capistrano 2为例.</p>
+<p>简介</p>
+<p>Capistrano 是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。 替代人肉的工作.</p>
+<p>注意: (TODO 另起个章节,专门说安全问题)</p>
+<p>绝对不要把 config&#x2F;deploy.rb 放到代码仓库中. 绝对不要把 config&#x2F;deploy.rb 放到代码仓库中. 绝对不要把 config&#x2F;deploy.rb 放到代码仓库中.</p>
+<p>同理, 不要把 配置信息 放到 代码仓库中. 比如:</p>
+<p>数据库配置信息: database.yml 邮箱配置信息: mail.yml 应用服务器配置信息: thin.yml, unicorn.yml</p>
+<p>如果你在公司中发现这样的人,直接把他开掉. 对服务器没有安全意识.</p>
+<p>无数的服务器配置信息,都在github上的公共项目中的 部署脚本 文件中泄漏出去的. 端口号, 用户名, ip地址一泄漏出去的话,基本上对方拿个密码字典碰几天, 你的服务器就成了肉鸡了.</p>
+<p>为什么不要人肉去做</p>
+<p>很多同学在部署时,用的是自己写的脚本. 这个就不对了. 自己写的脚本永远不专业. 不要自大,相信我没错的.</p>
+<p>哪怕是运维级别的同学,写出来的脚本,也无法轻易回滚. 因为这里的逻辑还是比较多的,光靠脚本不行. 还得 需要比较多的代码逻辑.</p>
+<p>最常见的人肉脚本是:</p>
+<p>进入到代码仓库<br>$ cd &lt; your code repo&gt;<br>更新代码:<br>$ git pull<br>重启<br>$ bundle exec thin restart<br>如果你有20个服务器,就可以这样使用脚本去做了.</p>
+<p>但是上面最大的缺点:</p>
+<p>无法回滚<br>你要祈祷工作顺风顺水,稍微有一个环节出了错, 就要手续继续处理剩下的环节.<br>安装方式：</p>
+<p>进入到项目目录下面,并增加下面内容到 Gemfile 中：<br>group :development<br>  gem ‘capistrano’, ‘2.12.0’<br>  gem ‘capistrano-rbenv’, ‘1.0.1’<br>end<br>安装添加的gem<br>$ bundle install<br>再运行下面的命令：<br>$ capify .<br>capify .<br>[skip] ‘.&#x2F;Capfile’ already exists<br>[skip] ‘.&#x2F;config&#x2F;deploy.rb’ already exists<br>[done] capified!<br>会生成两个关键性的文件： Capfile , config&#x2F;deploy.rb</p>
+<p>编辑后者config&#x2F;deploy.rb 加上自己的capistrano配置信息<br>启动deploy中的setup任务,创建一些必要文件夹<br>下面是一个完整的 部署脚本( config&#x2F;deploy.rb )的例子, 修改其中的 用户名,端口号, 目标服务器的域名 , 服务器的启动方式, 就可以直接运行了.:</p>
+<h1 id="encoding-utf-8"><a href="#encoding-utf-8" class="headerlink" title="-- encoding : utf-8 --"></a>-<em>- encoding : utf-8 -</em>-</h1><p>require ‘capistrano-rbenv’<br>load ‘deploy&#x2F;assets’<br>SSH_USER &#x3D; ‘你的用户名’<br>SSH_PORT &#x3D; ‘你的端口号’<br>server &#x3D; “目标服务器的域名或者ip”<br>FOLDER_IN_REMOTE_SERVER &#x3D; ‘远程服务器上的目标文件夹’</p>
+<p>ssh_options[:port] &#x3D; SSH_PORT<br>set :rake, “bundle exec rake”<br>set :application, “app name”<br>set :repository, “.”<br>set :scm, :none<br>set :deploy_via, :copy</p>
+<p>role :web, server<br>role :app, server<br>role :db,  server, :primary &#x3D;&gt; true<br>role :db,  server</p>
+<p>set :deploy_to, FOLDER_IN_REMOTE_SERVER<br>default_run_options[:pty] &#x3D; true</p>
+<h1 id="change-to-your-username"><a href="#change-to-your-username" class="headerlink" title="change to your username"></a>change to your username</h1><p>set :user, SSH_USER</p>
+<p>namespace :deploy do<br>  task :start do<br>    run “cd #{release_path} &amp;&amp; bundle exec thin start -C config&#x2F;thin.yml”<br>  end<br>  task :stop do<br>    run “cd #{release_path} &amp;&amp; bundle exec thin stop -C config&#x2F;thin.yml”<br>  end<br>  task :restart, :roles &#x3D;&gt; :app, :except &#x3D;&gt; { :no_release &#x3D;&gt; true } do<br>    db_migrate<br>    stop<br>    sleep 2<br>    start<br>  end<br>  task :db_migrate do<br>    run “cd #{release_path} &amp;&amp; bundle install”<br>    run “cd #{release_path} &amp;&amp; bundle exec rake db:migrate RAILS_ENV&#x3D;production”<br>  end</p>
+<p>  namespace :assets do<br>    task :precompile do<br>      #run “bundle install”<br>      #run “cd #{release_path} &amp;&amp; bundle exec rake RAILS_ENV&#x3D;production RAILS_GROUPS&#x3D;assets assets:precompile “<br>    end<br>  end<br>end</p>
+<p>desc “Copy database.yml to release_path”<br>task :cp_database_yml do<br>  puts “&#x3D;&#x3D;&#x3D; executing my customized command: “<br>  run “cp -r #{shared_path}&#x2F;config&#x2F;* #{release_path}&#x2F;config&#x2F;“<br>  run “ln -s #{shared_path}&#x2F;files #{release_path}&#x2F;public&#x2F;files”</p>
+<h1 id="因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再-ln"><a href="#因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再-ln" class="headerlink" title="因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再 ln"></a>因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再 ln</h1><p>  run “rm #{release_path}&#x2F;public&#x2F;uploads -rf”<br>  run “ln -s #{shared_path}&#x2F;public&#x2F;uploads #{release_path}&#x2F;public&#x2F;uploads”<br>  puts “&#x3D;&#x3D;&#x3D; done (executing my customized command)”<br>end</p>
+<p>before “deploy:assets:precompile”, :cp_database_yml<br>#after “deploy”, “deploy:restart”<br>第一次运行时,要先 配置好目标服务器上的文件夹.</p>
+<p>$ cap deploy:setup<br>注意: 这里让它创建基本的目标文件夹目录层次就可以:</p>
+<p>&#x2F;opt&#x2F;app:<br>    current (这是个软链接 soft link, )-&gt; &#x2F;opt&#x2F;app&#x2F;releases&#x2F;20150518030114&#x2F;<br>    releases&#x2F;<br>    shared&#x2F;<br>        assets<br>        config<br>        files<br>        log<br>        pids<br>        public<br>        system<br>不要让它做 : 安装rbenv, 安装ruby 版本, 安装第三方包的事儿.</p>
+<p>注意： 这里务必记得， 盯紧控制台的输出， 看到它执行完 mkdir -p 之后， 赶紧按ctrl + c 暂停。否则它会默认在远程服务器上安装各种ruby 第三方包，安装各种linux 依赖包。一不小心就会把服务器环境搞砸了。</p>
+<p>为 shared 目录下，增加各种配置文件，它们只需要被配置一遍。例如：<br>config&#x2F;thin.yml       # 服务器的配置<br>config&#x2F;database.yml   # 数据库的配置<br>config&#x2F;log4r.yml      # 日志文件的配置<br>config&#x2F;settings.yml   # 系统的配置<br>配置好ruby环境， mysql, thin, nginx 等<br>开始部署</p>
+<p>$ cap deploy.<br>这个命令会执行下面的过程:</p>
+<p>准备启动服务器:<br>安装各种新增的rubygem<br>做必要的数据库迁移<br>配置各种文件<br>修改上传文件夹的softlink<br>其他,每次使用裸代码做部署的时候,都要人肉做的事情. (修改保存日志的路径, 修改 rails server的配置, )<br>编译,压缩 js&#x2F; css<br>重启 服务器( $ nginx -s reload, $ kill -9 xxx , $ thin start -C config&#x2F;thin.yml)<br>再次部署（更新版本）</p>
+<p>只需要运行$ cap deploy即可。</p>
+<p>使用命令行</p>
+<p>下面是一个例子，在命令行中显示 User name: , 等用户输入完，按回车之后， 把输入的值赋给 user 变量。</p>
+<p>set(:user) { Capistrano::CLI.ui.ask(“User name: “) }<br>使用帮助：<br>$ cap –help<br>使用logger，特别是在其他语言调用CAP时，非常有用（例如被fabric 调用）:<br>$ cap setup –logger STDOUT<br>如何使用变量?<br>要记得: 使用@. . 例如，我们要设置 “deploy_type” 这个变量：</p>
+<p>$ cap say_hi –set-before deploy_type&#x3D;staging<br>然后在 config&#x2F;deploy.rb 中这样使用：</p>
+<p>DEFAULT_TYPE &#x3D; “stable”</p>
+<h1 id="deploy-type-仅仅在-begin-这个区域中生效-在rescue-ensure中都不行。"><a href="#deploy-type-仅仅在-begin-这个区域中生效-在rescue-ensure中都不行。" class="headerlink" title="deploy_type 仅仅在 begin 这个区域中生效, 在rescue, ensure中都不行。"></a>deploy_type 仅仅在 begin 这个区域中生效, 在rescue, ensure中都不行。</h1><p>begin<br>  deploy_type<br>  puts “deploy_type was set successfully”<br>  @deploy_type &#x3D; deploy_type<br>  rescue Exception &#x3D;&gt; e<br>  puts “deploy_type not set, use default: #{DEFAULT_TYPE}”<br>  deploy_type &#x3D; DEFAULT_TYPE<br>  @deploy_type &#x3D; deploy_type<br>end</p>
+<p>task :say_hi do<br>  puts “hihihi, var_deploy_type: #{@deploy_type}”<br>end<br>输出：</p>
+<p>deploy_type was set successfully<br>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; DEPLOY_PATH: &#x2F;rails_apps&#x2F;babble_portal&#x2F;cutting_edge</p>
+<ul>
+<li>executing &#96;say_hi’<br>hihihi, var_deploy_type: 444<br>最后，使用copy方式：</li>
+</ul>
+<h1 id="脚本中"><a href="#脚本中" class="headerlink" title="脚本中"></a>脚本中</h1><p>set :scm, :none<br>set :repository, “.”<br>set :deploy_via, :copy<br>capistrano的输出详解</p>
+<p>TODO 各种屏幕截图。 建立文件夹， 打包，压缩，上传，解压缩， rake db.. assets等等</p>
+<p>为什么要用capistrano</p>
+<p>流行的工具都是有道理的（ best practices are best in most cases)</p>
+<p>版本控制：SVN &#x3D;&gt; GIT( scm : from SVN to GIT)</p>
+<p>部署方式：人肉部署 &#x3D;&gt; Capistrano</p>
+<p>原来项目中用到的是SVN， 就一个分支，也不打tag。感觉用起来没啥。 ( there’s not so much trouble when the project is going under SVN and manual deployment)</p>
+<p>现在服务器的配置被运维同学限制了，无法连到SCM服务器 (同时无法连接到外网，无法连接到很多内部网络，比如LDAP，RADIUS等等）。肿么办???? (but one day, the server was limited its access to the internet, git repo and local LDAP , Radius service… what shall we do? )</p>
+<p>如果用SVN的话，就得用SCP的方式，打包过去，然后修修改改，每次都要人肉来做，还出错。(if using SVN, we have to copy the entire code folder to the target server, easy to make mistake and really painful for me )</p>
+<p>现在换成了GIT，不用capistrano的话，直接在本地把 git-patch 上传过去，然后 git am 就好。(now since we have migrated the SVN to GIT repo, it’s very easy to achieve the same goal using ‘git-patch’ and ‘git am’ )</p>
+<p>用了capistrano的话，用 deploy_via :scp 的 方式，我每次部署一行命令，自动搞定了。 ( and in capistrano, we just need to use ‘deploy_via scp’ to do the deployment job )</p>
+<p>所以，老式的办法，在某些新问题出现的时刻，不是那么得心应手。业界流行的“最佳实践”，在大部分情况下，还是“最佳实践”的。 ^_^ ( the conclusion is: best practices are always best in most cases. )</p>
+<p>—— 学习是王道！ ( keep STUDYING everyday! )</p>
+<p>capistrano的原理</p>
+<p>裸代码: 没有数据库的配置文件, 没有服务器相关的配置文件, 也没有压缩各种css&#x2F;js , 一般都是从git上直接clone下来的代码。</p>
+<p>传统的部署步骤:</p>
+<p>ssh 登陆到服务器<br>git pull<br>restart command（重新启动）<br>坏处是:</p>
+<p>无法回滚,<br>每次都人肉, 特别麻烦.<br>虽然上面3个步骤看似很少, 但是需要一直盯着(比如, ssh 需要10秒, git pull 需要20秒, restart 也需要人肉输入, 这些都是时间上的损耗, 而且人肉做重复性的事情, 无趣, 容易出错。</p>
+<p>合理的部署是:</p>
+<p>编写好一个配置文件之后, 运行代码: $ cap deploy (一个命令) , 之后的所有事情,都不用人参与了。</p>
+<p>结构:</p>
+<p>有三个角色:部署人员的机器,目标服务器,代码服务器(GIT)</p>
+<p>TODO: 没xuan的图片</p>
+<p>( 见譞的本本上的图 )</p>
+<p>每次部署, 都要做的事情:</p>
+<p>SSH 到目标服务器<br>把最新的代码,上传到目标服务器上。这时候的代码是裸代码，不能立刻部署, 因为很多配置文件都没有。</p>
+<p>我们不能把配置文件也放到github里面跟踪, 比如: config&#x2F;database.yml , 每个人或服务器的数据库的 mysql 密码都不一样。</p>
+<p>以及其他的内容(上传文件夹)</p>
+<p>项目的回滚</p>
+<p>回滚的方式有几种:</p>
+<p>code roll back</p>
+<p>git checkout … 这样不好,很多时候我们无法保证代码是没有被修改的。 被修改之后, checkout操作会涉及到代码合并的情况, 在某些 紧急 BUG 出现时, 会特别明显.</p>
+<p>使用capistrano,将上一次的release回滚,每一个release都用一个文件夹(里面包含了完整的项目代码, 包括裸代码, 和 各种配置文件)。</p>
+<p>目录结构</p>
+<p>20150310010954, 20150319015536 这种时间戳命名的文件夹，代码某一个时间段部署的版本。</p>
+<p>有一个特殊的softlink(软链接),current。</p>
+<p>web服务器的nginx配置,thin配置可以指向这个softlink,这样就不需要每次都改nginx，thin 的配置文件了, 只需要把current这个softlink,重新指向不同的 release 文件夹就可以了。</p>
+<p>shared文件夹中所保存的内容, 以及部分目录结构, 是由 config&#x2F;deploy.rb 这个配置文件决定的</p>
+<p>capistrano部署web应用的文件结构是:</p>
+<p>&#x2F;opt&#x2F;rails_app:<br>    current -&gt; &#x2F;opt&#x2F;app&#x2F;happystock_web&#x2F;releases&#x2F;20150518030114&#x2F;<br>    releases&#x2F;<br>        20150310010954<br>        20150319015536<br>        20150518030114<br>    shared&#x2F;<br>        assets<br>        config<br>        files<br>        log<br>        pids<br>        public<br>        system<br>常见问题</p>
+<p>无法部署capistrano? Net::SSH::AuthenticationFailed: Authentication failed</p>
+<p>对于capistrano 2.12.0,显式指定Gemfile中net-ssh 的版本，例如：</p>
+<p>gem ‘net-ssh’, ‘2.7.0’<br>下面是一个完整的deploy.rb文件：</p>
+<p><a href="https://github.com/beijing-rubyist/bjrubyist/blob/master/config/deploy.rb">https://github.com/beijing-rubyist/bjrubyist/blob/master/config/deploy.rb</a></p>
+]]></content>
+      <categories>
+        <category>部署</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[Android]整合H5的WebView(微信支付，支付宝支付)</title>
     <url>/2016/10/19/Android%E6%95%B4%E5%90%88H5/</url>
     <content><![CDATA[<p>Android整合H5(vuejs)</p>
@@ -1399,119 +1498,6 @@ end
       </categories>
   </entry>
   <entry>
-    <title>[部署]Capistrano: 自动化部署的利器</title>
-    <url>/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</url>
-    <content><![CDATA[<p>Capistrano: 自动化部署的利器</p>
-<p>注意： 以下的文档针对的版本是 2.12.0 capistrano 3.x 跟 2.x 的工作原理是差不多的. 掌握了其中一个, 就可以很快掌握第二个. 区别在于 3.x 只在 ruby 2.x 版本下工作. 很多项目都是 1.9.x的,所以我们以capistrano 2为例.</p>
-<p>简介</p>
-<p>Capistrano 是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。 替代人肉的工作.</p>
-<p>注意: (TODO 另起个章节,专门说安全问题)</p>
-<p>绝对不要把 config&#x2F;deploy.rb 放到代码仓库中. 绝对不要把 config&#x2F;deploy.rb 放到代码仓库中. 绝对不要把 config&#x2F;deploy.rb 放到代码仓库中.</p>
-<p>同理, 不要把 配置信息 放到 代码仓库中. 比如:</p>
-<p>数据库配置信息: database.yml 邮箱配置信息: mail.yml 应用服务器配置信息: thin.yml, unicorn.yml</p>
-<p>如果你在公司中发现这样的人,直接把他开掉. 对服务器没有安全意识.</p>
-<p>无数的服务器配置信息,都在github上的公共项目中的 部署脚本 文件中泄漏出去的. 端口号, 用户名, ip地址一泄漏出去的话,基本上对方拿个密码字典碰几天, 你的服务器就成了肉鸡了.</p>
-<p>为什么不要人肉去做</p>
-<p>很多同学在部署时,用的是自己写的脚本. 这个就不对了. 自己写的脚本永远不专业. 不要自大,相信我没错的.</p>
-<p>哪怕是运维级别的同学,写出来的脚本,也无法轻易回滚. 因为这里的逻辑还是比较多的,光靠脚本不行. 还得 需要比较多的代码逻辑.</p>
-<p>最常见的人肉脚本是:</p>
-<p>进入到代码仓库<br>$ cd &lt; your code repo&gt;<br>更新代码:<br>$ git pull<br>重启<br>$ bundle exec thin restart<br>如果你有20个服务器,就可以这样使用脚本去做了.</p>
-<p>但是上面最大的缺点:</p>
-<p>无法回滚<br>你要祈祷工作顺风顺水,稍微有一个环节出了错, 就要手续继续处理剩下的环节.<br>安装方式：</p>
-<p>进入到项目目录下面,并增加下面内容到 Gemfile 中：<br>group :development<br>  gem ‘capistrano’, ‘2.12.0’<br>  gem ‘capistrano-rbenv’, ‘1.0.1’<br>end<br>安装添加的gem<br>$ bundle install<br>再运行下面的命令：<br>$ capify .<br>capify .<br>[skip] ‘.&#x2F;Capfile’ already exists<br>[skip] ‘.&#x2F;config&#x2F;deploy.rb’ already exists<br>[done] capified!<br>会生成两个关键性的文件： Capfile , config&#x2F;deploy.rb</p>
-<p>编辑后者config&#x2F;deploy.rb 加上自己的capistrano配置信息<br>启动deploy中的setup任务,创建一些必要文件夹<br>下面是一个完整的 部署脚本( config&#x2F;deploy.rb )的例子, 修改其中的 用户名,端口号, 目标服务器的域名 , 服务器的启动方式, 就可以直接运行了.:</p>
-<h1 id="encoding-utf-8"><a href="#encoding-utf-8" class="headerlink" title="-- encoding : utf-8 --"></a>-<em>- encoding : utf-8 -</em>-</h1><p>require ‘capistrano-rbenv’<br>load ‘deploy&#x2F;assets’<br>SSH_USER &#x3D; ‘你的用户名’<br>SSH_PORT &#x3D; ‘你的端口号’<br>server &#x3D; “目标服务器的域名或者ip”<br>FOLDER_IN_REMOTE_SERVER &#x3D; ‘远程服务器上的目标文件夹’</p>
-<p>ssh_options[:port] &#x3D; SSH_PORT<br>set :rake, “bundle exec rake”<br>set :application, “app name”<br>set :repository, “.”<br>set :scm, :none<br>set :deploy_via, :copy</p>
-<p>role :web, server<br>role :app, server<br>role :db,  server, :primary &#x3D;&gt; true<br>role :db,  server</p>
-<p>set :deploy_to, FOLDER_IN_REMOTE_SERVER<br>default_run_options[:pty] &#x3D; true</p>
-<h1 id="change-to-your-username"><a href="#change-to-your-username" class="headerlink" title="change to your username"></a>change to your username</h1><p>set :user, SSH_USER</p>
-<p>namespace :deploy do<br>  task :start do<br>    run “cd #{release_path} &amp;&amp; bundle exec thin start -C config&#x2F;thin.yml”<br>  end<br>  task :stop do<br>    run “cd #{release_path} &amp;&amp; bundle exec thin stop -C config&#x2F;thin.yml”<br>  end<br>  task :restart, :roles &#x3D;&gt; :app, :except &#x3D;&gt; { :no_release &#x3D;&gt; true } do<br>    db_migrate<br>    stop<br>    sleep 2<br>    start<br>  end<br>  task :db_migrate do<br>    run “cd #{release_path} &amp;&amp; bundle install”<br>    run “cd #{release_path} &amp;&amp; bundle exec rake db:migrate RAILS_ENV&#x3D;production”<br>  end</p>
-<p>  namespace :assets do<br>    task :precompile do<br>      #run “bundle install”<br>      #run “cd #{release_path} &amp;&amp; bundle exec rake RAILS_ENV&#x3D;production RAILS_GROUPS&#x3D;assets assets:precompile “<br>    end<br>  end<br>end</p>
-<p>desc “Copy database.yml to release_path”<br>task :cp_database_yml do<br>  puts “&#x3D;&#x3D;&#x3D; executing my customized command: “<br>  run “cp -r #{shared_path}&#x2F;config&#x2F;* #{release_path}&#x2F;config&#x2F;“<br>  run “ln -s #{shared_path}&#x2F;files #{release_path}&#x2F;public&#x2F;files”</p>
-<h1 id="因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再-ln"><a href="#因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再-ln" class="headerlink" title="因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再 ln"></a>因为在开发机器上会存在这个文件夹，所以需要先把它删掉，再 ln</h1><p>  run “rm #{release_path}&#x2F;public&#x2F;uploads -rf”<br>  run “ln -s #{shared_path}&#x2F;public&#x2F;uploads #{release_path}&#x2F;public&#x2F;uploads”<br>  puts “&#x3D;&#x3D;&#x3D; done (executing my customized command)”<br>end</p>
-<p>before “deploy:assets:precompile”, :cp_database_yml<br>#after “deploy”, “deploy:restart”<br>第一次运行时,要先 配置好目标服务器上的文件夹.</p>
-<p>$ cap deploy:setup<br>注意: 这里让它创建基本的目标文件夹目录层次就可以:</p>
-<p>&#x2F;opt&#x2F;app:<br>    current (这是个软链接 soft link, )-&gt; &#x2F;opt&#x2F;app&#x2F;releases&#x2F;20150518030114&#x2F;<br>    releases&#x2F;<br>    shared&#x2F;<br>        assets<br>        config<br>        files<br>        log<br>        pids<br>        public<br>        system<br>不要让它做 : 安装rbenv, 安装ruby 版本, 安装第三方包的事儿.</p>
-<p>注意： 这里务必记得， 盯紧控制台的输出， 看到它执行完 mkdir -p 之后， 赶紧按ctrl + c 暂停。否则它会默认在远程服务器上安装各种ruby 第三方包，安装各种linux 依赖包。一不小心就会把服务器环境搞砸了。</p>
-<p>为 shared 目录下，增加各种配置文件，它们只需要被配置一遍。例如：<br>config&#x2F;thin.yml       # 服务器的配置<br>config&#x2F;database.yml   # 数据库的配置<br>config&#x2F;log4r.yml      # 日志文件的配置<br>config&#x2F;settings.yml   # 系统的配置<br>配置好ruby环境， mysql, thin, nginx 等<br>开始部署</p>
-<p>$ cap deploy.<br>这个命令会执行下面的过程:</p>
-<p>准备启动服务器:<br>安装各种新增的rubygem<br>做必要的数据库迁移<br>配置各种文件<br>修改上传文件夹的softlink<br>其他,每次使用裸代码做部署的时候,都要人肉做的事情. (修改保存日志的路径, 修改 rails server的配置, )<br>编译,压缩 js&#x2F; css<br>重启 服务器( $ nginx -s reload, $ kill -9 xxx , $ thin start -C config&#x2F;thin.yml)<br>再次部署（更新版本）</p>
-<p>只需要运行$ cap deploy即可。</p>
-<p>使用命令行</p>
-<p>下面是一个例子，在命令行中显示 User name: , 等用户输入完，按回车之后， 把输入的值赋给 user 变量。</p>
-<p>set(:user) { Capistrano::CLI.ui.ask(“User name: “) }<br>使用帮助：<br>$ cap –help<br>使用logger，特别是在其他语言调用CAP时，非常有用（例如被fabric 调用）:<br>$ cap setup –logger STDOUT<br>如何使用变量?<br>要记得: 使用@. . 例如，我们要设置 “deploy_type” 这个变量：</p>
-<p>$ cap say_hi –set-before deploy_type&#x3D;staging<br>然后在 config&#x2F;deploy.rb 中这样使用：</p>
-<p>DEFAULT_TYPE &#x3D; “stable”</p>
-<h1 id="deploy-type-仅仅在-begin-这个区域中生效-在rescue-ensure中都不行。"><a href="#deploy-type-仅仅在-begin-这个区域中生效-在rescue-ensure中都不行。" class="headerlink" title="deploy_type 仅仅在 begin 这个区域中生效, 在rescue, ensure中都不行。"></a>deploy_type 仅仅在 begin 这个区域中生效, 在rescue, ensure中都不行。</h1><p>begin<br>  deploy_type<br>  puts “deploy_type was set successfully”<br>  @deploy_type &#x3D; deploy_type<br>  rescue Exception &#x3D;&gt; e<br>  puts “deploy_type not set, use default: #{DEFAULT_TYPE}”<br>  deploy_type &#x3D; DEFAULT_TYPE<br>  @deploy_type &#x3D; deploy_type<br>end</p>
-<p>task :say_hi do<br>  puts “hihihi, var_deploy_type: #{@deploy_type}”<br>end<br>输出：</p>
-<p>deploy_type was set successfully<br>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; DEPLOY_PATH: &#x2F;rails_apps&#x2F;babble_portal&#x2F;cutting_edge</p>
-<ul>
-<li>executing &#96;say_hi’<br>hihihi, var_deploy_type: 444<br>最后，使用copy方式：</li>
-</ul>
-<h1 id="脚本中"><a href="#脚本中" class="headerlink" title="脚本中"></a>脚本中</h1><p>set :scm, :none<br>set :repository, “.”<br>set :deploy_via, :copy<br>capistrano的输出详解</p>
-<p>TODO 各种屏幕截图。 建立文件夹， 打包，压缩，上传，解压缩， rake db.. assets等等</p>
-<p>为什么要用capistrano</p>
-<p>流行的工具都是有道理的（ best practices are best in most cases)</p>
-<p>版本控制：SVN &#x3D;&gt; GIT( scm : from SVN to GIT)</p>
-<p>部署方式：人肉部署 &#x3D;&gt; Capistrano</p>
-<p>原来项目中用到的是SVN， 就一个分支，也不打tag。感觉用起来没啥。 ( there’s not so much trouble when the project is going under SVN and manual deployment)</p>
-<p>现在服务器的配置被运维同学限制了，无法连到SCM服务器 (同时无法连接到外网，无法连接到很多内部网络，比如LDAP，RADIUS等等）。肿么办???? (but one day, the server was limited its access to the internet, git repo and local LDAP , Radius service… what shall we do? )</p>
-<p>如果用SVN的话，就得用SCP的方式，打包过去，然后修修改改，每次都要人肉来做，还出错。(if using SVN, we have to copy the entire code folder to the target server, easy to make mistake and really painful for me )</p>
-<p>现在换成了GIT，不用capistrano的话，直接在本地把 git-patch 上传过去，然后 git am 就好。(now since we have migrated the SVN to GIT repo, it’s very easy to achieve the same goal using ‘git-patch’ and ‘git am’ )</p>
-<p>用了capistrano的话，用 deploy_via :scp 的 方式，我每次部署一行命令，自动搞定了。 ( and in capistrano, we just need to use ‘deploy_via scp’ to do the deployment job )</p>
-<p>所以，老式的办法，在某些新问题出现的时刻，不是那么得心应手。业界流行的“最佳实践”，在大部分情况下，还是“最佳实践”的。 ^_^ ( the conclusion is: best practices are always best in most cases. )</p>
-<p>—— 学习是王道！ ( keep STUDYING everyday! )</p>
-<p>capistrano的原理</p>
-<p>裸代码: 没有数据库的配置文件, 没有服务器相关的配置文件, 也没有压缩各种css&#x2F;js , 一般都是从git上直接clone下来的代码。</p>
-<p>传统的部署步骤:</p>
-<p>ssh 登陆到服务器<br>git pull<br>restart command（重新启动）<br>坏处是:</p>
-<p>无法回滚,<br>每次都人肉, 特别麻烦.<br>虽然上面3个步骤看似很少, 但是需要一直盯着(比如, ssh 需要10秒, git pull 需要20秒, restart 也需要人肉输入, 这些都是时间上的损耗, 而且人肉做重复性的事情, 无趣, 容易出错。</p>
-<p>合理的部署是:</p>
-<p>编写好一个配置文件之后, 运行代码: $ cap deploy (一个命令) , 之后的所有事情,都不用人参与了。</p>
-<p>结构:</p>
-<p>有三个角色:部署人员的机器,目标服务器,代码服务器(GIT)</p>
-<p>TODO: 没xuan的图片</p>
-<p>( 见譞的本本上的图 )</p>
-<p>每次部署, 都要做的事情:</p>
-<p>SSH 到目标服务器<br>把最新的代码,上传到目标服务器上。这时候的代码是裸代码，不能立刻部署, 因为很多配置文件都没有。</p>
-<p>我们不能把配置文件也放到github里面跟踪, 比如: config&#x2F;database.yml , 每个人或服务器的数据库的 mysql 密码都不一样。</p>
-<p>以及其他的内容(上传文件夹)</p>
-<p>项目的回滚</p>
-<p>回滚的方式有几种:</p>
-<p>code roll back</p>
-<p>git checkout … 这样不好,很多时候我们无法保证代码是没有被修改的。 被修改之后, checkout操作会涉及到代码合并的情况, 在某些 紧急 BUG 出现时, 会特别明显.</p>
-<p>使用capistrano,将上一次的release回滚,每一个release都用一个文件夹(里面包含了完整的项目代码, 包括裸代码, 和 各种配置文件)。</p>
-<p>目录结构</p>
-<p>20150310010954, 20150319015536 这种时间戳命名的文件夹，代码某一个时间段部署的版本。</p>
-<p>有一个特殊的softlink(软链接),current。</p>
-<p>web服务器的nginx配置,thin配置可以指向这个softlink,这样就不需要每次都改nginx，thin 的配置文件了, 只需要把current这个softlink,重新指向不同的 release 文件夹就可以了。</p>
-<p>shared文件夹中所保存的内容, 以及部分目录结构, 是由 config&#x2F;deploy.rb 这个配置文件决定的</p>
-<p>capistrano部署web应用的文件结构是:</p>
-<p>&#x2F;opt&#x2F;rails_app:<br>    current -&gt; &#x2F;opt&#x2F;app&#x2F;happystock_web&#x2F;releases&#x2F;20150518030114&#x2F;<br>    releases&#x2F;<br>        20150310010954<br>        20150319015536<br>        20150518030114<br>    shared&#x2F;<br>        assets<br>        config<br>        files<br>        log<br>        pids<br>        public<br>        system<br>常见问题</p>
-<p>无法部署capistrano? Net::SSH::AuthenticationFailed: Authentication failed</p>
-<p>对于capistrano 2.12.0,显式指定Gemfile中net-ssh 的版本，例如：</p>
-<p>gem ‘net-ssh’, ‘2.7.0’<br>下面是一个完整的deploy.rb文件：</p>
-<p><a href="https://github.com/beijing-rubyist/bjrubyist/blob/master/config/deploy.rb">https://github.com/beijing-rubyist/bjrubyist/blob/master/config/deploy.rb</a></p>
-]]></content>
-      <categories>
-        <category>部署</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Git]Git忽略规则及.gitignore规则不生效的解决办法</title>
-    <url>/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<pre><code>git rm -r --cached .
-
-git add .
-
-git commit -m &#39;update .gitignore&#39;
-</code></pre>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[Capistrano]Capistrano: 自动化部署的利器</title>
     <url>/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</url>
     <content><![CDATA[<pre><code>            capistrano是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。
@@ -1798,6 +1784,20 @@ git commit -m &#39;update .gitignore&#39;
 ]]></content>
       <categories>
         <category>Capistrano</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Git]Git忽略规则及.gitignore规则不生效的解决办法</title>
+    <url>/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<pre><code>git rm -r --cached .
+
+git add .
+
+git commit -m &#39;update .gitignore&#39;
+</code></pre>
+]]></content>
+      <categories>
+        <category>Git</category>
       </categories>
   </entry>
   <entry>
@@ -2370,25 +2370,6 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
-    <url>/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</url>
-    <content><![CDATA[<p>安装postgis：</p>
-<p>sudo apt-get install postgresql postgresql-contrib postgis postgresql-9.3-postgis-2.1</p>
-<p>安装pdo-pqsql：</p>
-<p>sudo apt-get install php5-pgsql</p>
-<p>测试pdo：</p>
-<p>new PDO(“pgsql:host&#x3D;127.0.0.1;dbname&#x3D;test”,  “postgres”,  “root”); die(“1111111”);</p>
-<p>安装composer：</p>
-<p>curl -sS <a href="https://getcomposer.org/installer">https://getcomposer.org/installer</a> | php</p>
-<p>mv composer.phar &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</p>
-<p>项目下：</p>
-<p>composer install （composer install -vvv）</p>
-]]></content>
-      <categories>
-        <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[RubyOnRails]Ruby Array学习总结</title>
     <url>/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>Array</p>
@@ -2462,7 +2443,7 @@ Cache-Control: no-cache
 <p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p>
 <p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p>
 <p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p>
-<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>, Michal Papis <a href="mailto:&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
+<p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#x65;&#x67;&#x75;&#105;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#x65;&#x67;&#x75;&#105;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>, Michal Papis <a href="mailto:&#109;&#x70;&#x61;&#x70;&#105;&#115;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;">&#109;&#x70;&#x61;&#x70;&#105;&#115;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p>
 <p>4、 安装ruby：</p>
 <p>要先执行下面命令，否则后边流程跑不动：</p>
 <p>ubuntu@ubuntu:~$ rvm autolibs enable</p>
@@ -2483,6 +2464,25 @@ Cache-Control: no-cache
 ]]></content>
       <categories>
         <category>RubyOnRails</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
+    <url>/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</url>
+    <content><![CDATA[<p>安装postgis：</p>
+<p>sudo apt-get install postgresql postgresql-contrib postgis postgresql-9.3-postgis-2.1</p>
+<p>安装pdo-pqsql：</p>
+<p>sudo apt-get install php5-pgsql</p>
+<p>测试pdo：</p>
+<p>new PDO(“pgsql:host&#x3D;127.0.0.1;dbname&#x3D;test”,  “postgres”,  “root”); die(“1111111”);</p>
+<p>安装composer：</p>
+<p>curl -sS <a href="https://getcomposer.org/installer">https://getcomposer.org/installer</a> | php</p>
+<p>mv composer.phar &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</p>
+<p>项目下：</p>
+<p>composer install （composer install -vvv）</p>
+]]></content>
+      <categories>
+        <category>Ubuntu</category>
       </categories>
   </entry>
   <entry>
@@ -2518,7 +2518,7 @@ Cache-Control: no-cache
 <p>npm install webpack -g</p>
 <p>npm install webpack –save-dev</p>
 <p>使用指定版本</p>
-<p> npm install <a href="mailto:&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;">&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;</a> –save-dev</p>
+<p> npm install <a href="mailto:&#119;&#x65;&#98;&#112;&#97;&#99;&#107;&#64;&#49;&#x2e;&#50;&#x2e;&#x78;">&#119;&#x65;&#98;&#112;&#97;&#99;&#107;&#64;&#49;&#x2e;&#50;&#x2e;&#x78;</a> –save-dev</p>
 <p>第三步，安装vue</p>
 <p>npm install vue</p>
 <p>npm install vue@csp</p>
@@ -2741,20 +2741,6 @@ Cache-Control: no-cache
       </categories>
   </entry>
   <entry>
-    <title>[android] 图标桌面不显示的问题解决</title>
-    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
-            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-        &lt;/intent-filter&gt;
-</code></pre>
-]]></content>
-      <categories>
-        <category>android</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[android] android使用umeng分享</title>
     <url>/2017/05/02/android%E4%BD%BF%E7%94%A8umeng%E5%88%86%E4%BA%AB/</url>
     <content><![CDATA[<pre><code>    微信支付包会和umeng分享包冲突，删除掉微信支付包就可以了libammsdk.jar
@@ -2938,6 +2924,20 @@ protected void onDestroy() &#123;
 
     /*******************res显示面板********************/
     使用的官网提供的面板socialize_share_menu_item.xml，umeng_socialize_oauth_dialog.xml
+</code></pre>
+]]></content>
+      <categories>
+        <category>android</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[android] 图标桌面不显示的问题解决</title>
+    <url>/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<pre><code>        &lt;intent-filter&gt;
+            &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+            &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+        &lt;/intent-filter&gt;
 </code></pre>
 ]]></content>
       <categories>
@@ -3443,16 +3443,6 @@ public void getPayInfoFromServer(final String payUrl) &#123;
       </categories>
   </entry>
   <entry>
-    <title>[Css]控制禁止输入法</title>
-    <url>/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</url>
-    <content><![CDATA[<p>很简单，一句话</p>
-<p>ime-mode:Disabled;</p>
-]]></content>
-      <categories>
-        <category>css</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[RubyOnRails]ckeditor+carrierwave+upyun图片上传</title>
     <url>/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</url>
     <content><![CDATA[<p>ckeditor+carrierwave+upyun图片上传</p>
@@ -3670,17 +3660,13 @@ End
       </categories>
   </entry>
   <entry>
-    <title>[RubyOnRails]gem install mysql2失败解决办法</title>
-    <url>/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<ol>
-<li>gem install mysql2失败解决办法</li>
-</ol>
-<p>sudo apt-get install libmysqlclient-dev</p>
-<p>2.gem install curb失败解决办法</p>
-<p>sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev</p>
+    <title>[Css]控制禁止输入法</title>
+    <url>/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<p>很简单，一句话</p>
+<p>ime-mode:Disabled;</p>
 ]]></content>
       <categories>
-        <category>RubyOnRails</category>
+        <category>css</category>
       </categories>
   </entry>
   <entry>
@@ -3707,6 +3693,20 @@ End
 ]]></content>
       <categories>
         <category>git</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[RubyOnRails]gem install mysql2失败解决办法</title>
+    <url>/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<ol>
+<li>gem install mysql2失败解决办法</li>
+</ol>
+<p>sudo apt-get install libmysqlclient-dev</p>
+<p>2.gem install curb失败解决办法</p>
+<p>sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev</p>
+]]></content>
+      <categories>
+        <category>RubyOnRails</category>
       </categories>
   </entry>
   <entry>
@@ -3877,25 +3877,6 @@ document.onpaste = function(pasteEvent) &#123;
 ]]></content>
   </entry>
   <entry>
-    <title>javascript-对于hash进行排序的几种方式</title>
-    <url>/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="1-根据-string类型来排序，使用-localeCompare"><a href="#1-根据-string类型来排序，使用-localeCompare" class="headerlink" title="1. 根据 string类型来排序，使用 localeCompare"></a>1. 根据 string类型来排序，使用 localeCompare</h3><pre><code class="bash">$ let elements = [ 
-  &#123;   year: 1, value: 1&#125;,   &#123;year: 2, value: 2&#125;
-]
-elements.filter(x =&gt; x)   // 这个是为了去重复，可以先不看了。
-// 为year做排序
-.sort( (a,b) =&gt; &#123; return (a.year + &#39;&#39;).localeCompare(b.year + &#39;&#39;)&#125;)
-</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="2-根据-int类型来排序，使用-号即可"><a href="#2-根据-int类型来排序，使用-号即可" class="headerlink" title="2. 根据 int类型来排序，使用 - 号即可"></a>2. 根据 int类型来排序，使用 - 号即可</h3><pre><code class="bash">$ let elements = [ 
-  &#123;   year: 1, value: 1&#125;,   &#123;year: 2, value: 2&#125;
-]
-// 为year做排序
-elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
-</code></pre>
-]]></content>
-  </entry>
-  <entry>
     <title>[JavaScript]设置select为选中</title>
     <url>/2013/03/20/javascript%E8%AE%BE%E7%BD%AEselect%E4%B8%BA%E9%80%89%E4%B8%AD/</url>
     <content><![CDATA[<pre><code>function jsSelectItemByValue(objItemText)
@@ -3915,6 +3896,25 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
       <categories>
         <category>JavaScript</category>
       </categories>
+  </entry>
+  <entry>
+    <title>javascript-对于hash进行排序的几种方式</title>
+    <url>/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="1-根据-string类型来排序，使用-localeCompare"><a href="#1-根据-string类型来排序，使用-localeCompare" class="headerlink" title="1. 根据 string类型来排序，使用 localeCompare"></a>1. 根据 string类型来排序，使用 localeCompare</h3><pre><code class="bash">$ let elements = [ 
+  &#123;   year: 1, value: 1&#125;,   &#123;year: 2, value: 2&#125;
+]
+elements.filter(x =&gt; x)   // 这个是为了去重复，可以先不看了。
+// 为year做排序
+.sort( (a,b) =&gt; &#123; return (a.year + &#39;&#39;).localeCompare(b.year + &#39;&#39;)&#125;)
+</code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="2-根据-int类型来排序，使用-号即可"><a href="#2-根据-int类型来排序，使用-号即可" class="headerlink" title="2. 根据 int类型来排序，使用 - 号即可"></a>2. 根据 int类型来排序，使用 - 号即可</h3><pre><code class="bash">$ let elements = [ 
+  &#123;   year: 1, value: 1&#125;,   &#123;year: 2, value: 2&#125;
+]
+// 为year做排序
+elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
+</code></pre>
+]]></content>
   </entry>
   <entry>
     <title>[php] laravel中使用ckeditor+ckfinder实现图片上传等功能</title>
@@ -4082,6 +4082,17 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
       </categories>
   </entry>
   <entry>
+    <title>[Php]错误信息的显示</title>
+    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
+    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
+<p>display_errors &#x3D; On</p>
+<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
+]]></content>
+      <categories>
+        <category>PHP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[rails] 项目增加日志功能(log)</title>
     <url>/2017/01/10/rails%20%E9%A1%B9%E7%9B%AE%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD(log)/</url>
     <content><![CDATA[<p>操作日志是几乎每一个项目所必须要有的</p>
@@ -4131,17 +4142,6 @@ elements.sort( (a,b) =&gt; &#123; return a.year - b.year&#125;)
 ]]></content>
       <categories>
         <category>rails</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[Php]错误信息的显示</title>
-    <url>/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</url>
-    <content><![CDATA[<p>修改php.ini(&#x2F;etc&#x2F;php5&#x2F;apache2&#x2F;)</p>
-<p>display_errors &#x3D; On</p>
-<p>error_reporting &#x3D; E_ALL &amp; ~E_NOTICE</p>
-]]></content>
-      <categories>
-        <category>PHP</category>
       </categories>
   </entry>
   <entry>
@@ -4215,6 +4215,18 @@ end
       </categories>
   </entry>
   <entry>
+    <title>[RubyOnRails]rvm is not a function的解决方法</title>
+    <url>/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p><a href="http://www.cnblogs.com/fantiantian/p/3392357.html">http://www.cnblogs.com/fantiantian/p/3392357.html</a></p>
+<p>执行如下命令：</p>
+<p>&#x2F;bin&#x2F;bash –login</p>
+<p>（设置terminal[终端],以登录shell方式运行命令[Run command as a login shell 的选项, 把它选上]）</p>
+]]></content>
+      <categories>
+        <category>RubyOnRails</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[Ubuntu]安装jdk</title>
     <url>/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/</url>
     <content><![CDATA[<p>具体步骤参详了如下链接：<br><a href="http://blog.csdn.net/yang_hui1986527/article/details/6677450">http://blog.csdn.net/yang_hui1986527&#x2F;article&#x2F;details&#x2F;6677450</a></p>
@@ -4231,18 +4243,6 @@ end
 ]]></content>
       <categories>
         <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>[RubyOnRails]rvm is not a function的解决方法</title>
-    <url>/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p><a href="http://www.cnblogs.com/fantiantian/p/3392357.html">http://www.cnblogs.com/fantiantian/p/3392357.html</a></p>
-<p>执行如下命令：</p>
-<p>&#x2F;bin&#x2F;bash –login</p>
-<p>（设置terminal[终端],以登录shell方式运行命令[Run command as a login shell 的选项, 把它选上]）</p>
-]]></content>
-      <categories>
-        <category>RubyOnRails</category>
       </categories>
   </entry>
   <entry>
@@ -4319,6 +4319,24 @@ end
       </categories>
   </entry>
   <entry>
+    <title>[Ubuntu]使用google拼音输入法</title>
+    <url>/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<p> linux下面的中文输入法一直不给力</p>
+<p>现在，google拼音输入法可以用了！这得感谢下面这个项目：<br>libgooglepinyin ( A fork from google pinyin on android)<br>项目地址：<a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
+<p>准备工作：你得安装ibus。（这是ubuntu的默认输入法框架，所以一般都不需要你去安装），具体可以参考 <a href="http://wiki.ubuntu.org.cn/IBus">http://wiki.ubuntu.org.cn/IBus</a></p>
+<p>然后：<br>sudo apt-get install cmake build-essential opencc mercurial ibus</p>
+<p>hg clone <a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
+<p>cd libgooglepinyin</p>
+<p>mkdir build;</p>
+<p>cd build</p>
+<p>cmake .. -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr</p>
+<p>make</p>
+]]></content>
+      <categories>
+        <category>Ubuntu</category>
+      </categories>
+  </entry>
+  <entry>
     <title>[vue] vue(h5)+ror加入popup-picker实现省市县级联</title>
     <url>/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/</url>
     <content><![CDATA[<p>项目中导入:</p>
@@ -4378,24 +4396,6 @@ end
       </categories>
   </entry>
   <entry>
-    <title>[Ubuntu]使用google拼音输入法</title>
-    <url>/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</url>
-    <content><![CDATA[<p> linux下面的中文输入法一直不给力</p>
-<p>现在，google拼音输入法可以用了！这得感谢下面这个项目：<br>libgooglepinyin ( A fork from google pinyin on android)<br>项目地址：<a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
-<p>准备工作：你得安装ibus。（这是ubuntu的默认输入法框架，所以一般都不需要你去安装），具体可以参考 <a href="http://wiki.ubuntu.org.cn/IBus">http://wiki.ubuntu.org.cn/IBus</a></p>
-<p>然后：<br>sudo apt-get install cmake build-essential opencc mercurial ibus</p>
-<p>hg clone <a href="http://code.google.com/p/libgooglepinyin/">http://code.google.com/p/libgooglepinyin/</a></p>
-<p>cd libgooglepinyin</p>
-<p>mkdir build;</p>
-<p>cd build</p>
-<p>cmake .. -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F;usr</p>
-<p>make</p>
-]]></content>
-      <categories>
-        <category>Ubuntu</category>
-      </categories>
-  </entry>
-  <entry>
     <title>vuejs - 普通方法 ， watch 与 computed</title>
     <url>/2021/07/15/vuejs%20-%20methods%EF%BC%8C%20watch%20%E4%B8%8E%20computed/</url>
     <content><![CDATA[<h2 id="例子参考"><a href="#例子参考" class="headerlink" title="例子参考"></a>例子参考</h2><p><a href="https://cn.vuejs.org/v2/guide/computed.html">https://cn.vuejs.org/v2/guide/computed.html</a></p>
@@ -4405,6 +4405,40 @@ end
 <h3 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h3><p>： 没有缓存， 每次都计算</p>
 <h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p>可以使用watch来实现computed, 使用 异步操作时，把结果使用watch 来监听是合适的（只能由watch来实现，computed无法实现）<br>所有watch的变量都是data中定义的变量</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>[Vue]vuejs中获取各个国家的假期时间</title>
+    <url>/2022/07/10/vuejs%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%90%84%E4%B8%AA%E5%9B%BD%E5%AE%B6%E7%9A%84%E5%81%87%E6%9C%9F%E6%97%B6%E9%97%B4/</url>
+    <content><![CDATA[<h3 id="使用yarn或者npm安装包"><a href="#使用yarn或者npm安装包" class="headerlink" title="使用yarn或者npm安装包"></a>使用yarn或者npm安装包</h3><pre><code class="bash">yarn add date-holidays
+or
+npm install date-holidays
+</code></pre>
+<blockquote>
+<p>这块注意自己的node版本，不同node版本匹配不同版本的包</p>
+</blockquote>
+<h3 id="在-vue中的使用"><a href="#在-vue中的使用" class="headerlink" title="在.vue中的使用"></a>在.vue中的使用</h3><pre><code class="bash">import Holidays from &quot;date-holidays&quot;;
+// JP指取日本的数据: (具体国家代码缩写后面有说明)
+let holidays = new Holidays(&#39;JP&#39;)
+
+//下面是比较常用的方法
+//获取指定年的假期数据信息, year为指定年份
+holidays.getHolidays(year)
+
+//判断指定日期是否为假期, date为需要判断的日期字符串
+holidays.isHoliday(date)   //该方法返回结果为false即不是假期，如果是一个对象即相应的假期信息
+</code></pre>
+<p><sub>具体国家代码缩写，以及相应版本请参考</sub><br><a href="https://yarnpkg.com/package/date-holidays">Click this</a>.</p>
+<blockquote>
+<p>非常方便，有使用到类似功能开发的，推荐使用.</p>
+</blockquote>
+<blockquote>
+<p>我这边是后端的数据需要进行判断和比对，所以这块是前端调用<code>getHolidays</code>方法获取假期数据，传递到后台，后台处理，前端再显示。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Vue</category>
+        <category>JavaScript</category>
+      </categories>
   </entry>
   <entry>
     <title>[RubyOnRails]一些网址</title>
@@ -5549,16 +5583,6 @@ end
       </categories>
   </entry>
   <entry>
-    <title>[JavaScript]禁用鼠标右键的“粘贴”菜单，可以防止鼠标右键或者Ctrl + V粘贴不合法的数据</title>
-    <url>/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</url>
-    <content><![CDATA[<pre><code class="bash">onpaste=&quot;javascript: return false;&quot;
-</code></pre>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-  </entry>
-  <entry>
     <title>[Ubuntu] 支付宝支付使用openssl生成key</title>
     <url>/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/</url>
     <content><![CDATA[<pre><code>    支付宝支付使用openssl生成公钥，私钥，pkcs8格式密钥
@@ -5581,6 +5605,16 @@ end
 ]]></content>
       <categories>
         <category>Ubuntu</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>[JavaScript]禁用鼠标右键的“粘贴”菜单，可以防止鼠标右键或者Ctrl + V粘贴不合法的数据</title>
+    <url>/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</url>
+    <content><![CDATA[<pre><code class="bash">onpaste=&quot;javascript: return false;&quot;
+</code></pre>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
       </categories>
   </entry>
 </search>

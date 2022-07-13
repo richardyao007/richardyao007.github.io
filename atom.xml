@@ -3,11 +3,11 @@
   <title>richardyao007的博客</title>
   
   <subtitle>努力改变生活</subtitle>
-  <link href="https://richardyao007.github.io/atom.xml" rel="self"/>
+  <link href="http://localhost:4000/atom.xml" rel="self"/>
   
-  <link href="https://richardyao007.github.io/"/>
-  <updated>2022-07-05T02:12:51.148Z</updated>
-  <id>https://richardyao007.github.io/</id>
+  <link href="http://localhost:4000/"/>
+  <updated>2022-07-13T10:16:15.759Z</updated>
+  <id>http://localhost:4000/</id>
   
   <author>
     <name>richard</name>
@@ -17,9 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Vue]vuejs中获取各个国家的假期时间</title>
+    <link href="http://localhost:4000/2022/07/10/vuejs%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%90%84%E4%B8%AA%E5%9B%BD%E5%AE%B6%E7%9A%84%E5%81%87%E6%9C%9F%E6%97%B6%E9%97%B4/"/>
+    <id>http://localhost:4000/2022/07/10/vuejs%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%90%84%E4%B8%AA%E5%9B%BD%E5%AE%B6%E7%9A%84%E5%81%87%E6%9C%9F%E6%97%B6%E9%97%B4/</id>
+    <published>2022-07-10T14:14:49.000Z</published>
+    <updated>2022-07-13T10:16:15.759Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="使用yarn或者npm安装包"><a href="#使用yarn或者npm安装包" class="headerlink" title="使用yarn或者npm安装包"></a>使用yarn或者npm安装包</h3><pre><code class="bash">yarn add date-holidaysornpm install date-holidays</code></pre><blockquote><p>这块注意自己的node版本，不同node版本匹配不同版本的包</p></blockquote><h3 id="在-vue中的使用"><a href="#在-vue中的使用" class="headerlink" title="在.vue中的使用"></a>在.vue中的使用</h3><pre><code class="bash">import Holidays from &quot;date-holidays&quot;;// JP指取日本的数据: (具体国家代码缩写后面有说明)let holidays = new Holidays(&#39;JP&#39;)//下面是比较常用的方法//获取指定年的假期数据信息, year为指定年份holidays.getHolidays(year)//判断指定日期是否为假期, date为需要判断的日期字符串holidays.isHoliday(date)   //该方法返回结果为false即不是假期，如果是一个对象即相应的假期信息</code></pre><p><sub>具体国家代码缩写，以及相应版本请参考</sub><br><a href="https://yarnpkg.com/package/date-holidays">Click this</a>.</p><blockquote><p>非常方便，有使用到类似功能开发的，推荐使用.</p></blockquote><blockquote><p>我这边是后端的数据需要进行判断和比对，所以这块是前端调用<code>getHolidays</code>方法获取假期数据，传递到后台，后台处理，前端再显示。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;使用yarn或者npm安装包&quot;&gt;&lt;a href=&quot;#使用yarn或者npm安装包&quot; class=&quot;headerlink&quot; title=&quot;使用yarn或者npm安装包&quot;&gt;&lt;/a&gt;使用yarn或者npm安装包&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;y</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="http://localhost:4000/categories/Vue/"/>
+    
+    <category term="JavaScript" scheme="http://localhost:4000/categories/Vue/JavaScript/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
-    <link href="https://richardyao007.github.io/2022/07/05/hello-world/"/>
-    <id>https://richardyao007.github.io/2022/07/05/hello-world/</id>
+    <link href="http://localhost:4000/2022/07/05/hello-world/"/>
+    <id>http://localhost:4000/2022/07/05/hello-world/</id>
     <published>2022-07-05T02:12:51.148Z</published>
     <updated>2022-07-05T02:12:51.148Z</updated>
     
@@ -38,8 +62,8 @@
   
   <entry>
     <title>[RubyOnRails]Rails 布局和视图渲染</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Rails%20%E5%B8%83%E5%B1%80%E5%92%8C%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Rails%20%E5%B8%83%E5%B1%80%E5%92%8C%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93/</id>
+    <link href="http://localhost:4000/2022/07/05/Rails%20%E5%B8%83%E5%B1%80%E5%92%8C%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93/"/>
+    <id>http://localhost:4000/2022/07/05/Rails%20%E5%B8%83%E5%B1%80%E5%92%8C%E8%A7%86%E5%9B%BE%E6%B8%B2%E6%9F%93/</id>
     <published>2022-07-05T02:12:51.143Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
@@ -57,15 +81,15 @@
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[Node]Ubuntu下安装n管理node版本</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85n%E7%AE%A1%E7%90%86node%E7%89%88%E6%9C%AC/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85n%E7%AE%A1%E7%90%86node%E7%89%88%E6%9C%AC/</id>
+    <link href="http://localhost:4000/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85n%E7%AE%A1%E7%90%86node%E7%89%88%E6%9C%AC/"/>
+    <id>http://localhost:4000/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85n%E7%AE%A1%E7%90%86node%E7%89%88%E6%9C%AC/</id>
     <published>2022-07-05T02:12:51.143Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
@@ -86,19 +110,19 @@
     
     
     
-    <category term="Node" scheme="https://richardyao007.github.io/categories/Node/"/>
+    <category term="Node" scheme="http://localhost:4000/categories/Node/"/>
     
     
   </entry>
   
   <entry>
     <title>[VueJs]Ubuntu下安装配置vuejs</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/</id>
+    <link href="http://localhost:4000/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/"/>
+    <id>http://localhost:4000/2022/07/05/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEvuejs/</id>
     <published>2022-07-05T02:12:51.143Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://github.com/vuejs">https://github.com/vuejs</a></p><p>第一步，安装npm</p><p>第二步，安装webpack</p><p>npm init(初始化，会生成一个package.json文件)</p><p>npm install webpack -g</p><p>npm install webpack –save-dev</p><p>使用指定版本</p><p> npm install <a href="mailto:&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;">&#x77;&#x65;&#x62;&#112;&#97;&#x63;&#107;&#64;&#x31;&#46;&#50;&#46;&#x78;</a> –save-dev</p><p>第三步，安装vue</p><p>npm install vue</p><p>npm install vue@csp</p><p>安装官方命令行工具</p><p>npm install -g vue-cli</p><p>第四步，创建一个基于 “webpack” 模板的新项目</p><p>vue init webpack my-project</p><p>cd my-project</p><p> npm install</p><p> npm run dev</p><p>错误：vuejs &#x2F;usr&#x2F;bin&#x2F;env: “node”: 没有那个文件或目录</p><p>解决办法：sudo apt-get install nodejs-legacy(如果没有安装nodejs也是需要安装的)</p>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://github.com/vuejs">https://github.com/vuejs</a></p><p>第一步，安装npm</p><p>第二步，安装webpack</p><p>npm init(初始化，会生成一个package.json文件)</p><p>npm install webpack -g</p><p>npm install webpack –save-dev</p><p>使用指定版本</p><p> npm install <a href="mailto:&#119;&#x65;&#98;&#112;&#97;&#99;&#107;&#64;&#49;&#x2e;&#50;&#x2e;&#x78;">&#119;&#x65;&#98;&#112;&#97;&#99;&#107;&#64;&#49;&#x2e;&#50;&#x2e;&#x78;</a> –save-dev</p><p>第三步，安装vue</p><p>npm install vue</p><p>npm install vue@csp</p><p>安装官方命令行工具</p><p>npm install -g vue-cli</p><p>第四步，创建一个基于 “webpack” 模板的新项目</p><p>vue init webpack my-project</p><p>cd my-project</p><p> npm install</p><p> npm run dev</p><p>错误：vuejs &#x2F;usr&#x2F;bin&#x2F;env: “node”: 没有那个文件或目录</p><p>解决办法：sudo apt-get install nodejs-legacy(如果没有安装nodejs也是需要安装的)</p>]]></content>
     
     
       
@@ -111,15 +135,15 @@
     
     
     
-    <category term="VUEJS" scheme="https://richardyao007.github.io/categories/VUEJS/"/>
+    <category term="VUEJS" scheme="http://localhost:4000/categories/VUEJS/"/>
     
     
   </entry>
   
   <entry>
     <title>[Android]Ubuntu安装Gradle</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</id>
+    <link href="http://localhost:4000/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/"/>
+    <id>http://localhost:4000/2022/07/05/Ubuntu%E5%AE%89%E8%A3%85gradle/</id>
     <published>2022-07-05T02:12:51.143Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
@@ -136,15 +160,15 @@
     
     
     
-    <category term="Android" scheme="https://richardyao007.github.io/categories/Android/"/>
+    <category term="Android" scheme="http://localhost:4000/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]gem install mysql2失败解决办法</title>
-    <link href="https://richardyao007.github.io/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>https://richardyao007.github.io/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</id>
+    <link href="http://localhost:4000/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://localhost:4000/2022/07/05/gem%E5%AE%89%E8%A3%85mysql2%E5%A4%B1%E8%B4%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</id>
     <published>2022-07-05T02:12:51.143Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
@@ -163,15 +187,15 @@
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[Capistrano]Capistrano: 自动化部署的利器</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</id>
+    <link href="http://localhost:4000/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"/>
+    <id>http://localhost:4000/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</id>
     <published>2022-07-05T02:12:51.142Z</published>
     <updated>2022-07-05T02:12:51.143Z</updated>
     
@@ -191,15 +215,15 @@
     
     
     
-    <category term="Capistrano" scheme="https://richardyao007.github.io/categories/Capistrano/"/>
+    <category term="Capistrano" scheme="http://localhost:4000/categories/Capistrano/"/>
     
     
   </entry>
   
   <entry>
     <title>[MySql]中添加用户,新建数据库,用户授权,删除用户,修改密码</title>
-    <link href="https://richardyao007.github.io/2022/07/05/MySQL%E6%93%8D%E4%BD%9C%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/"/>
-    <id>https://richardyao007.github.io/2022/07/05/MySQL%E6%93%8D%E4%BD%9C%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/</id>
+    <link href="http://localhost:4000/2022/07/05/MySQL%E6%93%8D%E4%BD%9C%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/"/>
+    <id>http://localhost:4000/2022/07/05/MySQL%E6%93%8D%E4%BD%9C%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%88%E6%9D%83/</id>
     <published>2022-07-05T02:12:51.142Z</published>
     <updated>2022-07-05T02:12:51.142Z</updated>
     
@@ -218,15 +242,15 @@
     
     
     
-    <category term="MYSQL" scheme="https://richardyao007.github.io/categories/MYSQL/"/>
+    <category term="MYSQL" scheme="http://localhost:4000/categories/MYSQL/"/>
     
     
   </entry>
   
   <entry>
     <title>[MySql]Ubuntu系统mysql用户root空密码登录</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</id>
+    <link href="http://localhost:4000/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/"/>
+    <id>http://localhost:4000/2022/07/05/Ubuntu%E7%B3%BB%E7%BB%9Fmysql%E7%94%A8%E6%88%B7root%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95/</id>
     <published>2022-07-05T02:12:51.142Z</published>
     <updated>2022-07-05T02:12:51.142Z</updated>
     
@@ -244,15 +268,15 @@
     
     
     
-    <category term="MYSQL" scheme="https://richardyao007.github.io/categories/MYSQL/"/>
+    <category term="MYSQL" scheme="http://localhost:4000/categories/MYSQL/"/>
     
     
   </entry>
   
   <entry>
     <title>[Css]控制禁止输入法</title>
-    <link href="https://richardyao007.github.io/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/"/>
-    <id>https://richardyao007.github.io/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</id>
+    <link href="http://localhost:4000/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    <id>http://localhost:4000/2022/07/05/css%E6%8E%A7%E5%88%B6%E7%A6%81%E6%AD%A2%E8%BE%93%E5%85%A5%E6%B3%95/</id>
     <published>2022-07-05T02:12:51.142Z</published>
     <updated>2022-07-05T02:12:51.142Z</updated>
     
@@ -268,15 +292,15 @@
     
     
     
-    <category term="css" scheme="https://richardyao007.github.io/categories/css/"/>
+    <category term="css" scheme="http://localhost:4000/categories/css/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]rvm is not a function的解决方法</title>
-    <link href="https://richardyao007.github.io/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-    <id>https://richardyao007.github.io/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
+    <link href="http://localhost:4000/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://localhost:4000/2022/07/05/rvm%20is%20not%20a%20function%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
     <published>2022-07-05T02:12:51.142Z</published>
     <updated>2022-07-05T02:12:51.142Z</updated>
     
@@ -292,15 +316,15 @@
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[jQuery]中removeAttr方法在IE8以下版本中的Bug</title>
-    <link href="https://richardyao007.github.io/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/"/>
-    <id>https://richardyao007.github.io/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/</id>
+    <link href="http://localhost:4000/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/"/>
+    <id>http://localhost:4000/2022/07/05/jQuery%E4%B8%ADremoveAttr%E6%96%B9%E6%B3%95%E5%9C%A8IE8%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E4%B8%AD%E7%9A%84Bug/</id>
     <published>2022-07-05T02:12:51.141Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
@@ -316,15 +340,15 @@
     
     
     
-    <category term="JQuery" scheme="https://richardyao007.github.io/categories/JQuery/"/>
+    <category term="JQuery" scheme="http://localhost:4000/categories/JQuery/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ubuntu]安装jdk</title>
-    <link href="https://richardyao007.github.io/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/"/>
-    <id>https://richardyao007.github.io/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/</id>
+    <link href="http://localhost:4000/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/"/>
+    <id>http://localhost:4000/2022/07/05/ubuntu%20%E5%AE%89%E8%A3%85%20JDK/</id>
     <published>2022-07-05T02:12:51.141Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
@@ -338,15 +362,15 @@
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[php] 如何使用workman为laravel项目添加websocket在线聊天沟通？.markdown</title>
-    <link href="https://richardyao007.github.io/2022/06/08/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8workman%E4%B8%BAlaravel%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0websocket%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E6%B2%9F%E9%80%9A%EF%BC%9F/"/>
-    <id>https://richardyao007.github.io/2022/06/08/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8workman%E4%B8%BAlaravel%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0websocket%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E6%B2%9F%E9%80%9A%EF%BC%9F/</id>
+    <link href="http://localhost:4000/2022/06/08/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8workman%E4%B8%BAlaravel%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0websocket%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E6%B2%9F%E9%80%9A%EF%BC%9F/"/>
+    <id>http://localhost:4000/2022/06/08/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8workman%E4%B8%BAlaravel%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0websocket%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E6%B2%9F%E9%80%9A%EF%BC%9F/</id>
     <published>2022-06-08T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.148Z</updated>
     
@@ -370,15 +394,15 @@
     
     
     
-    <category term="laravel workman websocket php" scheme="https://richardyao007.github.io/categories/laravel-workman-websocket-php/"/>
+    <category term="laravel workman websocket php" scheme="http://localhost:4000/categories/laravel-workman-websocket-php/"/>
     
     
   </entry>
   
   <entry>
     <title>[php] laravel中使用ckeditor+ckfinder实现图片上传等功能</title>
-    <link href="https://richardyao007.github.io/2022/03/19/laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/"/>
-    <id>https://richardyao007.github.io/2022/03/19/laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/</id>
+    <link href="http://localhost:4000/2022/03/19/laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/"/>
+    <id>http://localhost:4000/2022/03/19/laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/</id>
     <published>2022-03-19T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.148Z</updated>
     
@@ -397,15 +421,15 @@
     
     
     
-    <category term="laravel ckeditor ckfinder" scheme="https://richardyao007.github.io/categories/laravel-ckeditor-ckfinder/"/>
+    <category term="laravel ckeditor ckfinder" scheme="http://localhost:4000/categories/laravel-ckeditor-ckfinder/"/>
     
     
   </entry>
   
   <entry>
     <title>[javascript] highchart使用心得</title>
-    <link href="https://richardyao007.github.io/2022/03/11/highchart%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
-    <id>https://richardyao007.github.io/2022/03/11/highchart%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</id>
+    <link href="http://localhost:4000/2022/03/11/highchart%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/"/>
+    <id>http://localhost:4000/2022/03/11/highchart%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97/</id>
     <published>2022-03-11T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.148Z</updated>
     
@@ -424,15 +448,15 @@
     
     
     
-    <category term="javascript" scheme="https://richardyao007.github.io/categories/javascript/"/>
+    <category term="javascript" scheme="http://localhost:4000/categories/javascript/"/>
     
     
   </entry>
   
   <entry>
     <title>javascript-对于hash进行排序的几种方式</title>
-    <link href="https://richardyao007.github.io/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>https://richardyao007.github.io/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</id>
+    <link href="http://localhost:4000/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://localhost:4000/2021/09/30/javascript%20-%20%E5%AF%B9%E4%BA%8Ehash%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</id>
     <published>2021-09-29T16:00:00.000Z</published>
     <updated>2022-07-07T06:01:35.873Z</updated>
     
@@ -451,8 +475,8 @@
   
   <entry>
     <title>javascript - 使用浏览器读取剪切板中的图片内容，并且粘贴到对应的HTML编辑器中</title>
-    <link href="https://richardyao007.github.io/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/"/>
-    <id>https://richardyao007.github.io/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/</id>
+    <link href="http://localhost:4000/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/"/>
+    <id>http://localhost:4000/2021/08/12/javascript%20-%20%E4%BD%BF%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AF%BB%E5%8F%96%E5%89%AA%E5%88%87%E6%9D%BF%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%86%85%E5%AE%B9%EF%BC%8C%E5%B9%B6%E4%B8%94%E7%B2%98%E8%B4%B4/</id>
     <published>2021-08-11T16:00:00.000Z</published>
     <updated>2022-07-07T06:01:56.776Z</updated>
     
@@ -471,8 +495,8 @@
   
   <entry>
     <title>vuejs - 普通方法 ， watch 与 computed</title>
-    <link href="https://richardyao007.github.io/2021/07/15/vuejs%20-%20methods%EF%BC%8C%20watch%20%E4%B8%8E%20computed/"/>
-    <id>https://richardyao007.github.io/2021/07/15/vuejs%20-%20methods%EF%BC%8C%20watch%20%E4%B8%8E%20computed/</id>
+    <link href="http://localhost:4000/2021/07/15/vuejs%20-%20methods%EF%BC%8C%20watch%20%E4%B8%8E%20computed/"/>
+    <id>http://localhost:4000/2021/07/15/vuejs%20-%20methods%EF%BC%8C%20watch%20%E4%B8%8E%20computed/</id>
     <published>2021-07-14T16:00:00.000Z</published>
     <updated>2022-07-07T06:02:14.251Z</updated>
     
@@ -491,8 +515,8 @@
   
   <entry>
     <title>[android] 支付宝app支付android篇</title>
-    <link href="https://richardyao007.github.io/2017/05/04/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98android%E7%AF%87/"/>
-    <id>https://richardyao007.github.io/2017/05/04/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98android%E7%AF%87/</id>
+    <link href="http://localhost:4000/2017/05/04/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98android%E7%AF%87/"/>
+    <id>http://localhost:4000/2017/05/04/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98android%E7%AF%87/</id>
     <published>2017-05-04T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.148Z</updated>
     
@@ -509,15 +533,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[android] android使用umeng分享</title>
-    <link href="https://richardyao007.github.io/2017/05/02/android%E4%BD%BF%E7%94%A8umeng%E5%88%86%E4%BA%AB/"/>
-    <id>https://richardyao007.github.io/2017/05/02/android%E4%BD%BF%E7%94%A8umeng%E5%88%86%E4%BA%AB/</id>
+    <link href="http://localhost:4000/2017/05/02/android%E4%BD%BF%E7%94%A8umeng%E5%88%86%E4%BA%AB/"/>
+    <id>http://localhost:4000/2017/05/02/android%E4%BD%BF%E7%94%A8umeng%E5%88%86%E4%BA%AB/</id>
     <published>2017-05-02T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.147Z</updated>
     
@@ -533,15 +557,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ruby on Rails] 支付宝app支付接口篇</title>
-    <link href="https://richardyao007.github.io/2017/04/20/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E7%AF%87/"/>
-    <id>https://richardyao007.github.io/2017/04/20/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E7%AF%87/</id>
+    <link href="http://localhost:4000/2017/04/20/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E7%AF%87/"/>
+    <id>http://localhost:4000/2017/04/20/%E6%94%AF%E4%BB%98%E5%AE%9Dapp%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E7%AF%87/</id>
     <published>2017-04-20T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.147Z</updated>
     
@@ -561,15 +585,15 @@
     
     
     
-    <category term="Ruby on Rails" scheme="https://richardyao007.github.io/categories/Ruby-on-Rails/"/>
+    <category term="Ruby on Rails" scheme="http://localhost:4000/categories/Ruby-on-Rails/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ubuntu] 支付宝支付使用openssl生成key</title>
-    <link href="https://richardyao007.github.io/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/"/>
-    <id>https://richardyao007.github.io/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/</id>
+    <link href="http://localhost:4000/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/"/>
+    <id>http://localhost:4000/2017/04/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E4%BD%BF%E7%94%A8openssl%E7%94%9F%E6%88%90key/</id>
     <published>2017-04-10T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.147Z</updated>
     
@@ -592,15 +616,15 @@
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ruby On Rails] app微信支付Ruby on Rails接口篇</title>
-    <link href="https://richardyao007.github.io/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/"/>
-    <id>https://richardyao007.github.io/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/</id>
+    <link href="http://localhost:4000/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/"/>
+    <id>http://localhost:4000/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98Ruby%20on%20Rails%E6%8E%A5%E5%8F%A3%E7%AF%87/</id>
     <published>2017-03-15T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.146Z</updated>
     
@@ -623,15 +647,15 @@
     
     
     
-    <category term="Ruby On Rails" scheme="https://richardyao007.github.io/categories/Ruby-On-Rails/"/>
+    <category term="Ruby On Rails" scheme="http://localhost:4000/categories/Ruby-On-Rails/"/>
     
     
   </entry>
   
   <entry>
     <title>[android] app微信支付android篇</title>
-    <link href="https://richardyao007.github.io/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98android%E7%AF%87/"/>
-    <id>https://richardyao007.github.io/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98android%E7%AF%87/</id>
+    <link href="http://localhost:4000/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98android%E7%AF%87/"/>
+    <id>http://localhost:4000/2017/03/15/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98android%E7%AF%87/</id>
     <published>2017-03-15T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.147Z</updated>
     
@@ -647,15 +671,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ruby On Rails] app微信支付配置篇(appid,key,mch_id)</title>
-    <link href="https://richardyao007.github.io/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/"/>
-    <id>https://richardyao007.github.io/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/</id>
+    <link href="http://localhost:4000/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/"/>
+    <id>http://localhost:4000/2017/03/10/app%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E9%85%8D%E7%BD%AE%E7%AF%87(appid,key,mch_id)/</id>
     <published>2017-03-10T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.146Z</updated>
     
@@ -671,15 +695,15 @@
     
     
     
-    <category term="Ruby On Rails" scheme="https://richardyao007.github.io/categories/Ruby-On-Rails/"/>
+    <category term="Ruby On Rails" scheme="http://localhost:4000/categories/Ruby-On-Rails/"/>
     
     
   </entry>
   
   <entry>
     <title>[android] 对于webview中type为file无法选择文件以及上传</title>
-    <link href="https://richardyao007.github.io/2017/03/01/android%E4%B8%AD%E5%AF%B9%E4%BA%8Ewebview%E4%B8%ADtype%E4%B8%BAfile%E6%97%A0%E6%B3%95%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%8A%E4%BC%A0/"/>
-    <id>https://richardyao007.github.io/2017/03/01/android%E4%B8%AD%E5%AF%B9%E4%BA%8Ewebview%E4%B8%ADtype%E4%B8%BAfile%E6%97%A0%E6%B3%95%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%8A%E4%BC%A0/</id>
+    <link href="http://localhost:4000/2017/03/01/android%E4%B8%AD%E5%AF%B9%E4%BA%8Ewebview%E4%B8%ADtype%E4%B8%BAfile%E6%97%A0%E6%B3%95%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%8A%E4%BC%A0/"/>
+    <id>http://localhost:4000/2017/03/01/android%E4%B8%AD%E5%AF%B9%E4%BA%8Ewebview%E4%B8%ADtype%E4%B8%BAfile%E6%97%A0%E6%B3%95%E9%80%89%E6%8B%A9%E6%96%87%E4%BB%B6%E4%BB%A5%E5%8F%8A%E4%B8%8A%E4%BC%A0/</id>
     <published>2017-03-01T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.146Z</updated>
     
@@ -695,15 +719,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[android] 使用HttpURLConnection发送请求</title>
-    <link href="https://richardyao007.github.io/2017/02/28/android%E4%BD%BF%E7%94%A8HttpURLConnection%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/"/>
-    <id>https://richardyao007.github.io/2017/02/28/android%E4%BD%BF%E7%94%A8HttpURLConnection%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/</id>
+    <link href="http://localhost:4000/2017/02/28/android%E4%BD%BF%E7%94%A8HttpURLConnection%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/"/>
+    <id>http://localhost:4000/2017/02/28/android%E4%BD%BF%E7%94%A8HttpURLConnection%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82/</id>
     <published>2017-02-28T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.146Z</updated>
     
@@ -718,15 +742,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[android] 图标桌面不显示的问题解决</title>
-    <link href="https://richardyao007.github.io/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
-    <id>https://richardyao007.github.io/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</id>
+    <link href="http://localhost:4000/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+    <id>http://localhost:4000/2017/02/25/android%E5%9B%BE%E6%A0%87%E6%A1%8C%E9%9D%A2%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</id>
     <published>2017-02-25T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.145Z</updated>
     
@@ -743,15 +767,15 @@
     
     
     
-    <category term="android" scheme="https://richardyao007.github.io/categories/android/"/>
+    <category term="android" scheme="http://localhost:4000/categories/android/"/>
     
     
   </entry>
   
   <entry>
     <title>[vue] vue(h5)+ror加入popup-picker实现省市县级联</title>
-    <link href="https://richardyao007.github.io/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/"/>
-    <id>https://richardyao007.github.io/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/</id>
+    <link href="http://localhost:4000/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/"/>
+    <id>http://localhost:4000/2017/02/20/vue(h5)+ror%E5%8A%A0%E5%85%A5popup-picker%E5%AE%9E%E7%8E%B0%E7%9C%81%E5%B8%82%E5%8E%BF%E7%BA%A7%E8%81%94/</id>
     <published>2017-02-20T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.145Z</updated>
     
@@ -772,15 +796,15 @@ i</summary>
     
     
     
-    <category term="vue" scheme="https://richardyao007.github.io/categories/vue/"/>
+    <category term="vue" scheme="http://localhost:4000/categories/vue/"/>
     
     
   </entry>
   
   <entry>
     <title>[git] 打tag</title>
-    <link href="https://richardyao007.github.io/2017/01/20/git%E6%89%93tag/"/>
-    <id>https://richardyao007.github.io/2017/01/20/git%E6%89%93tag/</id>
+    <link href="http://localhost:4000/2017/01/20/git%E6%89%93tag/"/>
+    <id>http://localhost:4000/2017/01/20/git%E6%89%93tag/</id>
     <published>2017-01-20T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.145Z</updated>
     
@@ -796,15 +820,15 @@ i</summary>
     
     
     
-    <category term="git" scheme="https://richardyao007.github.io/categories/git/"/>
+    <category term="git" scheme="http://localhost:4000/categories/git/"/>
     
     
   </entry>
   
   <entry>
     <title>[rails] 项目增加日志功能(log)</title>
-    <link href="https://richardyao007.github.io/2017/01/10/rails%20%E9%A1%B9%E7%9B%AE%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD(log)/"/>
-    <id>https://richardyao007.github.io/2017/01/10/rails%20%E9%A1%B9%E7%9B%AE%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD(log)/</id>
+    <link href="http://localhost:4000/2017/01/10/rails%20%E9%A1%B9%E7%9B%AE%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD(log)/"/>
+    <id>http://localhost:4000/2017/01/10/rails%20%E9%A1%B9%E7%9B%AE%E5%A2%9E%E5%8A%A0%E6%97%A5%E5%BF%97%E5%8A%9F%E8%83%BD(log)/</id>
     <published>2017-01-10T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.145Z</updated>
     
@@ -823,15 +847,15 @@ i</summary>
     
     
     
-    <category term="rails" scheme="https://richardyao007.github.io/categories/rails/"/>
+    <category term="rails" scheme="http://localhost:4000/categories/rails/"/>
     
     
   </entry>
   
   <entry>
     <title>[部署]Capistrano: 自动化部署的利器</title>
-    <link href="https://richardyao007.github.io/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"/>
-    <id>https://richardyao007.github.io/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</id>
+    <link href="http://localhost:4000/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"/>
+    <id>http://localhost:4000/2016/12/10/Capistrano:%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</id>
     <published>2016-12-10T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.145Z</updated>
     
@@ -846,15 +870,15 @@ i</summary>
     
     
     
-    <category term="部署" scheme="https://richardyao007.github.io/categories/%E9%83%A8%E7%BD%B2/"/>
+    <category term="部署" scheme="http://localhost:4000/categories/%E9%83%A8%E7%BD%B2/"/>
     
     
   </entry>
   
   <entry>
     <title>[Android]ubuntu下adb连接android手机</title>
-    <link href="https://richardyao007.github.io/2016/11/17/ubuntu%E4%B8%8Badb%E8%BF%9E%E6%8E%A5android%E6%89%8B%E6%9C%BA/"/>
-    <id>https://richardyao007.github.io/2016/11/17/ubuntu%E4%B8%8Badb%E8%BF%9E%E6%8E%A5android%E6%89%8B%E6%9C%BA/</id>
+    <link href="http://localhost:4000/2016/11/17/ubuntu%E4%B8%8Badb%E8%BF%9E%E6%8E%A5android%E6%89%8B%E6%9C%BA/"/>
+    <id>http://localhost:4000/2016/11/17/ubuntu%E4%B8%8Badb%E8%BF%9E%E6%8E%A5android%E6%89%8B%E6%9C%BA/</id>
     <published>2016-11-17T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.144Z</updated>
     
@@ -874,15 +898,15 @@ i</summary>
     
     
     
-    <category term="Android" scheme="https://richardyao007.github.io/categories/Android/"/>
+    <category term="Android" scheme="http://localhost:4000/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>[Git]Git忽略规则及.gitignore规则不生效的解决办法</title>
-    <link href="https://richardyao007.github.io/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>https://richardyao007.github.io/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</id>
+    <link href="http://localhost:4000/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://localhost:4000/2016/10/28/Git%E5%BF%BD%E7%95%A5%E8%A7%84%E5%88%99%E5%8F%8Agitignore%E8%A7%84%E5%88%99%E4%B8%8D%E7%94%9F%E6%95%88%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</id>
     <published>2016-10-28T14:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.144Z</updated>
     
@@ -902,15 +926,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Git" scheme="https://richardyao007.github.io/categories/Git/"/>
+    <category term="Git" scheme="http://localhost:4000/categories/Git/"/>
     
     
   </entry>
   
   <entry>
     <title>[Android]实现更换网络图片,并且设置圆角</title>
-    <link href="https://richardyao007.github.io/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/"/>
-    <id>https://richardyao007.github.io/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/</id>
+    <link href="http://localhost:4000/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/"/>
+    <id>http://localhost:4000/2016/10/28/%E5%AE%9E%E7%8E%B0%E6%9B%B4%E6%8D%A2%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87,%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E5%9C%86%E8%A7%92/</id>
     <published>2016-10-28T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.144Z</updated>
     
@@ -927,15 +951,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Android" scheme="https://richardyao007.github.io/categories/Android/"/>
+    <category term="Android" scheme="http://localhost:4000/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>[Android]整合H5的WebView(微信支付，支付宝支付)</title>
-    <link href="https://richardyao007.github.io/2016/10/19/Android%E6%95%B4%E5%90%88H5/"/>
-    <id>https://richardyao007.github.io/2016/10/19/Android%E6%95%B4%E5%90%88H5/</id>
+    <link href="http://localhost:4000/2016/10/19/Android%E6%95%B4%E5%90%88H5/"/>
+    <id>http://localhost:4000/2016/10/19/Android%E6%95%B4%E5%90%88H5/</id>
     <published>2016-10-19T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.144Z</updated>
     
@@ -954,15 +978,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Android" scheme="https://richardyao007.github.io/categories/Android/"/>
+    <category term="Android" scheme="http://localhost:4000/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]ckeditor+carrierwave+upyun图片上传</title>
-    <link href="https://richardyao007.github.io/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/"/>
-    <id>https://richardyao007.github.io/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</id>
+    <link href="http://localhost:4000/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/"/>
+    <id>http://localhost:4000/2016/10/19/ckeditor+carrierwave+upyun%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/</id>
     <published>2016-10-19T01:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.144Z</updated>
     
@@ -983,15 +1007,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[Php]Ubuntu下为PHP安装postgis，pdo_pgsql，composer</title>
-    <link href="https://richardyao007.github.io/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/"/>
-    <id>https://richardyao007.github.io/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</id>
+    <link href="http://localhost:4000/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/"/>
+    <id>http://localhost:4000/2015/05/16/Ubuntu%E4%B8%8B%E4%B8%BAPHP%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E7%BB%84%E4%BB%B6/</id>
     <published>2015-05-16T14:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.142Z</updated>
     
@@ -1008,15 +1032,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ubuntu]Ubuntu手动设置HOSTS</title>
-    <link href="https://richardyao007.github.io/2015/05/15/ubuntu%E4%B8%8B%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AEHOSTS/"/>
-    <id>https://richardyao007.github.io/2015/05/15/ubuntu%E4%B8%8B%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AEHOSTS/</id>
+    <link href="http://localhost:4000/2015/05/15/ubuntu%E4%B8%8B%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AEHOSTS/"/>
+    <id>http://localhost:4000/2015/05/15/ubuntu%E4%B8%8B%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AEHOSTS/</id>
     <published>2015-05-15T14:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
@@ -1032,15 +1056,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[Php]错误信息的显示</title>
-    <link href="https://richardyao007.github.io/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/"/>
-    <id>https://richardyao007.github.io/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</id>
+    <link href="http://localhost:4000/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/"/>
+    <id>http://localhost:4000/2015/05/14/php%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF%E7%9A%84%E6%98%BE%E7%A4%BA/</id>
     <published>2015-05-14T14:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
@@ -1056,15 +1080,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="PHP" scheme="https://richardyao007.github.io/categories/PHP/"/>
+    <category term="PHP" scheme="http://localhost:4000/categories/PHP/"/>
     
     
   </entry>
   
   <entry>
     <title>[JavaScript]禁用鼠标右键的“粘贴”菜单，可以防止鼠标右键或者Ctrl + V粘贴不合法的数据</title>
-    <link href="https://richardyao007.github.io/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/"/>
-    <id>https://richardyao007.github.io/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</id>
+    <link href="http://localhost:4000/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/"/>
+    <id>http://localhost:4000/2014/04/25/%E7%A6%81%E6%AD%A2%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E7%B2%98%E8%B4%B4%E8%8F%9C%E5%8D%95/</id>
     <published>2014-04-25T14:14:49.000Z</published>
     <updated>2022-07-07T07:42:29.003Z</updated>
     
@@ -1080,15 +1104,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="JavaScript" scheme="https://richardyao007.github.io/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="http://localhost:4000/categories/JavaScript/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]Ruby Array学习总结</title>
-    <link href="https://richardyao007.github.io/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
-    <id>https://richardyao007.github.io/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</id>
+    <link href="http://localhost:4000/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>http://localhost:4000/2013/05/07/Ruby%20Array%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.140Z</updated>
     
@@ -1108,19 +1132,19 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]Ubuntu下Rails开发环境配置</title>
-    <link href="https://richardyao007.github.io/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    <id>https://richardyao007.github.io/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
+    <link href="http://localhost:4000/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>http://localhost:4000/2013/05/07/Ubuntu%20%E4%B8%8A%20Rails%20%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
-    <content type="html"><![CDATA[<p>Ubuntu版本：14.04</p><p>Ruby版本：2.1.2</p><p>1、 更新apt-get：</p><p>ubuntu@ubuntu:~$ sudo apt-get update</p><p>2、 安装curl：</p><p>ubuntu@ubuntu:~$ sudo apt-get install curl</p><p>3、 安装rvm：</p><p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p><p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p><p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p><p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x77;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#101;&#x67;&#117;&#105;&#110;&#x40;&#103;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a>, Michal Papis <a href="mailto:&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#109;&#x70;&#97;&#x70;&#105;&#115;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p><p>4、 安装ruby：</p><p>要先执行下面命令，否则后边流程跑不动：</p><p>ubuntu@ubuntu:~$ rvm autolibs enable</p><p>下面这步可选，是将rvm的源改成国内taobao的源：</p><p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p><p>安装：</p><p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p><p>5、 更改gem源：</p><p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p><p>6、 安装rails：</p><p>ubuntu@ubuntu:~$ gem install rails</p><p>下面就可以创建一个”blog”程序尝试一下：</p><p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p><p>2、启动服务器（执行 rails server）时会有如下报错：</p><p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p><p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p><p>再次启动服务器，即可正常运行啦！！！</p>]]></content>
+    <content type="html"><![CDATA[<p>Ubuntu版本：14.04</p><p>Ruby版本：2.1.2</p><p>1、 更新apt-get：</p><p>ubuntu@ubuntu:~$ sudo apt-get update</p><p>2、 安装curl：</p><p>ubuntu@ubuntu:~$ sudo apt-get install curl</p><p>3、 安装rvm：</p><p>安装：ubuntu@ubuntu:~$ curl -L <a href="https://get.rvm.io/">https://get.rvm.io</a> | bash -s stable</p><p>配置：ubuntu@ubuntu:~$ source ~&#x2F;.rvm&#x2F;scripts&#x2F;rvm</p><p>查看：<br>ubuntu@ubuntu:~$ rvm -v</p><p>rvm 1.25.33 (stable) by Wayne E. Seguin <a href="mailto:&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#x65;&#x67;&#x75;&#105;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#119;&#x61;&#121;&#x6e;&#x65;&#101;&#x73;&#x65;&#x67;&#x75;&#105;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;</a>, Michal Papis <a href="mailto:&#109;&#x70;&#x61;&#x70;&#105;&#115;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;">&#109;&#x70;&#x61;&#x70;&#105;&#115;&#x40;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#99;&#111;&#109;</a> [<a href="https://rvm.io/]">https://rvm.io/]</a></p><p>4、 安装ruby：</p><p>要先执行下面命令，否则后边流程跑不动：</p><p>ubuntu@ubuntu:~$ rvm autolibs enable</p><p>下面这步可选，是将rvm的源改成国内taobao的源：</p><p>ubuntu@ubuntu:~$ sed -i .bak ‘s!ftp.ruby-lang.org&#x2F;pub&#x2F;ruby!ruby.taobao.org&#x2F;mirrors&#x2F;ruby!’ $rvm_path&#x2F;config&#x2F;db</p><p>安装：</p><p>ubuntu@ubuntu:<del>$ rvm pkg install readline<br>ubuntu@ubuntu:</del>$ rvm install 2.1.2 （此步需要耗费一定时间）<br>ubuntu@ubuntu:~$ rvm 2.1.2 –default</p><p>5、 更改gem源：</p><p>国外的源可选，若删除的话执行：<br>ubuntu@ubuntu:<del>$ gem source -r <a href="https://rubygems.org/">https://rubygems.org/</a><br>添加国内的源：<br>ubuntu@ubuntu:</del>$ gem source -a <a href="https://ruby.taobao.org/">https://ruby.taobao.org/</a></p><p>6、 安装rails：</p><p>ubuntu@ubuntu:~$ gem install rails</p><p>下面就可以创建一个”blog”程序尝试一下：</p><p>1、参照<a href="http://guides.ruby-china.org/getting_started.html">http://guides.ruby-china.org/getting_started.html</a> 创建blog程序</p><p>2、启动服务器（执行 rails server）时会有如下报错：</p><p>&#x2F;home&#x2F;ubuntu&#x2F;.rvm&#x2F;gems&#x2F;ruby-2.1.2&#x2F;gems&#x2F;execjs-2.2.2&#x2F;lib&#x2F;execjs&#x2F;runtimes.rb:51:in &#96;autodetect’: Could not find a JavaScript runtime. See <a href="https://github.com/sstephenson/execjs">https://github.com/sstephenson/execjs</a> for a list of available runtimes. (ExecJS::RuntimeUnavailable)</p><p>解决方法：<br>gem install execjs<br>gem install therubyracer<br>sudo apt-get install nodejs</p><p>再次启动服务器，即可正常运行啦！！！</p>]]></content>
     
     
       
@@ -1135,15 +1159,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[jQuery]增加 删除 修改select option</title>
-    <link href="https://richardyao007.github.io/2013/05/07/jQuery%20%E5%A2%9E%E5%8A%A0%20%E5%88%A0%E9%99%A4%20%E4%BF%AE%E6%94%B9select%20option/"/>
-    <id>https://richardyao007.github.io/2013/05/07/jQuery%20%E5%A2%9E%E5%8A%A0%20%E5%88%A0%E9%99%A4%20%E4%BF%AE%E6%94%B9select%20option/</id>
+    <link href="http://localhost:4000/2013/05/07/jQuery%20%E5%A2%9E%E5%8A%A0%20%E5%88%A0%E9%99%A4%20%E4%BF%AE%E6%94%B9select%20option/"/>
+    <id>http://localhost:4000/2013/05/07/jQuery%20%E5%A2%9E%E5%8A%A0%20%E5%88%A0%E9%99%A4%20%E4%BF%AE%E6%94%B9select%20option/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.139Z</updated>
     
@@ -1158,15 +1182,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="JQuery" scheme="https://richardyao007.github.io/categories/JQuery/"/>
+    <category term="JQuery" scheme="http://localhost:4000/categories/JQuery/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ubuntu]linux下vim命令详解</title>
-    <link href="https://richardyao007.github.io/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
-    <id>https://richardyao007.github.io/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</id>
+    <link href="http://localhost:4000/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://localhost:4000/2013/05/07/linux%E4%B8%8Bvim%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.140Z</updated>
     
@@ -1184,15 +1208,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]常用正则表达式</title>
-    <link href="https://richardyao007.github.io/2013/05/07/ruby%20on%20rails%20%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://richardyao007.github.io/2013/05/07/ruby%20on%20rails%20%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
+    <link href="http://localhost:4000/2013/05/07/ruby%20on%20rails%20%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://localhost:4000/2013/05/07/ruby%20on%20rails%20%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.140Z</updated>
     
@@ -1215,15 +1239,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
   
   <entry>
     <title>[MySql]Ubuntu下安装MYSQL</title>
-    <link href="https://richardyao007.github.io/2013/05/07/ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/"/>
-    <id>https://richardyao007.github.io/2013/05/07/ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/</id>
+    <link href="http://localhost:4000/2013/05/07/ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/"/>
+    <id>http://localhost:4000/2013/05/07/ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85MySQL/</id>
     <published>2013-05-07T08:26:49.000Z</published>
     <updated>2022-07-05T02:12:51.141Z</updated>
     
@@ -1239,15 +1263,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[Ubuntu]使用google拼音输入法</title>
-    <link href="https://richardyao007.github.io/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/"/>
-    <id>https://richardyao007.github.io/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</id>
+    <link href="http://localhost:4000/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/"/>
+    <id>http://localhost:4000/2013/03/26/ubuntu%E4%BD%BF%E7%94%A8google%E6%8B%BC%E9%9F%B3%E8%BE%93%E5%85%A5%E6%B3%95/</id>
     <published>2013-03-26T07:47:49.000Z</published>
     <updated>2022-07-05T02:12:51.139Z</updated>
     
@@ -1262,15 +1286,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="Ubuntu" scheme="https://richardyao007.github.io/categories/Ubuntu/"/>
+    <category term="Ubuntu" scheme="http://localhost:4000/categories/Ubuntu/"/>
     
     
   </entry>
   
   <entry>
     <title>[JavaScript]设置select为选中</title>
-    <link href="https://richardyao007.github.io/2013/03/20/javascript%E8%AE%BE%E7%BD%AEselect%E4%B8%BA%E9%80%89%E4%B8%AD/"/>
-    <id>https://richardyao007.github.io/2013/03/20/javascript%E8%AE%BE%E7%BD%AEselect%E4%B8%BA%E9%80%89%E4%B8%AD/</id>
+    <link href="http://localhost:4000/2013/03/20/javascript%E8%AE%BE%E7%BD%AEselect%E4%B8%BA%E9%80%89%E4%B8%AD/"/>
+    <id>http://localhost:4000/2013/03/20/javascript%E8%AE%BE%E7%BD%AEselect%E4%B8%BA%E9%80%89%E4%B8%AD/</id>
     <published>2013-03-20T01:47:49.000Z</published>
     <updated>2022-07-05T02:12:51.139Z</updated>
     
@@ -1289,15 +1313,15 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="JavaScript" scheme="https://richardyao007.github.io/categories/JavaScript/"/>
+    <category term="JavaScript" scheme="http://localhost:4000/categories/JavaScript/"/>
     
     
   </entry>
   
   <entry>
     <title>[RubyOnRails]一些网址</title>
-    <link href="https://richardyao007.github.io/2013/03/18/%E4%B8%80%E4%BA%9B%E7%BD%91%E5%9D%80/"/>
-    <id>https://richardyao007.github.io/2013/03/18/%E4%B8%80%E4%BA%9B%E7%BD%91%E5%9D%80/</id>
+    <link href="http://localhost:4000/2013/03/18/%E4%B8%80%E4%BA%9B%E7%BD%91%E5%9D%80/"/>
+    <id>http://localhost:4000/2013/03/18/%E4%B8%80%E4%BA%9B%E7%BD%91%E5%9D%80/</id>
     <published>2013-03-18T14:14:49.000Z</published>
     <updated>2022-07-05T02:12:51.139Z</updated>
     
@@ -1312,7 +1336,7 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     
-    <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    <category term="RubyOnRails" scheme="http://localhost:4000/categories/RubyOnRails/"/>
     
     
   </entry>
