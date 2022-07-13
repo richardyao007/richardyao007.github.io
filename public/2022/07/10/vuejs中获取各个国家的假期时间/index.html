@@ -1,0 +1,237 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <title>richardyao007的博客</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="java ruby python php laravel vuejs linux mysql" />
+  <meta name="keyword" content="java ruby python php laravel vuejs linux mysql"/>
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="richardyao007的博客" type="application/atom+xml">
+</head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+    <div id="site-title">
+      知识是第一生产力
+    </div>
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+      
+      <a href="/share">分享</a>
+      
+    
+      
+      <a href="/search">检索</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[Vue]vuejs中获取各个国家的假期时间
+       
+        <div id="post-time" datetime="2022-07-10T14:14:49.000Z">
+          2022-07-10
+        </div>
+      
+    </h2>
+    <h3 id="使用yarn或者npm安装包"><a href="#使用yarn或者npm安装包" class="headerlink" title="使用yarn或者npm安装包"></a>使用yarn或者npm安装包</h3><pre><code class="bash">yarn add date-holidays
+or
+npm install date-holidays
+</code></pre>
+<blockquote>
+<p>这块注意自己的node版本，不同node版本匹配不同版本的包</p>
+</blockquote>
+<h3 id="在-vue中的使用"><a href="#在-vue中的使用" class="headerlink" title="在.vue中的使用"></a>在.vue中的使用</h3><pre><code class="bash">import Holidays from &quot;date-holidays&quot;;
+// JP指取日本的数据: (具体国家代码缩写后面有说明)
+let holidays = new Holidays(&#39;JP&#39;)
+
+//下面是比较常用的方法
+//获取指定年的假期数据信息, year为指定年份
+holidays.getHolidays(year)
+
+//判断指定日期是否为假期, date为需要判断的日期字符串
+holidays.isHoliday(date)   //该方法返回结果为false即不是假期，如果是一个对象即相应的假期信息
+</code></pre>
+<p><sub>具体国家代码缩写，以及相应版本请参考</sub><br><a target="_blank" rel="noopener" href="https://yarnpkg.com/package/date-holidays">Click this</a>.</p>
+<blockquote>
+<p>非常方便，有使用到类似功能开发的，推荐使用.</p>
+</blockquote>
+<blockquote>
+<p>我这边是后端的数据需要进行判断和比对，所以这块是前端调用<code>getHolidays</code>方法获取假期数据，传递到后台，后台处理，前端再显示。</p>
+</blockquote>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <div></div> 
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/07/05/hello-world/"> Hello World → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>

@@ -15,7 +15,6 @@ menu:
   #关于: /about   # 默认使用主页的about风格,所以先注释掉 #
   关于: /about   # 默认使用主页的about风格,所以先注释掉 #
   分享: /share
-  
 
 # stylesheets loaded in the <head>
 stylesheets:
@@ -24,6 +23,7 @@ stylesheets:
 # scripts loaded in the end of the body
 scripts:
 - /js/legend.js
+#- /js/search.js
 
 ##必须修改部分########################################################################
 #### 以下是你需要到hexo主配置(最外层_config.yml)修改的参数 
@@ -103,18 +103,18 @@ home_bgimage: /images/background.png
 #2.menu_about:在菜单栏新开一个菜单"关于", 请确保菜单配置menu，添加了about项(打开上面menu,about的注释)
 about_type: home_about
     
-local_search:
-  enable: true
-  # if auto, trigger search by changing input
-  # if manual, trigger search by pressing enter key or search button
-  trigger: auto
-  # show top n results per article, show all results by setting to -1
-  top_n_per_article: 1
-
-algolia_search:
-  enable: false
-  hits:
-    per_page: 5
+#local_search:
+#  enable: true
+#  # if auto, trigger search by changing input
+#  # if manual, trigger search by pressing enter key or search button
+#  trigger: auto
+#  # show top n results per article, show all results by setting to -1
+#  top_n_per_article: 1
+#
+#algolia_search:
+#  enable: false
+#  hits:
+#    per_page: 5
 
 # RSS订阅
 plugin:
