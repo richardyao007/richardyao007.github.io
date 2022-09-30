@@ -3,7 +3,8 @@ layout: post
 title: '[node]自定义npm包，以及制作和使用流程'
 date: 2022-08-10 22:14:49 +0800
 categories:
-- Npm, Node, Javascript
+- Vue
+- JavaScript
 ---
 
 > 1. 首先，需要将需要打包的javascript文件所有的依赖文件从中剥离出来
