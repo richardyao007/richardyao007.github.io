@@ -1,0 +1,344 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <title>richardyao007的博客</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="java ruby python php laravel vuejs linux mysql" />
+  <meta name="keyword" content="java ruby python php laravel vuejs linux mysql"/>
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="richardyao007的博客" type="application/atom+xml">
+</head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+    <div id="site-title">
+      Never give up
+    </div>
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[docker]docker常用基本操作
+       
+        <div id="post-time" datetime="2022-04-10T14:14:49.000Z">
+          2022-04-10
+        </div>
+      
+    </h2>
+    <h3 id="两个非常重要的概念：-image-container"><a href="#两个非常重要的概念：-image-container" class="headerlink" title="两个非常重要的概念： image , container"></a>两个非常重要的概念： image , container</h3><blockquote>
+<p>image: 镜像, 静态的东东,  可以被commit. 可以被删除。</p>
+</blockquote>
+<blockquote>
+<p>container:  docker “run” （注意是不是start ) image 之后的到的东东.   内容不会被自动保存。  docker run 命令 就会产生新的。 而且docker 的理念是container 可以随时随地产生和抛弃。</p>
+</blockquote>
+<blockquote>
+<p>docker run 命令： 根据image 来得到一个运行中的 container .这是一个崭新的container.</p>
+</blockquote>
+<blockquote>
+<p>docker start 命令： 把之前停止的 container 跑起来</p>
+</blockquote>
+<p>可以通过 –help 来查看 详细命令，例如  $ docker run –help 会打印出详细的解释。</p>
+<h3 id="docker-ps-查看-运行中的container"><a href="#docker-ps-查看-运行中的container" class="headerlink" title="docker ps  查看 运行中的container"></a>docker ps  查看 运行中的container</h3><pre><code class="bash">CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                                           NAMES
+fde1709c0722        xx_backend           &quot;bundle exec puma -C…&quot;   15 hours ago        Up 15 hours         0.0.0.0:8333-&gt;443/tcp, 0.0.0.0:3333-&gt;3000/tcp   xx_backend_1
+a6cce4485a11        gate_rails           &quot;sh -c &#39;rm -f tmp/pi…&quot;   37 hours ago        Up 37 hours         0.0.0.0:8443-&gt;443/tcp, 0.0.0.0:3001-&gt;3000/tcp   gateapp
+46e63e19f41f        redis                &quot;docker-entrypoint.s…&quot;   39 hours ago        Up 15 hours         0.0.0.0:6379-&gt;6379/tcp                          art-lesson_redis_1
+</code></pre>
+<h3 id="docker-ps-a-查看所有的container"><a href="#docker-ps-a-查看所有的container" class="headerlink" title="docker ps -a  查看所有的container"></a>docker ps -a  查看所有的container</h3><pre><code class="bash">CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS                       PORTS                                           NAMES
+09eb05026ee3        art-lesson_operator_frontend   &quot;docker-entrypoint.s…&quot;   15 hours ago        Exited (1) 5 minutes ago                                                     art-lesson_operator_frontend_1
+fde1709c0722        art-lesson_backend             &quot;bundle exec puma -C…&quot;   15 hours ago        Up 15 hours                  0.0.0.0:8333-&gt;443/tcp, 0.0.0.0:3333-&gt;3000/tcp   art-lesson_backend_1
+b52fb63efbbe        c00d6886c4eb                   &quot;docker-entrypoint.s…&quot;   16 hours ago        Exited (0) 16 hours ago                                                      wizardly_goldstine
+8b987c955e58        dc14bf43540d                   &quot;/bin/sh -c &#39;set -e …&quot;   16 hours ago        Exited (137) 16 hours ago                                                    sharp_perlman
+a6cce4485a11        gate_rails                     &quot;sh -c &#39;rm -f tmp/pi…&quot;   37 hours ago        Up 37 hours                  0.0.0.0:8443-&gt;443/tcp, 0.0.0.0:3001-&gt;3000/tcp   gateapp
+46e63e19f41f        redis                          &quot;docker-entrypoint.s…&quot;   39 hours ago        Up 15 hours                  0.0.0.0:6379-&gt;6379/tcp                          art-lesson_redis_1
+f349047c5be2        933f6                          &quot;/bin/bash&quot;              14 months ago       Exited (0) 14 months ago                                                     competent_noether
+43e658ea2787        933f6                          &quot;/bin/bash&quot;              14 months ago       Exited (0) 14 months ago                                                     jolly_turing
+abda2002620b        933f6d242546                   &quot;-v /workspace:/work…&quot;   14 months ago       Created                                                                      relaxed_johnson
+333d33e9ef2b        vulhub/nginx:heartbleed        &quot;/usr/local/nginx/sb…&quot;   15 months ago       Exited (255) 15 months ago   0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp        heartbleed_nginx_1
+b9a24255799f        imagetragick_apache            &quot;docker-php-entrypoi…&quot;   15 months ago       Exited (0) 15 months ago                                                     imagetragick_apache_1
+</code></pre>
+<h3 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run  "></a>docker run  <image_name></h3><p>根据已有的image  创建一个新的container 并运行</p>
+<p>例子： 运行 image: 933f6,  使用host ip,  并且把 host 的 &#x2F;workspace 文件夹加载到container 中的 &#x2F;workspace</p>
+<p>docker run -v &#x2F;workspace:&#x2F;workspace –net&#x3D;host -it –hostname&#x3D;admin-container 933f6</p>
+<h3 id="docker-create"><a href="#docker-create" class="headerlink" title="docker create"></a>docker create</h3><p>创建一个新的container ,但是不启动</p>
+<h3 id="docker-start"><a href="#docker-start" class="headerlink" title="docker start "></a>docker start <id></h3><p>运行一个已经存在的,并且已经停止的container</p>
+<h3 id="docker-stop"><a href="#docker-stop" class="headerlink" title="docker stop "></a>docker stop <id></h3><p>停止已经一个存在的container</p>
+<h3 id="docker-rm"><a href="#docker-rm" class="headerlink" title="docker rm "></a>docker rm <container id></h3><p>删除一个或者多个container</p>
+<h3 id="docker-image-ls-或者-docker-images"><a href="#docker-image-ls-或者-docker-images" class="headerlink" title="docker image ls   或者  $ docker images"></a>docker image ls   或者  $ docker images</h3><p>查看本地所有的image</p>
+<h3 id="docker-exec-it-x2F-bin-x2F-bash"><a href="#docker-exec-it-x2F-bin-x2F-bash" class="headerlink" title="docker exec -it  &#x2F;bin&#x2F;bash"></a>docker exec -it <container id> &#x2F;bin&#x2F;bash</h3><p>直接类似于使用ssh 登录一个container</p>
+<h3 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach "></a>docker attach <container id></h3><p>查看某个container</p>
+<h3 id="docker-logs"><a href="#docker-logs" class="headerlink" title="docker logs "></a>docker logs <container id></h3><p>查看某个container 的shell的输出</p>
+<h3 id="docker-inspect-查看某个container的详细情况-包括ip-等。"><a href="#docker-inspect-查看某个container的详细情况-包括ip-等。" class="headerlink" title="docker inspect  , 查看某个container的详细情况. 包括ip 等。"></a>docker inspect <container id> , 查看某个container的详细情况. 包括ip 等。</h3><pre><code class="bash">docker inspect c7180f611c13
+[
+&#123;
+&quot;Id&quot;: &quot;c7180f611c13d238755898e83f7fdefb06fad782f87e3ec9e260d3f62625c9a0&quot;,
+&quot;Created&quot;: &quot;2020-12-14T09:44:03.290361691Z&quot;,
+&quot;Path&quot;: &quot;/bin/bash&quot;,
+&quot;Args&quot;: [],
+&quot;State&quot;: &#123;
+&quot;Status&quot;: &quot;running&quot;,
+&quot;Running&quot;: true,
+&quot;Paused&quot;: false,
+&quot;Restarting&quot;: false,
+&quot;OOMKilled&quot;: false,
+&quot;Dead&quot;: false,
+&quot;Pid&quot;: 8122,
+&quot;ExitCode&quot;: 0,
+&quot;Error&quot;: &quot;&quot;,
+&quot;StartedAt&quot;: &quot;2020-12-14T09:44:03.899503111Z&quot;,
+&quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+&#125;,
+</code></pre>
+<h3 id="docker-ps-列出运行中的container-如果要列出所有，就-docker-ps-a"><a href="#docker-ps-列出运行中的container-如果要列出所有，就-docker-ps-a" class="headerlink" title="docker ps   列出运行中的container    ( 如果要列出所有，就 docker ps -a )"></a>docker ps   列出运行中的container    ( 如果要列出所有，就 docker ps -a )</h3><pre><code class="bash"># docker top c7180f611c13
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                8122                8096                0                   17:44               pts/0               00:00:00            /bin/bash
+</code></pre>
+<h3 id="docker-commit-记得要在-docker-compose停止之后-否则会卡死"><a href="#docker-commit-记得要在-docker-compose停止之后-否则会卡死" class="headerlink" title="docker commit  ( 记得要在 docker-compose停止之后, 否则会卡死)"></a>docker commit  ( 记得要在 docker-compose停止之后, 否则会卡死)</h3><p>先把docker停止,然后 docker ps -a 就可以看到所有的container. exit也没问题.</p>
+<p>为某个image 进行内容的永久性修改.  记得: 务必要加上  <container id>   image:tag_name 作为结尾, 例如:</p>
+<p>docker commit -a ‘dashi’ -m ‘增加tag名字’ c7180f611c13 ubuntu:add_vim</p>
+<p>sha256:4efbaa2d43fc40ac308297fe6e0df72fd2e55a9700abee5c9e4aa28b41cbf0a4</p>
+<p>后面的:add_vim 不加的话,默认就是 :lastest  ,  -a ‘dashi’ 也可以不加.</p>
+<h3 id="docker-rmi-删掉某个image"><a href="#docker-rmi-删掉某个image" class="headerlink" title="docker rmi  删掉某个image"></a>docker rmi <image_id> 删掉某个image</h3><pre><code class="bash">$ sudo docker image ls
+REPOSITORY         TAG              IMAGE ID       CREATED          SIZE
+snexx_data_rails   latest           0de6f45596fa   34 seconds ago   1.19GB
+snexx_data_rails   installed_gems   f8c24d5a9f1c   2 minutes ago    1.19GB
+mysql              5.7              82d2d47667cf   18 hours ago     450MB
+ubuntu             latest           825d55fb6340   2 weeks ago      72.8MB
+hello-world        latest           feb5d9fea6a5   6 months ago     13.3kB
+ruby               2.5.8            fc5e02c64ca4   12 months ago    843MB
+
+$ sudo docker rmi f8c24d
+Untagged: sneak_data_rails:installed_gems
+Deleted: sha256:f8c24d5a9f1ccf3c70ab3ef3a67cae0124d506e8c8a1bb3d6461676daf3b344f
+Deleted: sha256:1a585b5ce639cb9d2b569d0a372d75bae57496415d03322fd1b57325e1ac8462
+
+$ sudo docker image ls
+REPOSITORY         TAG       IMAGE ID       CREATED              SIZE
+snexx_data_rails   latest    0de6f45596fa   About a minute ago   1.19GB
+mysql              5.7       82d2d47667cf   18 hours ago         450MB
+ubuntu             latest    825d55fb6340   2 weeks ago          72.8MB
+hello-world        latest    feb5d9fea6a5   6 months ago         13.3kB
+ruby               2.5.8     fc5e02c64ca4   12 months ago        843MB
+</code></pre>
+<h3 id="docker-image-ls-列出所有的docker-image"><a href="#docker-image-ls-列出所有的docker-image" class="headerlink" title="docker image ls  列出所有的docker image"></a>docker image ls  列出所有的docker image</h3><p>REPOSITORY TAG IMAGE ID CREATED SIZE<br>ubuntu add_vim 4efbaa2d43fc About a minute ago 167MB</p>
+<h3 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h3><p>把 container 导出 , 例如:   docker export -o rails_container.tar c7180f611c13</p>
+<h3 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h3><p>把 image 导出, 例如：　docker save -o rails_image.tar 253ea174ad29</p>
+<h3 id="docker-load"><a href="#docker-load" class="headerlink" title="docker load"></a>docker load</h3><p>docker import<br>把image 导入。（但是不运行，仅仅导入到本地的image 仓库）</p>
+<h3 id="docker-cp"><a href="#docker-cp" class="headerlink" title="docker cp"></a>docker cp</h3><p>把本地的copy到container 中。 或者反之</p>
+<p>docker cp <containerId>:&#x2F;file&#x2F;path&#x2F;within&#x2F;container &#x2F;host&#x2F;path&#x2F;target</p>
+<p>或者  docker cp ~&#x2F;.vim <containerid>:&#x2F;root</p>
+<h3 id="docker-run-运行docker-，并且加上各种参数。"><a href="#docker-run-运行docker-，并且加上各种参数。" class="headerlink" title="docker run 运行docker ，并且加上各种参数。"></a>docker run 运行docker ，并且加上各种参数。</h3><p>-v 加上本地存储</p>
+<p>docker 不支持symlink, 参考：  <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/38485607/mount-host-directory-with-a-symbolic-link-inside-in-docker-container/40322275">https://stackoverflow.com/questions/38485607/mount-host-directory-with-a-symbolic-link-inside-in-docker-container/40322275</a></p>
+<h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><p>运行某个指定的yml文件：</p>
+<p>docker-compose -f .&#x2F;docker-compose.yml up</p>
+<p>另一个例子： （会在本地目录寻找  .privoxy, 然后运行里面的Dockerfile )</p>
+<pre><code class="bash">version: &#39;3&#39;
+services:
+
+socks5tohttp_proxy:
+build: ./privoxy
+container_name: &quot;socks5tohttp_proxy&quot;
+volumes:
+- /g/workspace/temp_socks_to_http_proxy:/root
+command: &#39;tail -f /dev/null&#39;
+#command: &#39;mysqld&#39;
+ports:
+- &quot;1080:1080&quot;
+stdin_open: true
+tty: true
+#environment:
+#  - MYSQL_ROOT_PASSWORD=666666
+#  - MYSQL_ROOT_HOST=%
+</code></pre>
+<p>.&#x2F;privoxy文件夹如下：</p>
+<pre><code class="bash">FROM alpine:3.11
+
+RUN apk update \
+&amp;&amp; apk add privoxy \
+&amp;&amp; rm -rf /var/cache/apk/*
+
+# CMD [&quot;privoxy&quot;,&quot;--no-daemon&quot;,&quot;/etc/privoxy/config&quot;]
+</code></pre>
+<p>进来之后就可以随便操作了：</p>
+<pre><code class="bash">/ # ps
+PID   USER     TIME  COMMAND
+1 root      0:00 tail -f /dev/null
+15 root      0:00 sh
+21 root      0:00 ps
+</code></pre>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2022/06/08/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8workman%E4%B8%BAlaravel%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0websocket%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E6%B2%9F%E9%80%9A%EF%BC%9F/"> ← [php] 如何使用workman为laravel项目添加websocket在线聊天沟通？.markdown </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/03/19/laravel%E4%B8%AD%E4%BD%BF%E7%94%A8ckeditor+ckfinder%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0%E7%AD%89%E5%8A%9F%E8%83%BD/"> [php] laravel中使用ckeditor+ckfinder实现图片上传等功能 → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>

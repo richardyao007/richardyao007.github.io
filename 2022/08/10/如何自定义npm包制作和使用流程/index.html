@@ -1,0 +1,295 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <title>richardyao007的博客</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="java ruby python php laravel vuejs linux mysql" />
+  <meta name="keyword" content="java ruby python php laravel vuejs linux mysql"/>
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="richardyao007的博客" type="application/atom+xml">
+</head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+    <div id="site-title">
+      Never give up
+    </div>
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[node]自定义npm包，以及制作和使用流程
+       
+        <div id="post-time" datetime="2022-08-10T14:14:49.000Z">
+          2022-08-10
+        </div>
+      
+    </h2>
+    <blockquote>
+<ol>
+<li>首先，需要将需要打包的javascript文件所有的依赖文件从中剥离出来</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>其次，把javascript文件和其依赖文件单独放在一个目录下</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>最后使用npm相关命令，登录，发布</li>
+</ol>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>需要提前注册好npm相关账号，注册地址：（<a target="_blank" rel="noopener" href="https://www.npmjs.com/%EF%BC%89">https://www.npmjs.com/）</a></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>请确保当前链接源是官网，使用nrm工具可以快速查看和切换</p>
+</blockquote>
+</blockquote>
+<p><code>npm install nrm</code></p>
+<p><code>nrm ls</code></p>
+<p><code>npm config set registry https://registry.npmjs.org</code></p>
+<ol>
+<li><p>登录npm用户</p>
+<p> <code> npm adduser </code></p>
+<blockquote>
+<p>命令执行后会需要依次输入以下信息</p>
+</blockquote>
+<p> 1&gt; 输入用户名</p>
+<p> 2&gt; 输入密码</p>
+<p> 3&gt; 输入邮箱</p>
+<p> 4&gt; 输入 OTP code（email中会收到的一个code）</p>
+</li>
+<li><p>发布包</p>
+<p> <code> npm publish --access public </code></p>
+</li>
+</ol>
+<ul>
+<li><p>引用和使用npm包</p>
+<ul>
+<li>下载安装依赖包(安装指定版本)</li>
+</ul>
+<p>  <code>   npm install -S your-package-name@1.0.0   </code></p>
+<ul>
+<li>调用npm包</li>
+</ul>
+<p>  <code>   import &#123;something&#125; from &#39;your-package-name&#39;   </code>    </p>
+<ul>
+<li><p>更新npm包</p>
+<ul>
+<li>每次修改完code后，一定要更新版本号</li>
+</ul>
+<p><code>//直接修改package.json中的version &quot;version&quot;: &quot;1.1.0&quot;</code></p>
+<p><code>//或者使用命令修改 npm version 1.1.0</code></p>
+<ul>
+<li><p>再次发布</p>
+<p><code>npm publish --access public</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>撤销发布的npm包</p>
+<p>  如果因为某种原因需要撤销已经发布提交的npm包</p>
+<p>  超过24小时后无法撤销</p>
+<p>  <code>  npm --force unpublish your-package-name  </code></p>
+</li>
+</ul>
+<blockquote>
+<p>注意</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ol>
+<li>在24小时加上 –force强制执行才可以实现。即使撤销了发布的包，再次发布的时候也不能与之前被撤销的包的名称和版本其中之一相同，包名和包版本组成唯一标识，即使撤销也并不会消失，不能重复使用。</li>
+</ol>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ol start="2">
+<li>撤销的包不能立马再次发布，撤销24小时后才能再次发布。</li>
+</ol>
+</blockquote>
+</blockquote>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <div></div> 
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/07/10/vuejs%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%90%84%E4%B8%AA%E5%9B%BD%E5%AE%B6%E7%9A%84%E5%81%87%E6%9C%9F%E6%97%B6%E9%97%B4/"> [Vue]vuejs中获取各个国家的假期时间 → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>

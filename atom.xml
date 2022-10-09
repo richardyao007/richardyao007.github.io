@@ -6,7 +6,7 @@
   <link href="https://richardyao007.github.io/atom.xml" rel="self"/>
   
   <link href="https://richardyao007.github.io/"/>
-  <updated>2022-07-13T10:16:15.759Z</updated>
+  <updated>2022-09-30T10:08:48.165Z</updated>
   <id>https://richardyao007.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[node]自定义npm包，以及制作和使用流程</title>
+    <link href="https://richardyao007.github.io/2022/08/10/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89npm%E5%8C%85%E5%88%B6%E4%BD%9C%E5%92%8C%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B/"/>
+    <id>https://richardyao007.github.io/2022/08/10/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89npm%E5%8C%85%E5%88%B6%E4%BD%9C%E5%92%8C%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B/</id>
+    <published>2022-08-10T14:14:49.000Z</published>
+    <updated>2022-09-30T10:08:48.165Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><ol><li>首先，需要将需要打包的javascript文件所有的依赖文件从中剥离出来</li></ol></blockquote><blockquote><ol start="2"><li>其次，把javascript文件和其依赖文件单独放在一个目录下</li></ol></blockquote><blockquote><ol start="3"><li>最后使用npm相关命令，登录，发布</li></ol></blockquote><blockquote><blockquote><p>需要提前注册好npm相关账号，注册地址：（<a href="https://www.npmjs.com/%EF%BC%89">https://www.npmjs.com/）</a></p></blockquote></blockquote><blockquote><blockquote><p>请确保当前链接源是官网，使用nrm工具可以快速查看和切换</p></blockquote></blockquote><p><code>npm install nrm</code></p><p><code>nrm ls</code></p><p><code>npm config set registry https://registry.npmjs.org</code></p><ol><li><p>登录npm用户</p><p> <code> npm adduser </code></p><blockquote><p>命令执行后会需要依次输入以下信息</p></blockquote><p> 1&gt; 输入用户名</p><p> 2&gt; 输入密码</p><p> 3&gt; 输入邮箱</p><p> 4&gt; 输入 OTP code（email中会收到的一个code）</p></li><li><p>发布包</p><p> <code> npm publish --access public </code></p></li></ol><ul><li><p>引用和使用npm包</p><ul><li>下载安装依赖包(安装指定版本)</li></ul><p>  <code>   npm install -S your-package-name@1.0.0   </code></p><ul><li>调用npm包</li></ul><p>  <code>   import &#123;something&#125; from &#39;your-package-name&#39;   </code>    </p><ul><li><p>更新npm包</p><ul><li>每次修改完code后，一定要更新版本号</li></ul><p><code>//直接修改package.json中的version &quot;version&quot;: &quot;1.1.0&quot;</code></p><p><code>//或者使用命令修改 npm version 1.1.0</code></p><ul><li><p>再次发布</p><p><code>npm publish --access public</code></p></li></ul></li></ul></li><li><p>撤销发布的npm包</p><p>  如果因为某种原因需要撤销已经发布提交的npm包</p><p>  超过24小时后无法撤销</p><p>  <code>  npm --force unpublish your-package-name  </code></p></li></ul><blockquote><p>注意</p></blockquote><blockquote><blockquote><ol><li>在24小时加上 –force强制执行才可以实现。即使撤销了发布的包，再次发布的时候也不能与之前被撤销的包的名称和版本其中之一相同，包名和包版本组成唯一标识，即使撤销也并不会消失，不能重复使用。</li></ol></blockquote></blockquote><blockquote><blockquote><ol start="2"><li>撤销的包不能立马再次发布，撤销24小时后才能再次发布。</li></ol></blockquote></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;首先，需要将需要打包的javascript文件所有的依赖文件从中剥离出来&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;其次，把javascript文件和其依赖文件单独</summary>
+      
+    
+    
+    
+    <category term="Vue" scheme="https://richardyao007.github.io/categories/Vue/"/>
+    
+    <category term="JavaScript" scheme="https://richardyao007.github.io/categories/Vue/JavaScript/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>[Vue]vuejs中获取各个国家的假期时间</title>
@@ -36,6 +67,30 @@
     <category term="Vue" scheme="https://richardyao007.github.io/categories/Vue/"/>
     
     <category term="JavaScript" scheme="https://richardyao007.github.io/categories/Vue/JavaScript/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[Vuejs+Nginx] vuejs + nginx常见跨域问题解决方案</title>
+    <link href="https://richardyao007.github.io/2022/07/10/vuejs+nginx%E5%B8%B8%E8%A7%81%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>https://richardyao007.github.io/2022/07/10/vuejs+nginx%E5%B8%B8%E8%A7%81%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2022-07-10T01:14:49.000Z</published>
+    <updated>2022-08-02T09:57:19.169Z</updated>
+    
+    <content type="html"><![CDATA[<p>###一般只需要在nginx.conf配置文件的 location ~ .php$ { 中添加如下配置：</p><pre><code class="bash">if ($request_method = &#39;OPTIONS&#39;) &#123;    add_header &#39;Access-Control-Allow-Origin&#39; $http_origin always;    add_header &#39;Access-Control-Allow-Credentials&#39; &#39;true&#39;;    add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, PATCH, DELETE, PUT, OPTIONS&#39;;    add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,  Access-Control-Expose-Headers, Token, Authorization&#39;;    add_header &#39;Access-Control-Max-Age&#39; 1728000;    add_header &#39;Content-Type&#39; &#39;text/plain charset=UTF-8&#39;;    add_header &#39;Content-Length&#39; 0;    return 204;&#125;if ($request_method = &#39;POST&#39;) &#123;    add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;    add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#125;if ($request_method = &#39;GET&#39;) &#123;    add_header &#39;Access-Control-Allow-Methods&#39; &#39;GET, POST, OPTIONS&#39;;    add_header &#39;Access-Control-Allow-Headers&#39; &#39;DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type&#39;;&#125;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;###一般只需要在nginx.conf配置文件的 location ~ .php$ { 中添加如下配置：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;if ($request_method = &amp;#39;OPTIONS&amp;#39;) &amp;#123;
+    add_</summary>
+      
+    
+    
+    
+    <category term="vuejs Nginx" scheme="https://richardyao007.github.io/categories/vuejs-Nginx/"/>
     
     
   </entry>
@@ -188,34 +243,6 @@
     
     
     <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>[Capistrano]Capistrano: 自动化部署的利器</title>
-    <link href="https://richardyao007.github.io/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/"/>
-    <id>https://richardyao007.github.io/2022/07/05/Capistrano%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E7%9A%84%E5%88%A9%E5%99%A8/</id>
-    <published>2022-07-05T02:12:51.142Z</published>
-    <updated>2022-07-05T02:12:51.143Z</updated>
-    
-    <content type="html"><![CDATA[<pre><code>            capistrano是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。            安装方式：            进入到项目目录下面,并增加下面内容到 Gemfile 中：            group :development gem &#39;capistrano&#39;, &#39;2.12.0&#39; gem &#39;capistrano-rbenv&#39;, &#39;1.0.1&#39; end            安装添加的gem            $ bundle install            再运行下面的命令：            $ capify .            会生成两个关键性的文件： Capfile , config/deploy.rb            编辑后者config/deploy.rb            加上自己的capistrano配置信息            启动deploy中的setup任务,创建一些必要文件夹            $ cap deploy:setup            编辑远程的数据库,thin等配置文件             ../shared/config/database.yml                ../shared/config/database.yml            开始部署            $ cap deploy.            下面是一个完整的deploy.rb文件：            https://github.com/beijing-rubyist/bjrubyist/blob/master/config/deploy.rb            使用命令行            下面是一个例子，在命令行中显示 User name: , 等用户输入完，按回车之后， 把输入的值赋给 user 变量。            set(:user) &#123; Capistrano::CLI.ui.ask(&quot;User name: &quot;) &#125;            使用帮助：            $ cap --help            使用logger，特别是在其他语言调用CAP时，非常有用（例如被fabric 调用）:            $ cap setup --logger STDOUT            如何使用变量?            要记得: 使用@. . 例如，我们要设置 &quot;deploy_type&quot; 这个变量：            $ cap say_hi --set-before deploy_type=staging            然后在 config/deploy.rb 中这样使用：            DEFAULT_TYPE = &quot;stable&quot; # deploy_type 仅仅在 begin 这个区域中生效, 在rescue, ensure中都不行。  begin deploy_type                puts &quot;deploy_type was set successfully&quot; @deploy_type = deploy_type rescue Exception =&gt; e                puts &quot;deploy_type not set, use default: #&#123;DEFAULT_TYPE&#125;&quot; deploy_type = DEFAULT_TYPE @deploy_type = deploy_type end task :say_hi do puts &quot;hihihi, var_deploy_type: #&#123;@deploy_type&#125;&quot; end            输出：            deploy_type was set successfully            ============= DEPLOY_PATH: /rails_apps/babble_portal/cutting_edge            * executing `say_hi&#39;            hihihi, var_deploy_type: 444            最后，使用copy方式：            # 脚本中            set :scm, :none            set :repository, &quot;.&quot;            set :deploy_via, :copy            capistrano的输出详解            TODO 各种屏幕截图。 建立文件夹， 打包，压缩，上传，解压缩， rake db.. assets等等            为什么要用capistrano            流行的工具都是有道理的（ best practices are best in most cases)            版本控制：SVN =&gt; GIT( scm : from SVN to GIT)            部署方式：人肉部署 =&gt; Capistrano            原来项目中用到的是SVN， 就一个分支，也不打tag。感觉用起来没啥。 ( there&#39;s not so much trouble when the project is going under SVN and manual deployment)            现在服务器的配置被运维同学限制了，无法连到SCM服务器 (同时无法连接到外网，无法连接到很多内部网络，比如LDAP，RADIUS等等）。肿么办???? (but one day, the server was limited its access to the internet, git repo and local LDAP , Radius service... what shall we do? )            如果用SVN的话，就得用SCP的方式，打包过去，然后修修改改，每次都要人肉来做，还出错。(if using SVN, we have to copy the entire code folder to the target server, easy to make mistake and really painful for me )            现在换成了GIT，不用capistrano的话，直接在本地把 git-patch 上传过去，然后 git am 就好。(now since we have migrated the SVN to GIT repo, it&#39;s very easy to achieve the same goal using &#39;git-patch&#39; and &#39;git am&#39; )            用了capistrano的话，用 deploy_via :scp 的 方式，我每次部署一行命令，自动搞定了。 ( and in capistrano, we just need to use &#39;deploy_via scp&#39; to do the deployment job )            所以，老式的办法，在某些新问题出现的时刻，不是那么得心应手。业界流行的“最佳实践”，在大部分情况下，还是“最佳实践”的。 ^_^ ( the conclusion is: best practices are always best in most cases. )            —— 学习是王道！ ( keep STUDYING everyday! )            capistrano的原理            裸代码: 没有数据库的配置文件, 没有服务器相关的配置文件, 也没有压缩各种css/js , 一般都是从git上直接clone下来的代码。            传统的部署步骤:            ssh 登陆到服务器            git pull            restart command（重新启动）            坏处是:            无法回滚,            每次都人肉, 特别麻烦.            虽然上面3个步骤看似很少, 但是需要一直盯着(比如, ssh 需要10秒, git pull 需要20秒, restart 也需要人肉输入, 这些都是时间上的损耗, 而且人肉做重复性的事情, 无趣, 容易出错。            合理的部署是:            编写好一个配置文件之后, 运行代码: $ cap deploy (一个命令) , 之后的所有事情,都不用人参与了。            结构:            有三个角色:部署人员的机器,目标服务器,代码服务器(GIT)            TODO: 没xuan的图片            ( 见譞的本本上的图 )            每次部署, 都要做的事情:            SSH 到目标服务器            把最新的代码,上传到目标服务器上。这时候的代码是裸代码，不能立刻部署, 因为很多配置文件都没有。            我们不能把配置文件也放到github里面跟踪, 比如: config/database.yml , 每个人或服务器的数据库的 mysql 密码都不一样。            以及其他的内容(上传文件夹)            项目的回滚            回滚的方式有几种:            code roll back            git checkout ... 这样不好,很多时候我们无法保证代码是没有被修改的。 被修改之后, checkout操作会涉及到代码合并的情况, 在某些 紧急 BUG 出现时, 会特别明显.            使用capistrano,将上一次的release回滚,每一个release都用一个文件夹(里面包含了完整的项目代码, 包括裸代码, 和 各种配置文件)。            目录结构            20150310010954, 20150319015536 这种时间戳命名的文件夹，代码某一个时间段部署的版本。            有一个特殊的softlink(软链接),current。            web服务器的nginx配置,thin配置可以指向这个softlink,这样就不需要每次都改nginx，thin 的配置文件了, 只需要把current这个softlink,重新指向不同的 release 文件夹就可以了。            shared文件夹中所保存的内容, 以及部分目录结构, 是由 config/deploy.rb 这个配置文件决定的            capistrano部署web应用的文件结构是:            /opt/rails_app:                    current -&gt; /opt/app/happystock_web/releases/20150518030114/                    releases/                            20150310010954                            20150319015536                            20150518030114                    shared/                            assets                            config                            files                            log                            pids                            public                            system            capistrano执行的内容            准备启动服务器:            安装各种新增的rubygem            做必要的数据库迁移            配置各种文件            修改上传文件夹的softlink            其他,每次使用裸代码做部署的时候,都要人肉做的事情. (修改保存日志的路径, 修改 rails server的配置, )            编译,压缩 js/ css            重启 服务器( $ nginx -s reload, $ kill -9 xxx , $ thin start -C config/thin.yml)            使用方式            首次运行前的准备工作            自动生成文件夹：            $ cap deploy:setup # 建立需要的各种文件夹            注意： 这里务必记得， 盯紧控制台的输出， 看到它执行完 mkdir -p 之后， 赶紧按ctrl + c 暂停。否则它会默认在远程服务器上安装各种ruby 第三方包，安装各种linux 依赖包。一不小心就会把服务器环境搞砸了。            为 shared 目录下，增加各种配置文件，它们只需要被配置一遍。例如：            config/thin.yml # 服务器的配置 config/database.yml # 数据库的配置 config/log4r.yml # 日志文件的配置 config/settings.yml # 系统的配置            配置好ruby环境， mysql, thin, nginx 等            $ bundle exec cap deploy            再次部署（更新版本）            只需要运行$ cap deploy即可。            常见问题            无法部署capistrano? Net::SSH::AuthenticationFailed: Authentication failed            对于capistrano 2.12.0,显式指定Gemfile中net-ssh 的版本，例如：            gem &#39;net-ssh&#39;, &#39;2.7.0&#39;</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;pre&gt;&lt;code&gt;            capistrano是个好用的自动化部署工具, 能够快速自动的将自己的代码部署到正式服务器上面。
-
-            安装方式：
-
-            进入到项目目录下面,并增加下面内容到 Gemfile 中：
-
-     </summary>
-      
-    
-    
-    
-    <category term="Capistrano" scheme="https://richardyao007.github.io/categories/Capistrano/"/>
     
     
   </entry>
@@ -395,6 +422,28 @@
     
     
     <category term="laravel workman websocket php" scheme="https://richardyao007.github.io/categories/laravel-workman-websocket-php/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[docker]docker常用基本操作</title>
+    <link href="https://richardyao007.github.io/2022/04/10/docker%E5%B8%B8%E7%94%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>https://richardyao007.github.io/2022/04/10/docker%E5%B8%B8%E7%94%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/</id>
+    <published>2022-04-10T14:14:49.000Z</published>
+    <updated>2022-07-15T09:03:49.755Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="两个非常重要的概念：-image-container"><a href="#两个非常重要的概念：-image-container" class="headerlink" title="两个非常重要的概念： image , container"></a>两个非常重要的概念： image , container</h3><blockquote><p>image: 镜像, 静态的东东,  可以被commit. 可以被删除。</p></blockquote><blockquote><p>container:  docker “run” （注意是不是start ) image 之后的到的东东.   内容不会被自动保存。  docker run 命令 就会产生新的。 而且docker 的理念是container 可以随时随地产生和抛弃。</p></blockquote><blockquote><p>docker run 命令： 根据image 来得到一个运行中的 container .这是一个崭新的container.</p></blockquote><blockquote><p>docker start 命令： 把之前停止的 container 跑起来</p></blockquote><p>可以通过 –help 来查看 详细命令，例如  $ docker run –help 会打印出详细的解释。</p><h3 id="docker-ps-查看-运行中的container"><a href="#docker-ps-查看-运行中的container" class="headerlink" title="docker ps  查看 运行中的container"></a>docker ps  查看 运行中的container</h3><pre><code class="bash">CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                                           NAMESfde1709c0722        xx_backend           &quot;bundle exec puma -C…&quot;   15 hours ago        Up 15 hours         0.0.0.0:8333-&gt;443/tcp, 0.0.0.0:3333-&gt;3000/tcp   xx_backend_1a6cce4485a11        gate_rails           &quot;sh -c &#39;rm -f tmp/pi…&quot;   37 hours ago        Up 37 hours         0.0.0.0:8443-&gt;443/tcp, 0.0.0.0:3001-&gt;3000/tcp   gateapp46e63e19f41f        redis                &quot;docker-entrypoint.s…&quot;   39 hours ago        Up 15 hours         0.0.0.0:6379-&gt;6379/tcp                          art-lesson_redis_1</code></pre><h3 id="docker-ps-a-查看所有的container"><a href="#docker-ps-a-查看所有的container" class="headerlink" title="docker ps -a  查看所有的container"></a>docker ps -a  查看所有的container</h3><pre><code class="bash">CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS                       PORTS                                           NAMES09eb05026ee3        art-lesson_operator_frontend   &quot;docker-entrypoint.s…&quot;   15 hours ago        Exited (1) 5 minutes ago                                                     art-lesson_operator_frontend_1fde1709c0722        art-lesson_backend             &quot;bundle exec puma -C…&quot;   15 hours ago        Up 15 hours                  0.0.0.0:8333-&gt;443/tcp, 0.0.0.0:3333-&gt;3000/tcp   art-lesson_backend_1b52fb63efbbe        c00d6886c4eb                   &quot;docker-entrypoint.s…&quot;   16 hours ago        Exited (0) 16 hours ago                                                      wizardly_goldstine8b987c955e58        dc14bf43540d                   &quot;/bin/sh -c &#39;set -e …&quot;   16 hours ago        Exited (137) 16 hours ago                                                    sharp_perlmana6cce4485a11        gate_rails                     &quot;sh -c &#39;rm -f tmp/pi…&quot;   37 hours ago        Up 37 hours                  0.0.0.0:8443-&gt;443/tcp, 0.0.0.0:3001-&gt;3000/tcp   gateapp46e63e19f41f        redis                          &quot;docker-entrypoint.s…&quot;   39 hours ago        Up 15 hours                  0.0.0.0:6379-&gt;6379/tcp                          art-lesson_redis_1f349047c5be2        933f6                          &quot;/bin/bash&quot;              14 months ago       Exited (0) 14 months ago                                                     competent_noether43e658ea2787        933f6                          &quot;/bin/bash&quot;              14 months ago       Exited (0) 14 months ago                                                     jolly_turingabda2002620b        933f6d242546                   &quot;-v /workspace:/work…&quot;   14 months ago       Created                                                                      relaxed_johnson333d33e9ef2b        vulhub/nginx:heartbleed        &quot;/usr/local/nginx/sb…&quot;   15 months ago       Exited (255) 15 months ago   0.0.0.0:80-&gt;80/tcp, 0.0.0.0:443-&gt;443/tcp        heartbleed_nginx_1b9a24255799f        imagetragick_apache            &quot;docker-php-entrypoi…&quot;   15 months ago       Exited (0) 15 months ago                                                     imagetragick_apache_1</code></pre><h3 id="docker-run"><a href="#docker-run" class="headerlink" title="docker run  "></a>docker run  <image_name></h3><p>根据已有的image  创建一个新的container 并运行</p><p>例子： 运行 image: 933f6,  使用host ip,  并且把 host 的 &#x2F;workspace 文件夹加载到container 中的 &#x2F;workspace</p><p>docker run -v &#x2F;workspace:&#x2F;workspace –net&#x3D;host -it –hostname&#x3D;admin-container 933f6</p><h3 id="docker-create"><a href="#docker-create" class="headerlink" title="docker create"></a>docker create</h3><p>创建一个新的container ,但是不启动</p><h3 id="docker-start"><a href="#docker-start" class="headerlink" title="docker start "></a>docker start <id></h3><p>运行一个已经存在的,并且已经停止的container</p><h3 id="docker-stop"><a href="#docker-stop" class="headerlink" title="docker stop "></a>docker stop <id></h3><p>停止已经一个存在的container</p><h3 id="docker-rm"><a href="#docker-rm" class="headerlink" title="docker rm "></a>docker rm <container id></h3><p>删除一个或者多个container</p><h3 id="docker-image-ls-或者-docker-images"><a href="#docker-image-ls-或者-docker-images" class="headerlink" title="docker image ls   或者  $ docker images"></a>docker image ls   或者  $ docker images</h3><p>查看本地所有的image</p><h3 id="docker-exec-it-x2F-bin-x2F-bash"><a href="#docker-exec-it-x2F-bin-x2F-bash" class="headerlink" title="docker exec -it  &#x2F;bin&#x2F;bash"></a>docker exec -it <container id> &#x2F;bin&#x2F;bash</h3><p>直接类似于使用ssh 登录一个container</p><h3 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach "></a>docker attach <container id></h3><p>查看某个container</p><h3 id="docker-logs"><a href="#docker-logs" class="headerlink" title="docker logs "></a>docker logs <container id></h3><p>查看某个container 的shell的输出</p><h3 id="docker-inspect-查看某个container的详细情况-包括ip-等。"><a href="#docker-inspect-查看某个container的详细情况-包括ip-等。" class="headerlink" title="docker inspect  , 查看某个container的详细情况. 包括ip 等。"></a>docker inspect <container id> , 查看某个container的详细情况. 包括ip 等。</h3><pre><code class="bash">docker inspect c7180f611c13[&#123;&quot;Id&quot;: &quot;c7180f611c13d238755898e83f7fdefb06fad782f87e3ec9e260d3f62625c9a0&quot;,&quot;Created&quot;: &quot;2020-12-14T09:44:03.290361691Z&quot;,&quot;Path&quot;: &quot;/bin/bash&quot;,&quot;Args&quot;: [],&quot;State&quot;: &#123;&quot;Status&quot;: &quot;running&quot;,&quot;Running&quot;: true,&quot;Paused&quot;: false,&quot;Restarting&quot;: false,&quot;OOMKilled&quot;: false,&quot;Dead&quot;: false,&quot;Pid&quot;: 8122,&quot;ExitCode&quot;: 0,&quot;Error&quot;: &quot;&quot;,&quot;StartedAt&quot;: &quot;2020-12-14T09:44:03.899503111Z&quot;,&quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;&#125;,</code></pre><h3 id="docker-ps-列出运行中的container-如果要列出所有，就-docker-ps-a"><a href="#docker-ps-列出运行中的container-如果要列出所有，就-docker-ps-a" class="headerlink" title="docker ps   列出运行中的container    ( 如果要列出所有，就 docker ps -a )"></a>docker ps   列出运行中的container    ( 如果要列出所有，就 docker ps -a )</h3><pre><code class="bash"># docker top c7180f611c13UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMDroot                8122                8096                0                   17:44               pts/0               00:00:00            /bin/bash</code></pre><h3 id="docker-commit-记得要在-docker-compose停止之后-否则会卡死"><a href="#docker-commit-记得要在-docker-compose停止之后-否则会卡死" class="headerlink" title="docker commit  ( 记得要在 docker-compose停止之后, 否则会卡死)"></a>docker commit  ( 记得要在 docker-compose停止之后, 否则会卡死)</h3><p>先把docker停止,然后 docker ps -a 就可以看到所有的container. exit也没问题.</p><p>为某个image 进行内容的永久性修改.  记得: 务必要加上  <container id>   image:tag_name 作为结尾, 例如:</p><p>docker commit -a ‘dashi’ -m ‘增加tag名字’ c7180f611c13 ubuntu:add_vim</p><p>sha256:4efbaa2d43fc40ac308297fe6e0df72fd2e55a9700abee5c9e4aa28b41cbf0a4</p><p>后面的:add_vim 不加的话,默认就是 :lastest  ,  -a ‘dashi’ 也可以不加.</p><h3 id="docker-rmi-删掉某个image"><a href="#docker-rmi-删掉某个image" class="headerlink" title="docker rmi  删掉某个image"></a>docker rmi <image_id> 删掉某个image</h3><pre><code class="bash">$ sudo docker image lsREPOSITORY         TAG              IMAGE ID       CREATED          SIZEsnexx_data_rails   latest           0de6f45596fa   34 seconds ago   1.19GBsnexx_data_rails   installed_gems   f8c24d5a9f1c   2 minutes ago    1.19GBmysql              5.7              82d2d47667cf   18 hours ago     450MBubuntu             latest           825d55fb6340   2 weeks ago      72.8MBhello-world        latest           feb5d9fea6a5   6 months ago     13.3kBruby               2.5.8            fc5e02c64ca4   12 months ago    843MB$ sudo docker rmi f8c24dUntagged: sneak_data_rails:installed_gemsDeleted: sha256:f8c24d5a9f1ccf3c70ab3ef3a67cae0124d506e8c8a1bb3d6461676daf3b344fDeleted: sha256:1a585b5ce639cb9d2b569d0a372d75bae57496415d03322fd1b57325e1ac8462$ sudo docker image lsREPOSITORY         TAG       IMAGE ID       CREATED              SIZEsnexx_data_rails   latest    0de6f45596fa   About a minute ago   1.19GBmysql              5.7       82d2d47667cf   18 hours ago         450MBubuntu             latest    825d55fb6340   2 weeks ago          72.8MBhello-world        latest    feb5d9fea6a5   6 months ago         13.3kBruby               2.5.8     fc5e02c64ca4   12 months ago        843MB</code></pre><h3 id="docker-image-ls-列出所有的docker-image"><a href="#docker-image-ls-列出所有的docker-image" class="headerlink" title="docker image ls  列出所有的docker image"></a>docker image ls  列出所有的docker image</h3><p>REPOSITORY TAG IMAGE ID CREATED SIZE<br>ubuntu add_vim 4efbaa2d43fc About a minute ago 167MB</p><h3 id="docker-export"><a href="#docker-export" class="headerlink" title="docker export"></a>docker export</h3><p>把 container 导出 , 例如:   docker export -o rails_container.tar c7180f611c13</p><h3 id="docker-save"><a href="#docker-save" class="headerlink" title="docker save"></a>docker save</h3><p>把 image 导出, 例如：　docker save -o rails_image.tar 253ea174ad29</p><h3 id="docker-load"><a href="#docker-load" class="headerlink" title="docker load"></a>docker load</h3><p>docker import<br>把image 导入。（但是不运行，仅仅导入到本地的image 仓库）</p><h3 id="docker-cp"><a href="#docker-cp" class="headerlink" title="docker cp"></a>docker cp</h3><p>把本地的copy到container 中。 或者反之</p><p>docker cp <containerId>:&#x2F;file&#x2F;path&#x2F;within&#x2F;container &#x2F;host&#x2F;path&#x2F;target</p><p>或者  docker cp ~&#x2F;.vim <containerid>:&#x2F;root</p><h3 id="docker-run-运行docker-，并且加上各种参数。"><a href="#docker-run-运行docker-，并且加上各种参数。" class="headerlink" title="docker run 运行docker ，并且加上各种参数。"></a>docker run 运行docker ，并且加上各种参数。</h3><p>-v 加上本地存储</p><p>docker 不支持symlink, 参考：  <a href="https://stackoverflow.com/questions/38485607/mount-host-directory-with-a-symbolic-link-inside-in-docker-container/40322275">https://stackoverflow.com/questions/38485607/mount-host-directory-with-a-symbolic-link-inside-in-docker-container/40322275</a></p><h2 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h2><p>运行某个指定的yml文件：</p><p>docker-compose -f .&#x2F;docker-compose.yml up</p><p>另一个例子： （会在本地目录寻找  .privoxy, 然后运行里面的Dockerfile )</p><pre><code class="bash">version: &#39;3&#39;services:socks5tohttp_proxy:build: ./privoxycontainer_name: &quot;socks5tohttp_proxy&quot;volumes:- /g/workspace/temp_socks_to_http_proxy:/rootcommand: &#39;tail -f /dev/null&#39;#command: &#39;mysqld&#39;ports:- &quot;1080:1080&quot;stdin_open: truetty: true#environment:#  - MYSQL_ROOT_PASSWORD=666666#  - MYSQL_ROOT_HOST=%</code></pre><p>.&#x2F;privoxy文件夹如下：</p><pre><code class="bash">FROM alpine:3.11RUN apk update \&amp;&amp; apk add privoxy \&amp;&amp; rm -rf /var/cache/apk/*# CMD [&quot;privoxy&quot;,&quot;--no-daemon&quot;,&quot;/etc/privoxy/config&quot;]</code></pre><p>进来之后就可以随便操作了：</p><pre><code class="bash">/ # psPID   USER     TIME  COMMAND1 root      0:00 tail -f /dev/null15 root      0:00 sh21 root      0:00 ps</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;两个非常重要的概念：-image-container&quot;&gt;&lt;a href=&quot;#两个非常重要的概念：-image-container&quot; class=&quot;headerlink&quot; title=&quot;两个非常重要的概念： image , container&quot;&gt;&lt;/a&gt;两个非常重要</summary>
+      
+    
+    
+    
+    <category term="Docker" scheme="https://richardyao007.github.io/categories/Docker/"/>
     
     
   </entry>
@@ -1008,6 +1057,28 @@ git commit -m &amp;#39;update .gitignore&amp;#39;
     
     
     <category term="RubyOnRails" scheme="https://richardyao007.github.io/categories/RubyOnRails/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[javascript]发送短信倒计时30秒</title>
+    <link href="https://richardyao007.github.io/2016/04/10/js%20-%20%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1%E5%80%92%E8%AE%A1%E6%97%B630%E7%A7%92/"/>
+    <id>https://richardyao007.github.io/2016/04/10/js%20-%20%E5%8F%91%E9%80%81%E7%9F%AD%E4%BF%A1%E5%80%92%E8%AE%A1%E6%97%B630%E7%A7%92/</id>
+    <published>2016-04-10T14:14:49.000Z</published>
+    <updated>2022-07-19T10:24:59.267Z</updated>
+    
+    <content type="html"><![CDATA[<p>倒计时参考: <a href="https://stackoverflow.com/questions/40638402/javascript-countdown-timer-with-start-stop-buttons">https://stackoverflow.com/questions/40638402/javascript-countdown-timer-with-start-stop-buttons</a></p><p>link disable&#x2F;enable: <a href="https://stackoverflow.com/questions/3788946/how-do-i-dynamically-enable-disable-links-with-jquery">https://stackoverflow.com/questions/3788946/how-do-i-dynamically-enable-disable-links-with-jquery</a></p><p>想实现个 倒计时的页面, 需要:</p><pre><code class="bash">var myTimer;function clock() &#123;myTimer = setInterval(myClock, 1000);var c = 30;   // 倒计时30 秒function myClock() &#123;     $(&#39;#send_validation_code&#39;).text(&#39;请等待&#39;+ (--c) + &#39;秒&#39;)     if (c == 0) &#123;       clearInterval(myTimer);       $(&#39;#send_validation_code&#39;).text(&quot;发送验证码&quot;)       $(&#39;#send_validation_code&#39;).unbind(&#39;click&#39;)   // 让按钮恢复点击     &#125;&#125;&#125;function send_validation_code()&#123;    mobile = $(&#39;#mobile&#39;).val()    url = &quot;/settings/send_validation_code?mobile=&quot; + mobile        jQuery.get(url, function(data)&#123;        if(data.code == 0)&#123;            alert(&#39;验证码已经发送到手机： &#39; + mobile)            $(&#39;#send_validation_code&#39;).bind(&#39;click&#39;, function(e)&#123;  // 让按钮无法点击                e.preventDefault();            &#125;)            clock()        &#125;else&#123;            alert(data.msg)        &#125;    &#125;)&#125;</code></pre><p>页面中的按钮:</p><pre><code class="bash">&lt;a class=&quot;btn btn-default btn-small&quot; id=&quot;send_validation_code&quot; style=&quot;width: 96px; text-align: center&quot; href=&quot;javascript:send_validation_code()&quot;&gt;发送验证码&lt;/a&gt;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;倒计时参考: &lt;a href=&quot;https://stackoverflow.com/questions/40638402/javascript-countdown-timer-with-start-stop-buttons&quot;&gt;https://stackoverflow.co</summary>
+      
+    
+    
+    
+    <category term="Javascript" scheme="https://richardyao007.github.io/categories/Javascript/"/>
     
     
   </entry>
