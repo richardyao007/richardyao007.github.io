@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[部署]Capistrano: 自动化部署的利器"
-date:   2016-12-10 09:14:49 +0800
+date:   2022-07-05 09:14:49 +0800
 category: 部署
 ---
 
