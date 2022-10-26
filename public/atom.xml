@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>richardyao007的博客</title>
+  <title>richard的博客</title>
   
   <subtitle>努力改变生活</subtitle>
   <link href="https://richardyao007.github.io/atom.xml" rel="self"/>
   
   <link href="https://richardyao007.github.io/"/>
-  <updated>2022-10-09T02:08:27.929Z</updated>
+  <updated>2022-10-25T12:12:27.064Z</updated>
   <id>https://richardyao007.github.io/</id>
   
   <author>
@@ -15,6 +15,103 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Mac]配置终端样式</title>
+    <link href="https://richardyao007.github.io/2022/10/22/[Mac]%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/"/>
+    <id>https://richardyao007.github.io/2022/10/22/[Mac]%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/</id>
+    <published>2022-10-22T14:14:49.000Z</published>
+    <updated>2022-10-25T12:12:27.064Z</updated>
+    
+    <content type="html"><![CDATA[<p>###[超清晰步骤 iterm2 ohmyzsh powerline font powerlevel10k 打造好看又实用mac终端] </p><blockquote><blockquote><p>refer： (<a href="https://www.jianshu.com/p/8f5091f4d122">https://www.jianshu.com/p/8f5091f4d122</a>)</p></blockquote></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;###[超清晰步骤 iterm2 ohmyzsh powerline font powerlevel10k 打造好看又实用mac终端] &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;refer： (&lt;a href=&quot;https://www.jiansh</summary>
+      
+    
+    
+    
+    <category term="Mac" scheme="https://richardyao007.github.io/categories/Mac/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[Laravel]依赖注入与控制反转【二】</title>
+    <link href="https://richardyao007.github.io/2022/10/20/laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E3%80%90%E4%BA%8C%E3%80%91/"/>
+    <id>https://richardyao007.github.io/2022/10/20/laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E3%80%90%E4%BA%8C%E3%80%91/</id>
+    <published>2022-10-20T14:14:49.000Z</published>
+    <updated>2022-10-25T09:07:17.252Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="依赖注入与控制反转"><a href="#依赖注入与控制反转" class="headerlink" title="依赖注入与控制反转"></a>依赖注入与控制反转</h3><p>依赖注入 当我第一次接触这个词的时候，我是有些丈二和尚摸不着头脑的，至今我也是感到比较困惑的，所以今天我们来探索一下 Laravel 中的依赖注入(dependency injection), 来好好的理解它。<br>控制反转 第一印象是好深奥的名词。。。看上去好像是说反向控制？不懂？那就理顺之！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;依赖注入与控制反转&quot;&gt;&lt;a href=&quot;#依赖注入与控制反转&quot; class=&quot;headerlink&quot; title=&quot;依赖注入与控制反转&quot;&gt;&lt;/a&gt;依赖注入与控制反转&lt;/h3&gt;&lt;p&gt;依赖注入 当我第一次接触这个词的时候，我是有些丈二和尚摸不着头脑的，至今我也是感到比</summary>
+      
+    
+    
+    
+    <category term="Laravel" scheme="https://richardyao007.github.io/categories/Laravel/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[Laravel]trait的使用代码实例详解</title>
+    <link href="https://richardyao007.github.io/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/"/>
+    <id>https://richardyao007.github.io/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/</id>
+    <published>2022-10-02T14:14:49.000Z</published>
+    <updated>2022-10-12T06:13:50.426Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><p>关于Trait的理解</p><p>Trait是PHP5.4引入的新概念，定义方式和class的定义方式类似。但是并不具备class的完整性。Trait看上去更像是一个class的一部分。它使不相关的两个class能够具有类似的行为。</p></li><li><p>Trait的简单使用</p><p>新建一个Trait</p><p>由于数据库操作上使用了eloquent模型，在多表查询时需要指定表格关系。在多个表中都使用了hasmany()关联到了主表。<br>于是便把这一段代码块单独提出来并放入了名为HasInvoices的Trait中，文件目录在App\Traits下。<strong>注意Trait名与文件名应该相同。</strong> </p></li><li><p>Trait的引入</p><p>Trait的引入十分简单，在需要代码块的class中使用use Trait名就行。记得头部要用use引入Trait。</p></li><li><p>关于Trait的用法</p><p>在上面所述的用法中，很显然用到的是完全相同的代码块。对于类似而不完全相同的的代码块复用，可以通过判断“不同点”来产生不同的结果。假设初始代码如下，人类A，动物类B，机器人类C。都具有付出成本，执行行为的能力。但由于彼此之间不具备继承关系，所以不适合使用继承。</p><p>&#96;&#96;</p><pre><code>&lt;?phpclass A&#123; public $action = &quot;逛街&quot;; public $money = 200; public function action()&#123;  echo &quot;花了&quot;.$this-&gt;money.$this-&gt;action.&quot;\n&quot;; &#125;&#125;class B&#123; public $action = &quot;吃骨头&quot;; public $time = 2; public function action()&#123;  echo &quot;花了&quot;.$this-&gt;time.&quot;分钟&quot;.$this-&gt;action.&quot;\n&quot;; &#125;&#125;class C&#123; public $action = &quot;跳舞&quot;; public $time = 30; public function action()&#123;  echo &quot;花了&quot;.$this-&gt;time.&quot;分钟&quot;.$this-&gt;action.&quot;\n&quot;; &#125;&#125;$a = new A;$b = new B;$c = new C;echo $a-&gt;action();echo $b-&gt;action();echo $c-&gt;action();</code></pre><p>&#96;&#96;</p></li></ul><p><strong>运行结果</strong></p><p><img src="/img.png" alt="img.png"></p><p><strong>将action函数提出到Trait，修改后代码</strong></p><pre><code>  trait D&#123;  public function action()&#123;  echo &quot;花了&quot;.(property_exists($this,&#39;time&#39;)? $this-&gt;time.&quot;分钟&quot;:$this-&gt;money)  .$this-&gt;action.&quot;\n&quot;;  &#125;  &#125;    class A&#123;  use D;  public $action = &quot;逛街&quot;;  public $money = 200;  &#125;    class B&#123;  use D;  public $action = &quot;吃骨头&quot;;  public $time = 2;  &#125;    class C&#123;  use D;  public $action = &quot;跳舞&quot;;  public $time = 30;  &#125;  $a = new A;  $b = new B;  $c = new C;  echo $a-&gt;action();  echo $b-&gt;action();  echo $c-&gt;action();</code></pre><p><strong>运行结果</strong></p><p><img src="/img_1.png" alt="img_1.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;关于Trait的理解&lt;/p&gt;
+&lt;p&gt;Trait是PHP5.4引入的新概念，定义方式和class的定义方式类似。但是并不具备class的完整性。Trait看上去更像是一个class的一部分。它使不相关的两个class能够具有类似的行为。&lt;/p&gt;
+&lt;/li&gt;
+</summary>
+      
+    
+    
+    
+    <category term="Laravel" scheme="https://richardyao007.github.io/categories/Laravel/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[Laravel]依赖注入与控制反转【一】</title>
+    <link href="https://richardyao007.github.io/2022/09/20/laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E3%80%90%E4%B8%80%E3%80%91/"/>
+    <id>https://richardyao007.github.io/2022/09/20/laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E3%80%90%E4%B8%80%E3%80%91/</id>
+    <published>2022-09-20T14:14:49.000Z</published>
+    <updated>2022-10-12T05:58:22.460Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在laravel中，依赖注入是将组件注入到应用程序中的一种行为，属于依赖的显示申明；控制反转是面向对象编程的一种设计原则，用于减低计算机代码之间的耦合度，是一个类把自己的的控制权交给另外一个对象，类间的依赖由这个对象去解决。</p></blockquote><ul><li><p>laravel的依赖注入和控制反转是什么</p><ul><li><p>1、依赖注入</p><p>依赖注入一词是由 Martin Fowler 提出的术语，它是将组件注入到应用程序中的一种行为。就像 Ward Cunningham 说的:<br>依赖注入是敏捷架构中关键元素。</p><p>例子：</p><p>&#96;&#96;</p><pre><code>class UserProvider &#123;    protected $connection;    public function __construct()&#123;        $this-&gt;connection = new Connection;    &#125;    public function retrieveByCredentials( array $credentials )&#123;        $user = $this-&gt;connection                        -&gt;where( &#39;email&#39;, $credentials[&#39;email&#39;])                        -&gt;where( &#39;password&#39;, $credentials[&#39;password&#39;])                        -&gt;first();        return $user;    &#125;&#125;</code></pre><p>&#96;&#96;</p><p>如果你要测试或者维护这个类，你必须访问数据库的实例来进行一些查询。为了避免必须这样做，你可以将此类与其他类进行 解耦 ，你有三个选项之一，可以将 Connection 类注入而不需要直接使用它。</p><ul><li><p>2、控制反转</p><p>  控制反转（Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递给它。</p><p>  简单说来，就是一个类把自己的的控制权交给另外一个对象，类间的依赖由这个对象去解决。依赖注入属于依赖的显示申明，而依赖查找则是通过查找来解决依赖。</p><p>  控制反转并不是一种方法，而是一种设计思想，laravel和Spring框架框架一样，不用纠结名词上的反转，解释就是传统的对象都是主动取赋予对象的属性，而框架内我们所做的只是操作容器，容器会自动的通过映射来查找需要的属性并进行赋予，对象只是被动的接受依赖对象，从对象属性的获取方式来看问题。</p></li></ul></li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;在laravel中，依赖注入是将组件注入到应用程序中的一种行为，属于依赖的显示申明；控制反转是面向对象编程的一种设计原则，用于减低计算机代码之间的耦合度，是一个类把自己的的控制权交给另外一个对象，类间的依赖由这个对象去解决。&lt;/p&gt;
+&lt;/block</summary>
+      
+    
+    
+    
+    <category term="Laravel" scheme="https://richardyao007.github.io/categories/Laravel/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>[Node]自定义npm包，以及制作和使用流程</title>

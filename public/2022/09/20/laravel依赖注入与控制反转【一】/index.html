@@ -1,0 +1,250 @@
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" 
+src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
+</script>
+<link href=  "/plugins/code-theme/tomorrow.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/plugins/github-markdown.css">
+
+<head>
+  <title>richard的博客</title>
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="java ruby python php laravel vuejs linux mysql" />
+  <meta name="keyword" content="java ruby python php laravel vuejs linux mysql"/>
+  
+    
+    
+      <link rel="stylesheet" href="/css/legend.css">
+    
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="richard的博客" type="application/atom+xml">
+</head>
+
+<body id="body-x">
+<div id="layout-content">
+  <div id="menu-outer-x">
+  <div id="menu-inner">
+    
+    
+    <div id="site-title">
+      授人以鱼不如授人以渔
+    </div>
+    
+
+     
+    <div>
+    
+      
+      <a href="/">首页</a>
+      
+    
+      
+      <a href="/archives">技术文章</a>
+      
+    
+      
+      <a href="/about">关于</a>
+      
+    
+    </div>
+  </div>
+</div> 
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article class="markdown-body">
+    <h2 id="post-title">[Laravel]依赖注入与控制反转【一】
+       
+        <div id="post-time" datetime="2022-09-20T14:14:49.000Z">
+          2022-09-20
+        </div>
+      
+    </h2>
+    <blockquote>
+<p>在laravel中，依赖注入是将组件注入到应用程序中的一种行为，属于依赖的显示申明；控制反转是面向对象编程的一种设计原则，用于减低计算机代码之间的耦合度，是一个类把自己的的控制权交给另外一个对象，类间的依赖由这个对象去解决。</p>
+</blockquote>
+<ul>
+<li><p>laravel的依赖注入和控制反转是什么</p>
+<ul>
+<li><p>1、依赖注入</p>
+<p>依赖注入一词是由 Martin Fowler 提出的术语，它是将组件注入到应用程序中的一种行为。就像 Ward Cunningham 说的:<br>依赖注入是敏捷架构中关键元素。</p>
+<p>例子：</p>
+<p>&#96;&#96;</p>
+<pre><code>class UserProvider &#123;
+
+    protected $connection;
+
+    public function __construct()&#123;
+
+        $this-&gt;connection = new Connection;
+
+    &#125;
+
+    public function retrieveByCredentials( array $credentials )&#123;
+
+        $user = $this-&gt;connection
+
+                        -&gt;where( &#39;email&#39;, $credentials[&#39;email&#39;])
+
+                        -&gt;where( &#39;password&#39;, $credentials[&#39;password&#39;])
+
+                        -&gt;first();
+        return $user;
+    &#125;
+&#125;
+</code></pre>
+<p>&#96;&#96;</p>
+<p>如果你要测试或者维护这个类，你必须访问数据库的实例来进行一些查询。为了避免必须这样做，你可以将此类与其他类进行 解耦 ，你有三个选项之一，可以将 Connection 类注入而不需要直接使用它。</p>
+<ul>
+<li><p>2、控制反转</p>
+<p>  控制反转（Inversion of Control，缩写为IoC），是面向对象编程中的一种设计原则，可以用来减低计算机代码之间的耦合度。其中最常见的方式叫做依赖注入（Dependency Injection，简称DI），还有一种方式叫“依赖查找”（Dependency Lookup）。通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递给它。</p>
+<p>  简单说来，就是一个类把自己的的控制权交给另外一个对象，类间的依赖由这个对象去解决。依赖注入属于依赖的显示申明，而依赖查找则是通过查找来解决依赖。</p>
+<p>  控制反转并不是一种方法，而是一种设计思想，laravel和Spring框架框架一样，不用纠结名词上的反转，解释就是传统的对象都是主动取赋予对象的属性，而框架内我们所做的只是操作容器，容器会自动的通过映射来查找需要的属性并进行赋予，对象只是被动的接受依赖对象，从对象属性的获取方式来看问题。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </article>
+
+  
+    
+    
+      <div id="page-prev-next">
+        
+        
+          <a id="page-prev-a" href="/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/"> ← [Laravel]trait的使用代码实例详解 </a>
+        
+
+        
+        
+          <a id="page-next-a" href="/2022/08/10/%E5%A6%82%E4%BD%95%E8%87%AA%E5%AE%9A%E4%B9%89npm%E5%8C%85%E5%88%B6%E4%BD%9C%E5%92%8C%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B/"> [Node]自定义npm包，以及制作和使用流程 → </a>
+        
+      </div>
+    
+    
+    
+    
+      
+      <div id="play-button"  style="background-color: #6d5aca; border: solid 2px #6d5aca;">
+  <img id="play-img" src="/images/playback_play.png"></img>
+</div>
+<audio id="bgaudio" loop="loop" preload="none"> 
+  <source src=http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715 type="audio/mpeg">
+</audio>
+
+<script>
+$(document).ready(function(){
+  //播放按钮点击
+  var audio = $("#bgaudio")[0];
+  var img = $("#play-img")[0];
+  $("#play-button").click(function(){ 
+    if (audio.paused || audio.ended) {
+      audio.play();
+      img.src = "/images/playback_pause.png";
+    } else {
+      audio.pause();
+      img.src = "/images/playback_play.png";
+    }
+  });
+});
+</script>
+    
+
+    
+    
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div id="reward_comment">文章对我有帮助，打赏作者</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpeg" alt=" WeChat Pay"/>
+          <p>微信</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt=" Alipay"/>
+          <p>支付宝</p>
+        </div> 
+      
+    </div>
+  </div>
+
+
+  
+
+    </div>
+  </div>
+</div>
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC81NjcxNC8zMzE3OA==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<div id="bottom-outer">
+  
+  <div id="bottom-inner">
+    richard 
+    ©2022 |Powered by  
+    <a href="http://hexo.io" target="_blank">Hexo</a> with theme 
+    <a href="https://github.com/iHongRen/legend" target="_blank">jekyll-theme-slate</a>
+  </div>
+    
+    
+    
+      <a href="/atom.xml">
+      
+      <img src=/images/rss.png height="18" width="18">
+      
+</div>
+ 
+
+
+  
+  
+    <script src="/js/legend.js"></script>
+  
+
+</body>
+</html>
+
+
+<script>
+$(window).on('load', function(){
+   $('pre').addClass('prettyprint').attr('style', 'overflow:auto;');
+   prettyPrint();
+ });
+</script>
