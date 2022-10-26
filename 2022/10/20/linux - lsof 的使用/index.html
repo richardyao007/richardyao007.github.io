@@ -62,14 +62,43 @@ src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
       
       
   <article class="markdown-body">
-    <h2 id="post-title">[Laravel]依赖注入与控制反转【二】
+    <h2 id="post-title">【linux】 - lsof 的使用.markdown
        
         <div id="post-time" datetime="2022-10-20T14:14:49.000Z">
           2022-10-20
         </div>
       
     </h2>
-    <h3 id="依赖注入与控制反转"><a href="#依赖注入与控制反转" class="headerlink" title="依赖注入与控制反转"></a>依赖注入与控制反转</h3><p>依赖注入 当我第一次接触这个词的时候，我是有些丈二和尚摸不着头脑的，至今我也是感到比较困惑的，所以今天我们来探索一下 Laravel 中的依赖注入(dependency injection), 来好好的理解它。<br>控制反转 第一印象是好深奥的名词。。。看上去好像是说反向控制？不懂？那就理顺之！</p>
+    <h3 id="查看运行在某端口的进程"><a href="#查看运行在某端口的进程" class="headerlink" title="查看运行在某端口的进程"></a>查看运行在某端口的进程</h3><p>sudo lsof -i:3306  就可以知道跑在3306 端口上的进程了．</p>
+<p>现在遇到个问题   mysql8 看不到端口在哪里.</p>
+<p>所以根据这里:   <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/278400/how-to-know-which-ports-are-listened-by-certain-pid">https://unix.stackexchange.com/questions/278400/how-to-know-which-ports-are-listened-by-certain-pid</a></p>
+<h3 id="根据进程pid-查询占用端口号"><a href="#根据进程pid-查询占用端口号" class="headerlink" title="根据进程pid 查询占用端口号:"></a>根据进程pid 查询占用端口号:</h3><p>sudo lsof -aPi -p <pid></p>
+<p>就可以看到对应的端口号.  (在我的本机很好使)</p>
+<pre><code>siwei@siweii5:/workspace/old_server_backup_2021-01-16$ sudo lsof -i:80
+[sudo] password for siwei:
+COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+nginx   1002     root    6u  IPv4  29356      0t0  TCP *:http (LISTEN)
+nginx   1002     root    7u  IPv6  29357      0t0  TCP *:http (LISTEN)
+nginx   1003 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)
+nginx   1003 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)
+nginx   1004 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)
+nginx   1004 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)
+nginx   1005 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)
+nginx   1005 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)
+nginx   1006 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)
+nginx   1006 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)
+siwei@siweii5:/workspace/old_server_backup_2021-01-16$ sudo su
+root@siweii5:/workspace/old_server_backup_2021-01-16# lsof -aPi -p 1003
+COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+nginx   1003 www-data    6u  IPv4  29356      0t0  TCP *:80 (LISTEN)
+nginx   1003 www-data    7u  IPv6  29357      0t0  TCP *:80 (LISTEN)
+root@siweii5:/workspace/old_server_backup_2021-01-16# sudo lsof -i:3306
+COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+mysqld  1079 mysql   34u  IPv4  32233      0t0  TCP *:mysql (LISTEN)
+root@siweii5:/workspace/old_server_backup_2021-01-16# lsof -aPi -p 1079
+COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+mysqld  1079 mysql   34u  IPv4  32233      0t0  TCP *:3306 (LISTEN)
+</code></pre>
 
   </article>
 
@@ -79,12 +108,12 @@ src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js">
       <div id="page-prev-next">
         
         
-          <a id="page-prev-a" href="/2022/10/22/%5BMac%5D%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF%E6%A0%B7%E5%BC%8F/"> ← [Mac]配置终端样式 </a>
+          <a id="page-prev-a" href="/2022/10/20/laravel%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC%E3%80%90%E4%BA%8C%E3%80%91/"> ← [Laravel]依赖注入与控制反转【二】 </a>
         
 
         
         
-          <a id="page-next-a" href="/2022/10/20/linux%20-%20lsof%20%E7%9A%84%E4%BD%BF%E7%94%A8/"> 【linux】 - lsof 的使用.markdown → </a>
+          <a id="page-next-a" href="/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/"> [Laravel]trait的使用代码实例详解 → </a>
         
       </div>
     

@@ -64,6 +64,28 @@
   </entry>
   
   <entry>
+    <title>【linux】 - lsof 的使用.markdown</title>
+    <link href="https://richardyao007.github.io/2022/10/20/linux%20-%20lsof%20%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://richardyao007.github.io/2022/10/20/linux%20-%20lsof%20%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2022-10-20T14:14:49.000Z</published>
+    <updated>2022-10-26T09:29:11.571Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="查看运行在某端口的进程"><a href="#查看运行在某端口的进程" class="headerlink" title="查看运行在某端口的进程"></a>查看运行在某端口的进程</h3><p>sudo lsof -i:3306  就可以知道跑在3306 端口上的进程了．</p><p>现在遇到个问题   mysql8 看不到端口在哪里.</p><p>所以根据这里:   <a href="https://unix.stackexchange.com/questions/278400/how-to-know-which-ports-are-listened-by-certain-pid">https://unix.stackexchange.com/questions/278400/how-to-know-which-ports-are-listened-by-certain-pid</a></p><h3 id="根据进程pid-查询占用端口号"><a href="#根据进程pid-查询占用端口号" class="headerlink" title="根据进程pid 查询占用端口号:"></a>根据进程pid 查询占用端口号:</h3><p>sudo lsof -aPi -p <pid></p><p>就可以看到对应的端口号.  (在我的本机很好使)</p><pre><code>siwei@siweii5:/workspace/old_server_backup_2021-01-16$ sudo lsof -i:80[sudo] password for siwei:COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAMEnginx   1002     root    6u  IPv4  29356      0t0  TCP *:http (LISTEN)nginx   1002     root    7u  IPv6  29357      0t0  TCP *:http (LISTEN)nginx   1003 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)nginx   1003 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)nginx   1004 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)nginx   1004 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)nginx   1005 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)nginx   1005 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)nginx   1006 www-data    6u  IPv4  29356      0t0  TCP *:http (LISTEN)nginx   1006 www-data    7u  IPv6  29357      0t0  TCP *:http (LISTEN)siwei@siweii5:/workspace/old_server_backup_2021-01-16$ sudo suroot@siweii5:/workspace/old_server_backup_2021-01-16# lsof -aPi -p 1003COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAMEnginx   1003 www-data    6u  IPv4  29356      0t0  TCP *:80 (LISTEN)nginx   1003 www-data    7u  IPv6  29357      0t0  TCP *:80 (LISTEN)root@siweii5:/workspace/old_server_backup_2021-01-16# sudo lsof -i:3306COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAMEmysqld  1079 mysql   34u  IPv4  32233      0t0  TCP *:mysql (LISTEN)root@siweii5:/workspace/old_server_backup_2021-01-16# lsof -aPi -p 1079COMMAND  PID  USER   FD   TYPE DEVICE SIZE/OFF NODE NAMEmysqld  1079 mysql   34u  IPv4  32233      0t0  TCP *:3306 (LISTEN)</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;查看运行在某端口的进程&quot;&gt;&lt;a href=&quot;#查看运行在某端口的进程&quot; class=&quot;headerlink&quot; title=&quot;查看运行在某端口的进程&quot;&gt;&lt;/a&gt;查看运行在某端口的进程&lt;/h3&gt;&lt;p&gt;sudo lsof -i:3306  就可以知道跑在3306 端口上</summary>
+      
+    
+    
+    
+    <category term="linux" scheme="https://richardyao007.github.io/categories/linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>[Laravel]trait的使用代码实例详解</title>
     <link href="https://richardyao007.github.io/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/"/>
     <id>https://richardyao007.github.io/2022/10/02/laravel%E4%B8%8Btrait%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3/</id>
