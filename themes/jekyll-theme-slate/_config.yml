@@ -13,7 +13,7 @@ menu:
   首页: /
   技术文章: /archives
   关于: /about   # 默认使用主页的about风格,所以先注释掉 #
-#  分享: /share
+  分享: /share
 
 # stylesheets loaded in the <head>
 stylesheets:
